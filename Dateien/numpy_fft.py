@@ -95,11 +95,6 @@ def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	return y
 
 file = open("/tmp/trash.bin", "wb")
-#for i in range(160,300):
-#	print(i)
-#	fourier(i,file,0)
-#fourier(1,file,1)
-#fourier_c(150,file)
 
 #file.close()
 for i in range(120,250):
