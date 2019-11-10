@@ -96,7 +96,6 @@ def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 
 file = open("/tmp/trash.bin", "wb")
 
-#file.close()
 for i in range(120,250):
 	bildeinlesen(i,file,0,1)
 	print(i)
