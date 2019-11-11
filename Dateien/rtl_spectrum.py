@@ -13,7 +13,7 @@ sdr.sample_rate = 2.4e6
 sdr.center_freq = 106.6e6
 sdr.gain = 20
 sdr.bandwith= 500e3
-samples = sdr.read_samples(1024*2048)
+samples = sdr.read_samples(256*2048)
 
 def first(samples):
 	freq, power = signal.welch(samples, sdr.sample_rate, window='hann', nperseg=2048, scaling='spectrum')
@@ -24,11 +24,9 @@ def first(samples):
 	#freq_sorted = sorted(freq)
 	plt.show()
 	plt.figure()
-	return 0
-	#plt.semilogy(freq[int(len(freq)/2):], np.sqrt(power[int(len(freq)/2):]))
-	plt.semilogy(freq[int(len(freq)):-1], np.sqrt(power[int(len(freq)):-1]))
-	#plt.semilogy(freq[0:int(len(freq)/2)], np.sqrt(power[0:int(len(freq)/2)]))
-	plt.semilogy(freq[int(len(freq)):-1], np.sqrt(power[int(len(freq)):-1]))
+	#return 0
+	plt.semilogy(freq[int(len(freq)/2):], np.sqrt(power[int(len(freq)/2):]))
+	plt.semilogy(freq[0:int(len(freq)/2)], np.sqrt(power[0:int(len(freq)/2)]))
 	
 	#plt.semilogy(freq, np.sqrt(power))
 	plt.xlabel('frequency [Hz]')
@@ -87,4 +85,5 @@ def py_3():
 	plt.ylabel('Relative Power')
 	plt.show()
 
-first(samples)
+#first(samples)
+#py_3()
