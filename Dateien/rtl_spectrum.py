@@ -18,6 +18,28 @@ sdr.gain = 20
 sdr.bandwith= 500e3
 samples = sdr.read_samples(256*2048)
 
+async def streaming(freq,power):
+    #sdr = RtlSdr()
+    fft=[[],[]]
+    async for samples in sdr.stream():
+        if sdr.center_freq+sdr.bandwidth>end_freq:
+        	 return fft
+       	z = second(samples,1e6,sdr.center_freq)
+       	fft[0] = np.append(fft[0],z[0])
+       	fft[1] = np.append(fft[1],z[1])
+       	#second(samples,1e6,sdr.center_freq)
+        #freq1,power1 = fourier_trafo(samples)
+        #print(len(freq),len(power))
+        #freq = np.append(freq,freq1)
+        #power = np.append(power,power1)
+        sdr.center_freq+=1000e3
+        print(sdr.center_freq)
+    
+    await sdr.stop()
+
+    # done
+    sdr.close()
+
 def first(samples):
 	freq, power = signal.welch(samples, sdr.sample_rate, window='hann', nperseg=2048, scaling='spectrum')
 	
@@ -69,27 +91,6 @@ def no_async(freq,power):
 		#second(samples,1e6,sdr.center_freq)
 		print(sdr.center_freq)
 
-async def streaming(freq,power):
-    #sdr = RtlSdr()
-    fft=[[],[]]
-    async for samples in sdr.stream():
-        if sdr.center_freq+sdr.bandwidth>end_freq:
-        	 return fft
-       	z = second(samples,1e6,sdr.center_freq)
-       	fft[0] = np.append(fft[0],z[0])
-       	fft[1] = np.append(fft[1],z[1])
-       	#second(samples,1e6,sdr.center_freq)
-        #freq1,power1 = fourier_trafo(samples)
-        #print(len(freq),len(power))
-        #freq = np.append(freq,freq1)
-        #power = np.append(power,power1)
-        sdr.center_freq+=1000e3
-        print(sdr.center_freq)
-    
-    await sdr.stop()
-
-    # done
-    sdr.close()
 
 def py_3():
 	freq = []
@@ -111,6 +112,8 @@ def py_3():
 	plt.show()
 
 #second(samples,1e6,start_freq)
-py_3()
+plt.plot(fourier_trafo(samples)[0],fourier_trafo(samples)[1])
+plt.show()
+#py_3()
 #sdr.stop()
 #sdr.close()
