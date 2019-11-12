@@ -10,8 +10,8 @@ np.set_printoptions(threshold=np.inf)
 sdr = RtlSdr()
 
 # configure device
-start_freq = 106.6e6
-end_freq = 110e6
+start_freq = 100e6
+end_freq = 200e6
 sdr.sample_rate = 2.4e6
 sdr.center_freq = start_freq
 sdr.gain = 20
@@ -57,23 +57,27 @@ def fourier_trafo(samples):
 
 
 def no_async(freq,power):
-	smpls= sdr.read_samples(1024*2048)
+	fft=[[],[]]
 	while True:
 		if sdr.center_freq > end_freq:
-			return freq,power,smpls
+			return fft
+		samples = sdr.read_samples(128*2048)
+		z = second(samples,1e6,sdr.center_freq)
+		fft[0] = np.append(fft[0],z[0])
+		fft[1] = np.append(fft[1],z[1])
 		sdr.center_freq+=1e6
-		samples = sdr.read_samples(1024*2048)
 		#second(samples,1e6,sdr.center_freq)
-		smpls = smpls+samples
 		print(sdr.center_freq)
 
 async def streaming(freq,power):
     #sdr = RtlSdr()
-    smpls=[]
+    fft=[[],[]]
     async for samples in sdr.stream():
         if sdr.center_freq+sdr.bandwidth>end_freq:
-        	 return freq,power,smpls
-       	smpls = np.append(smpls,samples)
+        	 return fft
+       	z = second(samples,1e6,sdr.center_freq)
+       	fft[0] = np.append(fft[0],z[0])
+       	fft[1] = np.append(fft[1],z[1])
        	#second(samples,1e6,sdr.center_freq)
         #freq1,power1 = fourier_trafo(samples)
         #print(len(freq),len(power))
@@ -91,10 +95,12 @@ def py_3():
 	freq = []
 	power = []
 	#loop = asyncio.get_event_loop()
-	#freq,power,smpls = loop.run_until_complete(streaming(freq,power))
-	freq,power,smpls = no_async(freq,power)
+	#fft = loop.run_until_complete(streaming(freq,power))
+	fft = no_async(freq,power)
+	print(fft[0],fft[1])
 	
-	second(smpls,end_freq-start_freq,(start_freq+end_freq)/2)
+	plt.plot(fft[1],fft[0])
+	plt.show()
 	return 
 	plt.semilogy(freq, np.sqrt(power))
 	#plt.semilogy(freq[0:int(len(freq)/2)], np.sqrt(power[0:int(len(freq)/2)]))
@@ -104,7 +110,7 @@ def py_3():
 	plt.ylabel('Relative Power')
 	plt.show()
 
-second(samples,1e6,start_freq)
-#py_3()
+#second(samples,1e6,start_freq)
+py_3()
 #sdr.stop()
 #sdr.close()
