@@ -112,7 +112,7 @@ def py_3():
 	plt.show()
 
 #second(samples,1e6,start_freq)
-plt.plot(fourier_trafo(samples)[0],fourier_trafo(samples)[1])
+plt.plot(fourier_trafo(samples)[0]+100e6,fourier_trafo(samples)[1])
 plt.show()
 #py_3()
 #sdr.stop()

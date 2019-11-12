@@ -31,40 +31,55 @@ def konturen():
 	im2 = im1.filter(ImageFilter.CONTOUR)   
 	im2.show(im2)
 
-def bildeinlesen(stelle,file1,plot,type):
+def bildeinlesen(file1,file2,plot,type,mini,maxi):
 	im = np.array(Image.open('Physec_Schriftzug.png'))
 	x_achse=im.shape[1]
 	y_achse=im.shape[0]
 	fsamplerate=x_achse*2 #X-achse als Samplerate Einstellen 
 	
-	stelle = stelle % y_achse
-
+	maxi = maxi % y_achse
+	if maxi==0:
+		mini = 0
+		maxi = y_achse
 	arr = np.zeros((y_achse,x_achse), dtype = 'bool')
-	
+	##aus der Funktion auslagern:
 	for i in range(y_achse):
 		for x in range(x_achse):
 			if ((im[i,x,0]<127) and (im[i,x,1]<127) and (im[i,x,2]<127)):
 				arr[i,x]= 1#[0,0,0,255]
 			else:
 				arr[i,x]= 0 #[255,255,255,255]
-	sign = 0
-	if type==1:
-		sign = fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle)
-	else:
-		sign = fft_complex(arr,fsamplerate/2,x_achse,y_achse,plot,stelle)
-	
-	#im = Image.fromarray(arr)
-	#im.show()
-	#print(sign)
-	s = struct.pack('f'*len(sign), *sign)
-	file1.write(s)
+	###
+	for i in range(mini,maxi):
+		sign = 0
+		if type==0:
+			print("Using Real fft")
+			sign = fft_real(arr,fsamplerate,x_achse,y_achse,plot,i)
+		elif type==1:
+			print("Using Complex fft")
+			sign = fft_complex(arr,fsamplerate,x_achse,y_achse,plot,i)
+		elif type==2:
+			print("Using Numpy fft")
+			sign = np.fft.ifft(arr[i])*10e50
+		#im = Image.fromarray(arr)
+		#im.show()
+		#print(sign)
+		s1 = bytes(0)
+		s2 = bytes(0)
+		for i in range(len(sign)):
+			s1 += struct.pack('f',sign[i].real)
+			s2 += struct.pack('f',sign[i].imag)
+
+		file1.write(s1)
+		#print(sign)
+		file2.write(s2)
 	
 def fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	t = np.arange(0,1, 1.0/fsamplerate)
 	y = np.sin(2*np.pi*0*t)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
-			y += np.sin(2*np.pi* i *t)
+			y += np.sin(2*np.pi* i *t)*10e100
 	if plot == 1:
 		n = len(y)
 		Y = np.fft.fft(y)/(n)
@@ -78,11 +93,10 @@ def fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 
 def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	t = np.arange(0,1, 1.0/fsamplerate)
-	y = 0
-	#y = np.exp(2*np.pi*0 * t * 1j)
+	y = np.exp(2*np.pi*0 * t * 1j)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
-			y += np.exp(2*np.pi* i * t * 1j)
+			y += np.exp(2*np.pi* i * t * 1j)*10e50
 	if plot == 1:
 		n = len(y)
 		Y = np.fft.fft(y)/n
@@ -94,11 +108,11 @@ def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 		plt.show()
 	return y
 
-file = open("/tmp/trash.bin", "wb")
+file = open("/tmp/real.wav", "wb")
+file1 = open("/tmp/imag.wav", "wb")
 
-#for i in range(120,250):
-#	bildeinlesen(i,file,0,1)
-#	print(i)
-#file.close()
+bildeinlesen(file,file1,0,1,150,0)
 
-test()
+file.close()
+
+#test()
