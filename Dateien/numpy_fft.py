@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy import signal
 from PIL import Image, ImageFilter 
 import struct
 np.set_printoptions(threshold=np.inf)
@@ -31,8 +32,8 @@ def konturen():
 	im2 = im1.filter(ImageFilter.CONTOUR)   
 	im2.show(im2)
 
-def bildeinlesen(file1,file2,plot,type,mini,maxi):
-	im = np.array(Image.open('Physec_Schriftzug.png'))
+def bildeinlesen(file1,plot,type,mini,maxi):
+	im = np.array(Image.open('baudlineStern.png'))
 	x_achse=im.shape[1]
 	y_achse=im.shape[0]
 	fsamplerate=x_achse*2 #X-achse als Samplerate Einstellen 
@@ -68,14 +69,13 @@ def bildeinlesen(file1,file2,plot,type,mini,maxi):
 		s2 = bytes(0)
 		for i in range(len(sign)):
 			s1 += struct.pack('f',sign[i].real)
-			s2 += struct.pack('f',sign[i].imag)
+			s1 += struct.pack('f',sign[i].imag)
 
 		file1.write(s1)
 		#print(sign)
-		file2.write(s2)
 	
 def fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
-	t = np.arange(0,1, 1.0/fsamplerate)
+	t = np.arange(0,1, 2.0/fsamplerate)
 	y = np.sin(2*np.pi*0*t)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
@@ -92,11 +92,11 @@ def fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	return y
 
 def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
-	t = np.arange(0,1, 1.0/fsamplerate)
+	t = np.arange(0,1, 2.0/fsamplerate)
 	y = np.exp(2*np.pi*0 * t * 1j)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
-			y += np.exp(2*np.pi* i * t * 1j)*10e50
+			y += np.exp(2*np.pi* (i-x_achse/2) * t * 1j)*10e50
 	if plot == 1:
 		n = len(y)
 		Y = np.fft.fft(y)/n
@@ -108,10 +108,9 @@ def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 		plt.show()
 	return y
 
-file = open("/tmp/real.wav", "wb")
-file1 = open("/tmp/imag.wav", "wb")
+file = open("/tmp/signal.wav", "wb")
 
-bildeinlesen(file,file1,0,1,150,0)
+bildeinlesen(file,0,1,0,0)
 
 file.close()
 
