@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy import signal
 from PIL import Image, ImageFilter 
 import struct
 np.set_printoptions(threshold=np.inf)
@@ -33,7 +32,8 @@ def konturen():
 	im2.show(im2)
 
 def bildeinlesen(file1,plot,type,mini,maxi):
-	im = np.array(Image.open('baudlineStern.png'))
+	im = np.array(Image.open('Physec_Schriftzug.png'))
+	#im = np.array(Image.open('physec_1.png'))
 	x_achse=im.shape[1]
 	y_achse=im.shape[0]
 	fsamplerate=x_achse*2 #X-achse als Samplerate Einstellen 
@@ -66,7 +66,6 @@ def bildeinlesen(file1,plot,type,mini,maxi):
 		#im.show()
 		#print(sign)
 		s1 = bytes(0)
-		s2 = bytes(0)
 		for i in range(len(sign)):
 			s1 += struct.pack('f',sign[i].real)
 			s1 += struct.pack('f',sign[i].imag)

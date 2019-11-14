@@ -10,12 +10,16 @@ np.set_printoptions(threshold=np.inf)
 sdr = RtlSdr()
 
 # configure device
-start_freq = 100e6
-end_freq = 120e6
+bandwith=500e3
+start_freq = 50e6
+end_freq = 1500e6
+
+
+
 sdr.sample_rate = 2.4e6
 sdr.center_freq = start_freq
 sdr.gain = 20
-sdr.bandwith= 500e3
+sdr.bandwith= bandwith
 samples = sdr.read_samples(256*2048)
 
 #async def streaming(freq,power):
@@ -64,7 +68,7 @@ def first(samples):
 	#plt.show()
 
 def second(samples,srate,center):
-	x = pl.psd(samples, NFFT=256, Fs=srate/1e6, Fc=center/(1e6), noverlap=False)
+	x = pl.psd(samples, NFFT=256, Fs=srate/1e6, Fc=center/(1e6), noverlap=False, windows='hann')
 	return x
 	#Bei hohen FFTS sind hässliche peaks zu sehen ... warum?
 	#print(x)
@@ -80,6 +84,8 @@ def fourier_trafo(samples):
 
 def no_async(freq,power):
 	fft=[[],[]]
+	breite = bandwith*2
+	print(breite)
 	while True:
 		if sdr.center_freq > end_freq:
 			return fft
@@ -87,7 +93,7 @@ def no_async(freq,power):
 		z1,z2 = fourier_trafo(samples)
 		fft[0] = np.append(fft[0],z1+sdr.center_freq)
 		fft[1] = np.append(fft[1],z2)
-		sdr.center_freq+=1e6
+		sdr.center_freq+=breite
 		#second(samples,1e6,sdr.center_freq)
 		print(sdr.center_freq)
 
