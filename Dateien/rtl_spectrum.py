@@ -9,8 +9,8 @@ sdr = RtlSdr()
 
 # configure device
 bandwith=500e3
-start_freq = 50e6
-end_freq = 200e6
+start_freq = 100e6
+end_freq = 110e6
 
 
 
@@ -83,7 +83,7 @@ def fourier_trafo(samples):
 	return freq , power
 
 
-def no_async(freq,power):
+def sensing():
 	fft=[[],[]] 		#Leeres Freqenz:Power array
 	breite = bandwith*2 #step Freqenz setzen
 	print(breite)
@@ -98,11 +98,24 @@ def no_async(freq,power):
 		#second(samples,1e6,sdr.center_freq)
 		print(sdr.center_freq)
 	return -1
-
+"""	
+def mull(freq,power):
+	samples = []
+	fft=[[],[]] 		#Leeres Freqenz:Power array
+	breite = bandwith*2 #step Freqenz setzen
+	print(breite)
+	while sdr.center_freq < end_freq-breite:	
+		if (len(samples)>=0):
+			samples = np.append(samples,sdr.read_samples(128*2048))
+		else:
+			samples = sdr.read_samples(128*2048)
+		sdr.center_freq+=breite	
+	fft[0],fft[1] = fourier_trafo(samples)
+	print(len(samples))
+	return (fft[0]+(start_freq+end_freq)/2),fft[1]
+"""
 def py_3():
-	freq = []
-	power = []
-	fft = no_async(freq,power)
+	fft = sensing()
 	#print(fft[0],fft[1])
 	plt.plot(fft[0],fft[1]) #zeigt die Stärksten Signale an
 	plt.ylabel('Relative Power 10^(db/10)')
@@ -116,5 +129,4 @@ def py_3():
 #plt.plot(fourier_trafo(samples)[0]+100e6,fourier_trafo(samples)[1])
 #plt.show()
 py_3()
-#sdr.stop()
-#sdr.close()
+sdr.close()
