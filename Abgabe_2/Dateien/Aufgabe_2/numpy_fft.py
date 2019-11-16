@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image, ImageFilter 
 import struct
+import random
 np.set_printoptions(threshold=np.inf)
 
 def test():
@@ -33,7 +34,7 @@ def konturen():
 
 def bildeinlesen(file1,plot,type,mini,maxi):
 	im = np.array(Image.open('Physec_Schriftzug.png'))
-	#im = np.array(Image.open('physec_1.png'))
+	#im = np.array(Image.open('baudlineStern.png'))
 	x_achse=im.shape[1]
 	y_achse=im.shape[0]
 	fsamplerate=x_achse*2 #X-achse als Samplerate Einstellen 
@@ -50,30 +51,32 @@ def bildeinlesen(file1,plot,type,mini,maxi):
 				arr[i,x]= 1#[0,0,0,255]
 			else:
 				arr[i,x]= 0 #[255,255,255,255]
-	###
+	#ifft_complex(arr,fsamplerate,x_achse,y_achse,1,150)
 	for i in range(mini,maxi):
 		sign = 0
+		print(i+1," of ", maxi)
 		if type==0:
-			print("Using Real fft")
-			sign = fft_real(arr,fsamplerate,x_achse,y_achse,plot,i)
+			#print("Using Real fft")
+			sign = ifft_real(arr,fsamplerate,x_achse,y_achse,plot,i)
 		elif type==1:
-			print("Using Complex fft")
-			sign = fft_complex(arr,fsamplerate,x_achse,y_achse,plot,i)
+			#print("Using Complex fft")
+			sign = ifft_complex(arr,fsamplerate,x_achse,y_achse,plot,i)
 		elif type==2:
-			print("Using Numpy fft")
-			sign = np.fft.ifft(arr[i])*10e50
+			#print("Using Numpy fft")
+			sign = np.fft.ifft(arr[i])
 		#im = Image.fromarray(arr)
 		#im.show()
 		#print(sign)
 		s1 = bytes(0)
 		for i in range(len(sign)):
+			#print(sign)
 			s1 += struct.pack('f',sign[i].real)
 			s1 += struct.pack('f',sign[i].imag)
 
 		file1.write(s1)
 		#print(sign)
 	
-def fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
+def ifft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	t = np.arange(0,1, 2.0/fsamplerate)
 	y = np.sin(2*np.pi*0*t)
 	for i in range(x_achse):
@@ -90,17 +93,20 @@ def fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 		plt.show()
 	return y
 
-def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
-	t = np.arange(0,1, 2.0/fsamplerate)
+def ifft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
+	scale = 30 #höherer Wert, bessere genaugkeit, aber auch mehr Rechenleistung
+	t = np.arange(0,1, 1/(x_achse*scale))
 	y = np.exp(2*np.pi*0 * t * 1j)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
-			y += np.exp(2*np.pi* (i-x_achse/2) * t * 1j)
+			#rand = random.random() *2*np.pi* (i-x_achse/2)
+			rand = 0
+			y += np.exp(2*np.pi* (scale*(i-x_achse/2)) * (t+rand) * 1j)
+	y = (y-1)
 	if plot == 1:
 		n = len(y)
 		Y = np.fft.fft(y)/n
-		Y = Y[range(int(n))]
-		#Plotting
+		#Y = Y[range(int(n))]
 		fig, ax = plt.subplots(2, 1)
 		ax[0].plot(t,y)
 		ax[1].plot(abs(Y),'r')
@@ -109,8 +115,6 @@ def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 
 file = open("/tmp/signal.raw", "wb")
 
-bildeinlesen(file,0,1,0,0)
+bildeinlesen(file,0,1,0,0) 
 
 file.close()
-
-#test()
