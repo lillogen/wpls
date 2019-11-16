@@ -1,0 +1,84 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{txfonts} %Times New Roman Font
+\usepackage{titlesec} %Format der Headings ändern
+\usepackage{times}
+\usepackage{float}
+\usepackage{listings}
+\usepackage[bottom]{footmisc}
+
+
+\renewcommand{\thesection}{\arabic{section}.} %Nummerierung der Sections anpassen
+\renewcommand{\labelenumi}{\alph{enumi})}  %Nummerierung der Listen anpassen
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{} %Format der Section Überschrift ändern
+\setlength{\parindent}{0pt} %Keine Einrückung bei neuen Paragraphen
+\geometry{left=2.0cm,textwidth=17cm,top=2.5cm,textheight=23cm}
+
+% Anpassen %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\student}{Benedict Schlüter\\ 108018212913 } % Namen eintragen
+\newcommand{\partner}{Christoph Lange\\ 108015222248} % Matrikelnummer eintragen
+\newcommand{\group}{1} % Gruppennummer eintragen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\hwheadtwo}{$ $
+  \vspace{-2cm}
+  
+\noindent \student \qquad \qquad  Wireless Physical Layer Security Praktikum \hfill WS 2019/2020 \\
+\noindent \partner \\
+%\noindent \thirdone \\  % einkommentieren, falls ihr eine 3er Gruppe seid
+\noindent Gruppe:~\group\\
+$ $
+
+  
+\begin{center}    
+{\Large \bf Abgabe PHYSEC 2}
+\end{center}
+}
+
+\begin{document}
+\hwheadtwo
+
+\section{FM-Empfänger}
+\subsection*{a)}
+Der gesamte Flowgraph ist in der folgenden Abbildung zu betrachten. 
+Als erstes wird der Block \textbf{osmocom Source} eingefügt, um ein Signal zu initiieren. Die Frequenz, auf der wir uns bewegen wird zum einen von den Blöcken mit den ID's \textbf{channel} sowie \textbf{senderauswahl} gesteuert. Der Block channel sorgt dafür, dass über eine graphische Leiste die Frequenz angepasst werden kann. Der Block senderauswahl hat drei Optionen, in denen bestimmte Frequenzen, von den aufgetragenen Radiosendern, festgelegt worden. Diese Optionen sind nachher in der GUI über drei Radiobuttons zu steuern. Die Samplerate der Quelle wird über die Variable \textbf{samprate} gesteuert und wurde auf 2e6 festgesetzt.\\
+Das Signal wird anschließend gesplittet und in einen Low-Pass-Filter und in eine graphische Ausgabe geleitet. Der Tiefpassfilter killt die hohen Frequenzen. Die graphische Oberfläche dient der Bedienung von Radio-Buttons oder Schiebereglern, auf die noch eingegangen wird.\\
+Um ein Audiosignal zu bekommen, welches nicht stockt, wird der Resampler im nächsten Schritt benutzt und um das Signal hören zu können wird eine Wideband Frequency Modulation durch geführt, um das Signal hörbar zu machen. Dabei wird das Signal von Complex in Reell umgewandelt. Dabei ist zu beachten, dass wir auf die Hz-Zahl kommen, die wir im Audiosink und Filesink generieren wollen. Dafür wird die Quadrature Rate auf 480k gesetzt und die Audio Decimation auf 10, da wird damit 48kHz erhalten.\\
+Die multiply Konstante dient lediglich der Lautstärkevariation. Diese wird über den Block mit der ID \textbf{audiogain} realisiert, die über den Schieberegler die multiply Konstante verändern. Darauf hin wandert das Signal mit der gewünschten Lautstärke in den Audiosink, wo das Signal in Schall umgewandelt wird. \\
+Außerdem geht das Signal in einen Selector, der entscheidet, ob das Signal in den Filesink geschrieben werden soll oder ob das Signal im Nullsink verfällt. Dies wird über den Chooserblock mit der ID \textbf{record} geregelt. Wird bei dem Chooser Record ausgewählt so wird das Signal in den Filesink geschrieben und bei Dont Record verworfen. \\
+So konnten wir alle angeforderten Funktionen realisieren.
+\section{Spectrum Spraying}
+\section{Spectrum Sensing}
+\section{Reading Assignment}
+Angriffe:
+	Resource Depletion Attack: 
+		Bei dem Resource Depletion Attack wird das Netzwerk vom Angreifer mit unnötigen Anfragen überflutet, um eine große Menge der Bandbreite des Netzwerkes, der Rechenleistung sowie des Speichers zu verbrauchen. Durch das Spoofen der IP-, oder der MAC-Adresse versucht er seiner Identität zu verschleiern und die Attackdetection scheitert an den gefälschten Adressen.
+	Masquerade Attack:
+		Bei dem Masquerade Attack gibt sich der Angreifer als gültiger Knoten aus. Dies geht mit IP-, oder MAC-Spoofing einher und hat diesselbe Konsequenz wie beim RD-Attack.
+
+Eigenschaften von Signalprints:
+	Hard to spoof: 
+		Die Angreifen haben nur sehr geringen Einfluss auf den RSSI (Received Signal Strengh Indicator). Dadurch wird es schwer diesen zu spoofen. 
+	Strong correlation with physical location:
+		Der RSSI, der an den Knoten empfangen wird hängt von der Entfernung und den Umgebungsfaktoren zwischen Sender und Empfänger ab. Auch wenn ein einzelner RSSI keine genaue Auskunft über die Position geben kann, können das eine ausreichende Menge dieser. Es kann nicht genau der Sender identifiziert werden aber immerhin dessen physikalische Position.
+	Small variation over moderate intervals of time:
+		Es hat sich gezeigtm dass Signalprints sich nur in kleinen Werten unterscheiden, wenn die Umwelteinflüsse ebenso gering sind.
+
+Die drei Phasen des Algorithmus:
+	Node Induction: 
+		Um einen Sender zu identifizieren muss ein empfangerner Signalprint mit einem referenzieren Signalprint verglichen werden. Wenn ein neuer Sensor mit dem Netzwerk agieren will, so besitzt dieser noch keine Referenz.  Daher können Signalprints nicht bei der ersten Interaktion des neuen Sensors wirken. Dafür wird ein neuer Sensor, wenn er dem Netzwerk beitritt, wird der Kanal angegeben, auf welchem er senden wird. Die Empfänger im Netzwerk empfangen dann auf diesem Kanal und jeder Knoten misst den individuelle RSSI. 
+	Frequent Hello Message:
+		Aufgrund vom einer entladenen Batterie kann die Sendeleistung sinken. Daher sinkt auch der RSSI-Wert, welcher gemessen wird. Dies wird nach der Zeit den Vergleich des RSSI-Werts und dem Vergleichswert beeinflussen. Um dies zu verhindern werden wiederholt 'Hallo' Pakete gesendet. Der RSSI-Wert all dieser Pakete wird verglichen und sollte sich herausstellen, dass der Unterschied größer als 1.5dBm wird, so wird ein neuer Signalprint angefordert. Dieser gilt dann als neue Referenz.
+	Data Transmission:
+		Es ist nicht jeden Datenübertragung mit einer Signalprint-Verifikation verbunden. Je höher die Anzahl an Empfängern im Netzwerk, umso höher ist auch die Genauigkeit der Signalprints. Manchmal gibt es aber eventuell nicht genügend Teilnehmer, um ein ausreichend genauen Signalprint zu erstellen. Daher werden zwei Schritte eingeleitet. Zuerst wird das Netzwerk auf verdächtige Aktivität geprüft und anschließend, wenn eine entdeckt wurde, dann wird das Netzwerk eine ausreichende Menge an Empfängern auf den gewählten Channel ausrichten, um ein Signalprint zu generieren.
+\end{document}
