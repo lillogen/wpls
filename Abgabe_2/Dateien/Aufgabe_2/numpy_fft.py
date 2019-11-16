@@ -78,7 +78,7 @@ def fft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	y = np.sin(2*np.pi*0*t)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
-			y += np.sin(2*np.pi* i *t)*10e100
+			y += np.sin(2*np.pi* i *t)
 	if plot == 1:
 		n = len(y)
 		Y = np.fft.fft(y)/(n)
@@ -95,7 +95,7 @@ def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	y = np.exp(2*np.pi*0 * t * 1j)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
-			y += np.exp(2*np.pi* (i-x_achse/2) * t * 1j)*10e50
+			y += np.exp(2*np.pi* (i-x_achse/2) * t * 1j)
 	if plot == 1:
 		n = len(y)
 		Y = np.fft.fft(y)/n
@@ -107,7 +107,7 @@ def fft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 		plt.show()
 	return y
 
-file = open("/tmp/signal.wav", "wb")
+file = open("/tmp/signal.raw", "wb")
 
 bildeinlesen(file,0,1,0,0)
 
