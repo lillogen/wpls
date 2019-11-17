@@ -59,7 +59,10 @@ Außerdem geht das Signal in einen Selector, der entscheidet, ob das Signal in d
 So konnten wir alle angeforderten Funktionen realisieren.
 \section{Spectrum Spraying}
 Am Anfang mussten wir das Bild in eine binäre Matrix umwandeln. Dafür mussten wir zunächst einen threshold Wert festlegen, diesen hätte man auch dynamisch an das Bild anpassen können usw. aber wir haben nun die einfachste variante gewählt und alle rgb's unter (127) auf null alles was darüber war auf 1 gesetzt. \\
-Nun hatten wir die Matrix. Als nächstes sind wir die Matrix Zeile für Zeile durchgegangen, und haben für jede 1 eine e hoch i Funktion mit der ensprechenden Frequenz zum Signal hinzugefügt. Für die Zeile 150 bei dem PHYSEC Bild sah der Frequenzberech wie beispielsweise in \ref{fig:1} zu sehen aus. Um den Peak um 0 rum wegzubekommen, verhindert man die Frequenz 0 oder zieht von jedem Wert im array 1 ab.
+Nun hatten wir die Matrix. Als nächstes sind wir die Matrix Zeile für Zeile durchgegangen, und haben für jede 1 eine e hoch i Funktion mit der ensprechenden Frequenz zum Signal hinzugefügt. Für die Zeile 150 bei dem PHYSEC Bild sah der Frequenzberech wie beispielsweise in \ref{fig:1} zu sehen aus. Um den Peak um 0 rum wegzubekommen, verhindert man die Frequenz 0 oder zieht von jedem Wert im Array 1 ab. Nun mussen wir nur noch die Daten Array für Array in eine Datei schreiben und haben folgende Ergebnisse bekommen. \\
+
+FFT-size 4096 bei Physec und Stern
+FFT-size 2048 bei test und Donald
 \section{Spectrum Sensing}
 \section{Reading Assignment}
 Angriffe:
