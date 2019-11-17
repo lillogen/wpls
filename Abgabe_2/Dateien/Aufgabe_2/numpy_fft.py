@@ -3,6 +3,8 @@ import numpy as np
 from PIL import Image, ImageFilter 
 import struct
 import random
+from tqdm import tqdm
+
 np.set_printoptions(threshold=np.inf)
 
 def test():
@@ -52,9 +54,9 @@ def bildeinlesen(file1,plot,type,mini,maxi):
 			else:
 				arr[i,x]= 0 #[255,255,255,255]
 	#ifft_complex(arr,fsamplerate,x_achse,y_achse,1,150)
-	for i in range(mini,maxi):
+	for i in tqdm(range(mini,maxi)):
 		sign = 0
-		print(i+1," of ", maxi)
+		#print(i+1," of ", maxi,flush=True)
 		if type==0:
 			#print("Using Real fft")
 			sign = ifft_real(arr,fsamplerate,x_achse,y_achse,plot,i)
@@ -64,12 +66,8 @@ def bildeinlesen(file1,plot,type,mini,maxi):
 		elif type==2:
 			#print("Using Numpy fft")
 			sign = np.fft.ifft(arr[i])
-		#im = Image.fromarray(arr)
-		#im.show()
-		#print(sign)
 		s1 = bytes(0)
 		for i in range(len(sign)):
-			#print(sign)
 			s1 += struct.pack('f',sign[i].real)
 			s1 += struct.pack('f',sign[i].imag)
 
@@ -77,7 +75,7 @@ def bildeinlesen(file1,plot,type,mini,maxi):
 		#print(sign)
 	
 def ifft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
-	t = np.arange(0,1, 2.0/fsamplerate)
+	t = np.arange(0,1, 1.0/fsamplerate)
 	y = np.sin(2*np.pi*0*t)
 	for i in range(x_achse):
 		if arr[stelle,i]==1:
@@ -94,7 +92,7 @@ def ifft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	return y
 
 def ifft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
-	scale = 30 #höherer Wert, bessere genaugkeit, aber auch mehr Rechenleistung
+	scale = 30 #höherer Wert, höhere Genauigkeit, aber auch mehr Rechenleistung
 	t = np.arange(0,1, 1/(x_achse*scale))
 	y = np.exp(2*np.pi*0 * t * 1j)
 	for i in range(x_achse):
