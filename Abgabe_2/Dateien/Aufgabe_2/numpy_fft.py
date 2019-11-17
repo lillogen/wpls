@@ -37,7 +37,7 @@ def konturen():
 def bildeinlesen(file1,plot,type,mini,maxi):
 	#im = np.array(Image.open('Physec_Schriftzug.png'))
 	#im = np.array(Image.open('baudlineStern.png'))
-	im = np.array(Image.open('Bilder/Ahkjmort.png'))
+	im = np.array(Image.open('Bilder/Donald-Trump.jpg'))
 	x_achse=im.shape[1]
 	y_achse=im.shape[0]
 	fsamplerate=x_achse*2 #X-achse als Samplerate Einstellen 
@@ -95,7 +95,7 @@ def ifft_real(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 	return y
 
 def ifft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
-	scale = 5 #höherer Wert, höhere Genauigkeit, aber auch mehr Rechenleistung
+	scale = 1 #höherer Wert, höhere Genauigkeit, aber auch mehr Rechenleistung
 	t = np.arange(0,1, 1/(x_achse*scale))
 	y = np.exp(2*np.pi*0 * t * 1j)
 	for i in range(x_achse):
