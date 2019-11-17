@@ -79,7 +79,7 @@ def fourier_trafo(samples):
 	freq, power = signal.welch(samples, sdr.sample_rate, window='hann', nperseg=256, scaling='spectrum')
 	return freq,power
 
-def sensing():
+def sensing(einheit):
 	fft=[[],[]] 		#Leeres Freqenz:Power array
 	breite = bandwith*2 #step Freqenz setzen
 	print(breite)
@@ -87,8 +87,10 @@ def sensing():
 		if sdr.center_freq > end_freq-breite: 	#bis end_freq erreicht:
 			return fft
 		samples = sdr.read_samples(128*2048) #samples einlesen
-		#z1,z2 = fourier_trafo(samples)		#fft bestimmen
-		z1,z2 = fourier_trafo_2(samples,1e6,sdr.center_freq)		#fft bestimmen
+		if einheit == 0:
+			z1,z2 = fourier_trafo(samples)		#fft bestimmen
+		else:
+			z1,z2 = fourier_trafo_2(samples,1e6,sdr.center_freq)		#fft bestimmen
 		fft[0] = np.append(fft[0],z1+sdr.center_freq)	#x Werte an center-freq anpassen und an PLOT-Array anhängen
 		fft[1] = np.append(fft[1],z2)					#Power an plot-array anhängen
 		sdr.center_freq+=breite							#Centerfrequenz um Bandbreite*2 erhöhen
@@ -112,7 +114,7 @@ def mull(freq,power):
 	return (fft[0]+(start_freq+end_freq)/2),fft[1]
 """
 def py_3(einheit):
-	fft = sensing()
+	fft = sensing(einheit)
 	#print(fft[0],fft[1])
 	if einheit == 0 :
 		plt.plot(fft[0],fft[1]) #zeigt die Stärksten Signale an
@@ -127,5 +129,5 @@ def py_3(einheit):
 #second(samples,1e6,start_freq)
 #plt.plot(fourier_trafo(samples)[0]+100e6,fourier_trafo(samples)[1])
 #plt.show()
-py_3(1)
+py_3(0)
 sdr.close()
