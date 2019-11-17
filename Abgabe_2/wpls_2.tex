@@ -70,6 +70,7 @@ Nun hatten wir die Matrix. Als nächstes sind wir die Matrix Zeile für Zeile du
 FFT-size 4096 bei Physec und Stern\\
 FFT-size 2048 bei test und Donald\\
 \section{Spectrum Sensing}
+Zum vorgehen, es war nötig das angegebene Frequenzband Teil für Teil zu durchlaufen, da unser SDR nur eine sehr kleine Bandbreite hatte. Diese Teile wurden dann mittels FFT transformiert und an ein Array angehangen, welches wir am ende des Programms geplottet haben.\\
 Die Werte auf der Y-Achse sind in der Einheit $10^{db/10}$, da es so einfacher ist starke Signale zu identifizieren. Eine andere Einehit kann sehr einfach in dem Script ausgewählt werden.
 \begin{figure}[H]
 \centering
@@ -83,7 +84,7 @@ Die Werte auf der Y-Achse sind in der Einheit $10^{db/10}$, da es so einfacher i
 \caption{Radiostationen}
 \label{fig:3_3}
 \end{figure}
-Jeder Peak ist eine Radiostation bzw ein Radiosignal, theoretisch könnte man es automatisch per RDS erkennen lassen, aber die Signale sind zu schwach bzw. unser SDR ist zu schlecht dafür. Selbst in GQRX sind die Signale zu schwach um sie per RDS erkenne zu lassen. Also googeln wir und die Namen der Stationen herauszufinden.
+Jeder Peak ist eine Radiostation bzw ein Radiosignal, theoretisch könnte man es automatisch per RDS erkennen lassen, aber die Signale sind zu schwach bzw. unser SDR ist zu schlecht dafür. Selbst in GQRX sind die Signale zu schwach um sie per RDS erkenne zu lassen. Also googeln wir, um die Namen der Stationen herauszufinden.
 In Abbildung \ref{fig:3_4} ist zu sehen, wie schwach die Radiosignale sind.
 \begin{figure}[H]
 \centering
