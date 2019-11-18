@@ -10,8 +10,8 @@ sdr = RtlSdr()
 
 # configure device
 bandwith=500e3
-start_freq = 88e6
-end_freq = 110e6
+start_freq = 50e6
+end_freq = 1500e6
 
 
 

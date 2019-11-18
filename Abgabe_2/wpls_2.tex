@@ -86,15 +86,26 @@ Zum vorgehen, es war nötig das angegebene Frequenzband Teil für Teil zu durchl
 Die Werte auf der Y-Achse sind in der Einheit $10^{db/10}$, da es so einfacher ist starke Signale zu identifizieren. Eine andere Einehit kann sehr einfach in dem Script ausgewählt werden.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Dateien/Aufgabe_3/Figure_1.png} 
+\includegraphics[width=0.5\textwidth]{Dateien/Aufgabe_3/Figure_1.png} 
 \caption{Spectrum von 50MHz bis 1.5GHz}
 \label{fig:3_1}
 \end{figure}
 \begin{figure}[H]
 \centering
+\includegraphics[width=0.5\textwidth]{Dateien/Aufgabe_3/spectrum-2.jpg} 
+\caption{fünf makierte Signale}
+\label{fig:3_1_1}
+\end{figure}
+Signal 1 ist ein Radiosender, höchstwahrscheinlich Eins-Live \\
+Signal 2 sehr schmalbandiger energiereicher Peak kp was das ist\\
+Signal 3 sehr schmalbandiger energiereicher Peak kp was das ist\\
+Signal 4 DVB T oder sowas \\
+Signal 5 ist aus dem GSM Band\\
+\begin{figure}[H]
+\centering
 \includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/radio.png} 
 \caption{Radiostationen}
-\label{fig:3_3}
+\label{fig:3_2}
 \end{figure}
 Jeder Peak ist eine Radiostation bzw ein Radiosignal, theoretisch könnte man es automatisch per RDS erkennen lassen, aber die Signale sind zu schwach bzw. unser SDR ist zu schlecht dafür. Selbst in GQRX sind die Signale zu schwach um sie per RDS erkenne zu lassen. Also googeln wir, um die Namen der Stationen herauszufinden. In Abbildung \ref{fig:3_4} ist zu sehen, wie schwach die Radiosignale sind.
 \begin{table}[H]
@@ -141,10 +152,16 @@ Frequenz & Name & Bandbreite \\
 \hline
 106.7MHz & 1-Live & 90kHz\\
 \hline
-108MHz & irgentein Signalband & 5kHz\\
+108MHz & irgentein Grenzsignal & 5kHz\\
 \hline
 \end{tabular}
 \end{table}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/radio_Komm.jpg} 
+\caption{Zuordnung der Radiosender}
+\label{fig:3_3}
+\end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/gqrx_radio.png} 
