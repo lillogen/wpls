@@ -5,7 +5,7 @@ from struct import *
 import random
 import cmath
 
-def bildeinlesen(file1,plot,type,mini,maxi):
+def bildeinlesen(file1,type,mini,maxi):
 	im = np.array(Image.open('Bilder/Physec_Schriftzug.png'))
 	#im = np.array(Image.open('baudlineStern.png'))
 	#im = np.array(Image.open('Bilder/Donald-Trump.jpg'))
@@ -32,20 +32,20 @@ def bildeinlesen(file1,plot,type,mini,maxi):
 		print (i+1," of ", maxi)
 		if type==1:
 			#print("Using Complex fft")
-			y1,y2 = ifft_complex(arr,fsamplerate,x_achse,y_achse,plot,i)
+			y1,y2 = ifft_complex(arr,fsamplerate,x_achse,y_achse,i)
 		s1 = bytes(0)
 
 		new_array_cause_python2_sucks = []
 		for h in range(len(y1)):
 			new_array_cause_python2_sucks.append(y2[h])
 			new_array_cause_python2_sucks.append(y1[h])
-			#s1 += str((pack('f',y2[h]) + pack('f',y1[h]))) ging aus irgenteinem Grund in PY2 nicht bei complexn werten ist der auch grundlos immer abgeschissen
+			#s1 += str((pack('f',y2[h]) + pack('f',y1[h]))) ging aus irgenteinem Grund in PY2 nicht bei complexen Werten ist der auch immer grundlos abgeschissen
 			#print (pack('f',y2[h]))
 		s1 = pack('f'*len(new_array_cause_python2_sucks), *new_array_cause_python2_sucks)
 		#print sign
 		file1.write(s1)
 
-def ifft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
+def ifft_complex(arr,fsamplerate,x_achse,y_achse,stelle):
 	scale = 1   #hherer Wert, hhere Genauigkeit, aber auch mehr Rechenleistung
 	t = np.arange(0,1, 1.0/(x_achse*scale))
 	y1 = np.zeros(x_achse*scale)
@@ -56,18 +56,10 @@ def ifft_complex(arr,fsamplerate,x_achse,y_achse,plot,stelle):
 			rand = 0
 			y1 += np.sin(2*np.pi* (scale*(i-x_achse/2)) * (t+rand)) #imag
 			y2 += np.cos(2*np.pi* (scale*(i-x_achse/2)) * (t+rand)) #real
-	if plot == 1:
-		n = len(y)
-		Y = np.fft.fft(y)/n
-		#Y = Y[range(int(n))]
-		fig, ax = plt.subplots(2, 1)
-		ax[0].plot(t,y)
-		ax[1].plot(abs(Y),'r')
-		plt.show()
 	return y1,y2
 
 file = open("/tmp/signal.raw", "wb")
 
-bildeinlesen(file,0,1,0,0) 
+bildeinlesen(file,1,0,0) 
 
 file.close()

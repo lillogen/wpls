@@ -67,6 +67,18 @@ Nun hatten wir die Matrix. Als nächstes sind wir die Matrix Zeile für Zeile du
 \caption{Spectrum Bilder}
 \label{fig:2_1}
 \end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_2/Bilder/donald.png} 
+\caption{Spectrum Bilder 2.0}
+\label{fig:2_2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_2/Bilder/finger.png} 
+\caption{Spectrum Bilder 3.0}
+\label{fig:2_3}
+\end{figure}
 FFT-size 4096 bei Physec und Stern\\
 FFT-size 2048 bei test und Donald\\
 \section{Spectrum Sensing}
@@ -74,7 +86,7 @@ Zum vorgehen, es war nötig das angegebene Frequenzband Teil für Teil zu durchl
 Die Werte auf der Y-Achse sind in der Einheit $10^{db/10}$, da es so einfacher ist starke Signale zu identifizieren. Eine andere Einehit kann sehr einfach in dem Script ausgewählt werden.
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/Figure_1.png} 
+\includegraphics[width=0.8\textwidth]{Dateien/Aufgabe_3/Figure_1.png} 
 \caption{Spectrum von 50MHz bis 1.5GHz}
 \label{fig:3_1}
 \end{figure}
@@ -84,8 +96,55 @@ Die Werte auf der Y-Achse sind in der Einheit $10^{db/10}$, da es so einfacher i
 \caption{Radiostationen}
 \label{fig:3_3}
 \end{figure}
-Jeder Peak ist eine Radiostation bzw ein Radiosignal, theoretisch könnte man es automatisch per RDS erkennen lassen, aber die Signale sind zu schwach bzw. unser SDR ist zu schlecht dafür. Selbst in GQRX sind die Signale zu schwach um sie per RDS erkenne zu lassen. Also googeln wir, um die Namen der Stationen herauszufinden.
-In Abbildung \ref{fig:3_4} ist zu sehen, wie schwach die Radiosignale sind.
+Jeder Peak ist eine Radiostation bzw ein Radiosignal, theoretisch könnte man es automatisch per RDS erkennen lassen, aber die Signale sind zu schwach bzw. unser SDR ist zu schlecht dafür. Selbst in GQRX sind die Signale zu schwach um sie per RDS erkenne zu lassen. Also googeln wir, um die Namen der Stationen herauszufinden. In Abbildung \ref{fig:3_4} ist zu sehen, wie schwach die Radiosignale sind.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Frequenz & Name & Bandbreite \\
+\hline
+87.8MHz & 	WDR Eins Live & 34kHz \\
+\hline
+88.8MHz & WDR 5 & 100kHz\\
+\hline
+90.3MHz & WDR 5 & 100kHz\\
+\hline
+90.8MHz & 90.8 Radio Herne & 80kHz \\
+\hline
+92MHz & WDR 5 & 70kHz\\
+\hline
+93.5MHz & WDR 2 & 82kHz \\
+\hline
+94.2MHz & WDR 2 & 70kHz\\
+\hline 
+94.6MHz & Radio Vest & 60kHz\\
+\hline
+95.1MHz & WDR 3 & 60kHz \\
+\hline
+96.1MHz & Radio Emscher Lippe & 82kHz\\
+\hline
+96.5MHz & Deutschlandfunk Kultur & 82kHz\\
+\hline
+98.1MHz & WDR 3 & 82kHz\\
+\hline
+98.5MHZ & Radio Bochum & 82kHz \\
+\hline
+99.2MHz & WDR 2 Rhein-Ruhr &82kHz\\
+\hline
+100MHz & WDR 4 & 54kHz \\
+\hline
+101.3MHz & WDR 4 & 100kHz \\
+\hline
+102.8MHz & Deutschlandfunk (DLF)&90kHz\\
+\hline
+103.3MHz & Funkhaus Europa & 90kHz\\
+\hline
+106.7MHz & 1-Live & 90kHz\\
+\hline
+108MHz & irgentein Signalband & 5kHz\\
+\hline
+\end{tabular}
+\end{table}
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/gqrx_radio.png} 

@@ -129,5 +129,5 @@ def py_3(einheit):
 #second(samples,1e6,start_freq)
 #plt.plot(fourier_trafo(samples)[0]+100e6,fourier_trafo(samples)[1])
 #plt.show()
-py_3(0)
+py_3(1)
 sdr.close()
