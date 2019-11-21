@@ -45,8 +45,8 @@ def ifft_complex(arr,fsamplerate,x_achse,y_achse,stelle):
 	t = np.arange(0,1, 1.0/(x_achse*scale))
 	y1 = np.zeros(x_achse*scale)
 	y2 = np.zeros(x_achse*scale)
-	for i in range(x_achse):
-		if arr[stelle,i]==1:
+	for i in range(x_achse): #Array durchgehen
+		if arr[stelle,i]==1: #Bei einer 1 die ensprechende Freq hinzufügen
 			#rand = random.random() *2*np.pi* (i-x_achse/2)
 			rand = 0
 			y1 += np.sin(2*np.pi* (scale*(i-x_achse/2)) * (t+rand)) #imag

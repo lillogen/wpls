@@ -70,11 +70,9 @@ def first(samples):
 	#plt.show()
 """
 def fourier_trafo_2(samples,srate,center):
-	freq,power = pl.psd(samples, NFFT=32, Fs=srate, Fc=center, noverlap=False)
+	freq,power = pl.psd(samples, NFFT=64, Fs=srate, Fc=center, noverlap=False)
 	return freq, power
 	
-	#Bei hohen FFTS sind hässliche peaks zu sehen ... warum?
-
 def fourier_trafo(samples):
 	freq, power = signal.welch(samples, sdr.sample_rate, window='hann', nperseg=256, scaling='spectrum')
 	return freq,power
@@ -129,5 +127,5 @@ def py_3(einheit):
 #second(samples,1e6,start_freq)
 #plt.plot(fourier_trafo(samples)[0]+100e6,fourier_trafo(samples)[1])
 #plt.show()
-py_3(1)
+py_3(1)   # 1 db Plot / 0 der andere Plot
 sdr.close()
