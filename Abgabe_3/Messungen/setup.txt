@@ -1,0 +1,4 @@
+cc2531 dogle Adress Alcie addr=00124b0001542bf5
+
+cc2531 dogle Adress      EVE- addr=00124b00015735cf (dev: /dev/ttyACM0)
+    - addr=00124b0001542c6d (dev: /dev/ttyACM1) BOB
