@@ -82,8 +82,8 @@ def plot_correlation(args):
         print("Illegal argument for style. Using dots instead. For help view documnetation.")
         dots(correlation_coefficients, "blue", xlabel="Blocks", ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow B$")
 
-    multiple_save(os.path.join(destination, "correlation_AB_%s" % ts))
-    store_list(os.path.join(destination, "data/correlation_AB_%s.csv" % ts), correlation_coefficients)
+    multiple_save(os.path.join(destination, "correlation_AB"))
+    store_list(os.path.join(destination, "data/correlation_AB.csv"), correlation_coefficients)
     plt.clf()
 
     # Apply correlation function implemented by the student and store plot and correlation coefficients in csv file
@@ -97,8 +97,8 @@ def plot_correlation(args):
     else:
         dots(correlation_coefficients, "blue", xlabel="Blocks", ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow E$")
     
-    multiple_save(os.path.join(destination, "correlation_AE_%s" % ts))
-    store_list(os.path.join(destination, "data/correlation_AE_%s.csv" % ts), correlation_coefficients)
+    multiple_save(os.path.join(destination, "correlation_AE"))
+    store_list(os.path.join(destination, "data/correlation_AE.csv"), correlation_coefficients)
     plt.clf()
 
 

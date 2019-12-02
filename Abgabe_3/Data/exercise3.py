@@ -47,7 +47,11 @@ def correlation(X, Y):
 		oben += (X[i]-mittelwert_x)*(Y[i]-mittelwert_y)
 		unten_1 += (X[i]-mittelwert_x)**2
 		unten_2 += (Y[i]-mittelwert_y)**2
-	return (oben/math.sqrt(unten_1*unten_2))
+	z = math.sqrt(unten_1*unten_2)
+	if z != 0:
+		return (oben/z)
+	else:
+		return (0)
 
 
 """

@@ -1,0 +1,147 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{txfonts} %Times New Roman Font
+\usepackage{titlesec} %Format der Headings ändern
+\usepackage{times}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage[bottom]{footmisc}
+
+
+\renewcommand{\thesection}{\arabic{section}.} %Nummerierung der Sections anpassen
+\renewcommand{\labelenumi}{\alph{enumi})}  %Nummerierung der Listen anpassen
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{} %Format der Section Überschrift ändern
+\setlength{\parindent}{0pt} %Keine Einrückung bei neuen Paragraphen
+\geometry{left=2.0cm,textwidth=17cm,top=2.5cm,textheight=23cm}
+
+% Anpassen %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\student}{Benedict Schlüter\\ 108018212913 } % Namen eintragen
+\newcommand{\partner}{Christoph Lange\\ 108015222248} % Matrikelnummer eintragen
+\newcommand{\group}{1} % Gruppennummer eintragen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\hwheadtwo}{$ $
+  \vspace{-2cm}
+  
+\noindent \student \qquad \qquad  Wireless Physical Layer Security Praktikum \hfill WS 2019/2020 \\
+\noindent \partner \\
+%\noindent \thirdone \\  % einkommentieren, falls ihr eine 3er Gruppe seid
+\noindent Gruppe:~\group\\
+$ $
+
+  
+\begin{center}    
+{\Large \bf Abgabe PHYSEC 2}
+\end{center}
+}
+
+\begin{document}
+\hwheadtwo
+Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.
+\section{Messungen}
+Eine schematische Zeichnung der Messumgebung ist in Abbildung \ref{fig:1_1} zu sehen.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Aufgaben_Dateien/Aufgabe_1/Zimmer.pdf} 
+\caption{Zimmer aufbau}
+\label{fig:1_1}
+Joa die Messungen wurden durchgeführt und liegen in CSV Form in dem Ordner rum.
+\end{figure}
+\section{Implementierung Pearson Correlation}
+Implementiert.
+\section{Auswertung}
+\subsection*{1}
+
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/1_ohneBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/1_ohneBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation ohne Bewegung Blocksize 100}
+\label{fig:1}
+\end{figure}
+
+\subsection*{2}
+
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/2_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/2_mitBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation mit Bewegung Blocksize 10}
+\label{fig:2}
+\end{figure}
+
+\subsection*{3}
+
+\subsubsection*{a)}
+
+%OHNE BWG
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_a_ohneBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_a_ohneBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation ohne Bewegung \textbf{Blocksize 500}}
+\label{fig:3_a_o}
+\end{figure}
+
+%MIT BWG
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_a_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_a_mitBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation mit Bewegung \textbf{Blocksize 50}}
+\label{fig:3_a_m}
+\end{figure}
+
+
+
+\subsubsection*{b)}
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_ohneBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_ohneBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation ohne Bewegung \textbf{Blocksize 100}}
+\label{fig:3_b_o}
+\end{figure}
+
+%MIT BWG
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_mitBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation mit Bewegung \textbf{Blocksize 20}}
+\label{fig:3_b_m}
+\end{figure}
+\subsection*{4}
+
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/4_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/4_mitBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation mit Bewegung \textbf{Blocksize 20}}
+\label{fig:4}
+\end{figure}
+
+\subsection*{5}
+
+\begin{figure}[H]
+\centering
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/5_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/5_mitBwg_A_B/output_Ex3/correlation_AE.png}}
+\caption{Korrelation mit Bewegung \textbf{Blocksize 10}}
+\label{fig:5}
+\end{figure}
+
+\section{Quantisierer Jana Multibit}
+\section{Quantisierer Mathur Suhas}
+\end{document}
