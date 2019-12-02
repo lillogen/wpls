@@ -232,7 +232,7 @@ Eve & -55.98965 & 7.07650 \\
 \end{table}
 
 \subsection*{5}
-In Abbildung \ref{fig:5} ist eine auf den ersten Blick merkwürdige Entdeckung festzustellen, obwohl Eve direkt neben Bob ist sind die RSSI Werte extrem unterschiedlich. Dies haben wir aber erwartet, da es bereits in der Vorlesung angesprochen wurde. 'Ein die Korrelation erhöht sich bis zu einer gewissen Distanz, aber wenn man näher ran geht, verringert sie sich sehr stark'.
+In Abbildung \ref{fig:5} ist eine auf den ersten Blick merkwürdige Entdeckung festzustellen, obwohl Eve direkt neben Bob ist sind die RSSI Werte extrem unterschiedlich. Dies haben wir aber erwartet, da es bereits in der Vorlesung angesprochen wurde. 'Ein die Korrelation erhöht sich bis zu einer gewissen Distanz, aber wenn man näher ran geht, verringert sie sich sehr stark'. Die Korrelation ist zwar stärker als in 4, aber immernoch sehr sehr inkonsistent. So gibt es mehr Werte in der nähe von eins aber immernoch extrem viele Ausreißer nach unten.
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/5_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
@@ -255,7 +255,8 @@ Eve & -58.22699 & 7.88637 \\
 \caption{absolute Daten der 5. Messung}
 \end{table}
 \subsection*{Fazit}
-Abschließend ist zu sagen, das wir viel Bewegung brauchen um Entropie auf den Channel zu bekommen, um die Standardabweichung zu erhöhen. Des weiteren ist wichtig, das der Abstand zwischen Eve und Bob nicht auf intermediate Range kommt, also der perfekte Abstand ist wohl zwischen 50 cm und 1 cm aber diesem Wert genau zu ermitteln war nicht Teil dieses versuches. 
+Abschließend ist zu sagen, das wir viel Bewegung brauchen um Entropie auf den Channel zu bekommen, um die Standardabweichung zu erhöhen. Des weiteren ist wichtig, das der Abstand zwischen Eve und Bob nicht auf intermediate Range kommt, also der perfekte Abstand für eine Angriff ist wohl zwischen 50 cm und 1 cm aber diesem Wert genau zu ermitteln war nicht Teil dieses Versuches. Die Blocklänge glättet die Ergebnisse ab, so fallen einzelne ausrutscher nicht mehr auf. \\
+Die beste Chance hat der Angreifer generell, wenn wenig Bewegung im Raum ist. So sind die RSSI-Werte homogen und unterscheiden sich nur um einen linearen Wert. Bei Bewegung, egal welchen Abstandes, hat der Angreifer in der Regel keine Chance da die Korrelation zu schwach ist. 
 \section{Quantisierer Jana Multibit}
 \section{Quantisierer Mathur Suhas}
 \end{document}
