@@ -1,5 +1,4 @@
 import csv
-from sys import argv
 from utils import *
 import math
 from argparse import ArgumentParser
@@ -29,14 +28,25 @@ def st_abw(path_):
 			x = str(row[0].split(";")[1:]).strip("[]'")
 			x = int(str(x),10)
 			abweichung+= (x-mittelwert)**2
-		abweichung/=spamreader.line_num
+		abweichung/=(spamreader.line_num-1)
 		abweichung = math.sqrt(abweichung)
 
 	return abweichung,mittelwert
 
 abweichung,mittelwert = st_abw(path_+"/"+a)
-print("Alice Mittelwert ist :",mittelwert, " bei einer Standardabweichung von ", abweichung)
+print("Alice Mittelwert ist :","%.5f" %mittelwert, " bei einer Standardabweichung von ", "%.5f" %abweichung)
 abweichung,mittelwert = st_abw(path_+"/"+b)
-print("Bob's Mittelwert ist :",mittelwert, " bei einer Standardabweichung von ", abweichung)
+print("Bob's Mittelwert ist :","%.5f" %mittelwert, " bei einer Standardabweichung von ", "%.5f" %abweichung)
 abweichung,mittelwert = st_abw(path_+"/"+c)
-print("Eve's Mittelwert ist :",mittelwert, " bei einer Standardabweichung von ", abweichung)
+print("Eve's Mittelwert ist :","%.5f" %mittelwert, " bei einer Standardabweichung von ", "%.5f" %abweichung)
+
+print("&","Mittelwert","&","empirische Standardabweichung","\\\\")
+print("\hline")
+abweichung,mittelwert = st_abw(path_+"/"+a)
+print("Alice","&","%.5f" %mittelwert,"&","%.5f" %abweichung,"\\\\")
+abweichung,mittelwert = st_abw(path_+"/"+b)
+print("\hline")
+print("Bob","&","%.5f" %mittelwert,"&","%.5f" %abweichung,"\\\\")
+abweichung,mittelwert = st_abw(path_+"/"+c)
+print("\hline")
+print("Eve","&","%.5f" %mittelwert,"&","%.5f" %abweichung,"\\\\")
