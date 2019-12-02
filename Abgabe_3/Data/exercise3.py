@@ -32,21 +32,22 @@ X, Y are given as lists.
 Blockwise application is done outside so please use the whole vectors at once.
 """
 def correlation(X, Y):
-	mittelwert_x = 0
-	mittelwert_y = 0
+	mittelwert_x = 0.0
+	mittelwert_y = 0.0
+
 	for i in range(0,len(X)):
 		mittelwert_x+=X[i] 
 		mittelwert_y+=Y[i] 
 	mittelwert_x/=len(X)
 	mittelwert_y/=len(Y)
 
-	oben = 0
-	unten_1 = 0
-	unten_2 = 0
+	oben = 0.0
+	unten_1 = 0.0
+	unten_2 = 0.0
 	for i in range(0,len(X)):
 		oben += (X[i]-mittelwert_x)*(Y[i]-mittelwert_y)
-		unten_1 += (X[i]-mittelwert_x)**2
-		unten_2 += (Y[i]-mittelwert_y)**2
+		unten_1 += (X[i]-mittelwert_x)**2.0
+		unten_2 += (Y[i]-mittelwert_y)**2.0
 	z = math.sqrt(unten_1*unten_2)
 	if z != 0:
 		return (oben/z)

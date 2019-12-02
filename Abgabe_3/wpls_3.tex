@@ -62,7 +62,7 @@ Joa die Messungen wurden durchgeführt und liegen in CSV Form in dem Ordner rum.
 Implementiert.
 \section{Auswertung}
 \subsection*{1}
-
+In der Abbildung \ref{fig:1} ist zu sehen, das die Werte doch recht unkorreliert sind. Sowohl von Alice und Bob, als auch von Eve. Dadurch, das wir uns nicht Bewegen ist wenig Entropie im Raum, es verändert sich die Umgebung also nicht. Deshalb war es auch nötig die Blockgröße so hoch zu setzen. Es hat sich nichts geändert, daher war der RSSI-Wert relativ konstant und die Standardabweichung sehr sehr gering. Um so einer Division durch 0 zu entgehen haben wir die Größe erhöht.
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/1_ohneBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
@@ -72,7 +72,7 @@ Implementiert.
 \end{figure}
 
 \subsection*{2}
-
+In Abbildung \ref{fig:2} sieht es schon ganz anders aus. Bei dieser Messung haben wir uns im Raum bewegt. Hier sieht man deutlich, das die RSSI Werte von Alice und Bob sehr korreliert sind, die von Alice und Eve hingegen überhaupt nicht. Dieses Ergebnis haben wir erwartet, es ist wie in der Vorlesung beschrieben eingetreten.
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/2_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
@@ -80,11 +80,9 @@ Implementiert.
 \caption{Korrelation mit Bewegung Blocksize 10}
 \label{fig:2}
 \end{figure}
-
 \subsection*{3}
-
 \subsubsection*{a)}
-
+Durch eine kurze Entfernung wird der Wert relativ konstant gehalten, Reflektionen etc. sind im Vergleich zum Ursprungssignal so schwach, das sie kaum Auswirkung haben, daher haben wir auch hier ein RSSI Wert der die ganze Zeit Konstant war, dies hat zur Folge, das die Korrelation 0 ist, da wir durch 0 teilen. Eve's Wert war auch relativ konstant, aber weicht dennoch leicht von Bob's ab.
 %OHNE BWG
 \begin{figure}[H]
 \centering
@@ -93,7 +91,7 @@ Implementiert.
 \caption{Korrelation ohne Bewegung \textbf{Blocksize 500}}
 \label{fig:3_a_o}
 \end{figure}
-
+Brigen wir nun Bewegung zwischen Alice und Bob sieht die Sache schon wieder ganz anders aus. Da wir teilweise mit der Hand zwischen A und B waren, haben wir dort eine komplett andere Impulsantwort als Eve empfangen. Dies hat zu Folge, das wir sehr korrelierte Werte zwischen Alice und Bob haben aber nicht zwischen Alice und Eve. Die Ausbrüche Richtung Null kommen daher, da 10 Werte in Folge Teilweise gleich dem Mittelwert waren. 
 %MIT BWG
 \begin{figure}[H]
 \centering
@@ -102,10 +100,8 @@ Implementiert.
 \caption{Korrelation mit Bewegung \textbf{Blocksize 50}}
 \label{fig:3_a_m}
 \end{figure}
-
-
-
 \subsubsection*{b)}
+Durch die hohe Entfernung, wirken sich nun schon kleinste Veränderungen auf den RSSI Wert aus, die Absoluten Werte sind im die -85 dB. Es gab keine direkte Verbinndung mehr, es kamen also nur noch Reflextierte Signale an. Den hohen Wert am Anfang können wir uns nur dadurch erklären, das es am Anfang möglicherweise kleine Bewegungen in der Umgebung gab, und er deswegen so hoch ist.
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_ohneBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
@@ -113,7 +109,7 @@ Implementiert.
 \caption{Korrelation ohne Bewegung \textbf{Blocksize 100}}
 \label{fig:3_b_o}
 \end{figure}
-
+Mit Bewegungen sehen wir, das wir wieder eine sehr starke Korrelation zwischen Alice und Bob haben, aber keine zwischen Alice und Eve. Wir mussen die Blocksize wieder erhöhen, da wir ansonsten zu viele Werte in Folge hatte, die dem Mittelwert geglichen haben. Die absolute Wertespanne, in der sich die RSSI-Werte befinden hat sich im Vergleich zu dem Versuch ohne Bewegung vergrößert. So sind die absoluten Werte zwischen -79 und -100.
 %MIT BWG
 \begin{figure}[H]
 \centering
@@ -123,7 +119,7 @@ Implementiert.
 \label{fig:3_b_m}
 \end{figure}
 \subsection*{4}
-
+Durch die Bewegung des Knoten B erhöhen wir die Entropie immenz. Wie in Abbildung \ref{fig:4} zu sehen erzielen wir unser bis hierhin bestes Ergebnis. Eve hat überhaupt keine Chance an den Schlüssel zu kommen, da die Werte extrem unkorreliert im Vergleich zu Bob-Alice sind.
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/4_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
@@ -131,9 +127,8 @@ Implementiert.
 \caption{Korrelation mit Bewegung \textbf{Blocksize 20}}
 \label{fig:4}
 \end{figure}
-
 \subsection*{5}
-
+In Abbildung \ref{fig:5} ist eine auf den ersten Blick merkwürdige Entdeckung festzustellen, obwohl Eve direkt neben Bob ist sind die RSSI Werte extrem unterschiedlich. Dies haben wir aber erwartet, da es bereits in der Vorlesung angesprochen wurde. 'Ein die Korrelation erhöht sich bis zu einer gewissen Distanz, aber wenn man näher ran geht, verringert sie sich sehr stark'.
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/5_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
