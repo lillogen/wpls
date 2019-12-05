@@ -15,6 +15,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{subfig}
+\usepackage{algorithm2e}
 \usepackage[bottom]{footmisc}
 
 
@@ -258,5 +259,22 @@ Eve & -58.22699 & 7.88637 \\
 Abschließend ist zu sagen, das wir viel Bewegung brauchen um Entropie auf den Channel zu bekommen, um die Standardabweichung zu erhöhen. Des weiteren ist wichtig, das der Abstand zwischen Eve und Bob nicht auf intermediate Range kommt, also der perfekte Abstand für eine Angriff ist wohl zwischen 50 cm und 1 cm aber diesem Wert genau zu ermitteln war nicht Teil dieses Versuches. Die Blocklänge glättet die Ergebnisse ab, so fallen einzelne ausrutscher nicht mehr auf. \\
 Die beste Chance hat der Angreifer generell, wenn wenig Bewegung im Raum ist. So sind die RSSI-Werte homogen und unterscheiden sich nur um einen linearen Wert. Bei Bewegung, egal welchen Abstandes, hat der Angreifer in der Regel keine Chance da die Korrelation zu schwach ist. 
 \section{Quantisierer Jana Multibit}
+\begin{algorithm}[H]
+\DontPrintSemicolon
+ \KwData{this text}
+ \KwResult{how to write algorithm with \LaTeX }
+ initialization\;
+ \While{not at end of this document}{
+  read current\;
+  \eIf{understand}{
+   go to next section\;
+   $i \gets j$\;
+   current section becomes this one\;
+   }{
+   go back to the beginning of current section\;
+  }
+ }
+ \caption{How to write algorithms}
+\end{algorithm}
 \section{Quantisierer Mathur Suhas}
 \end{document}
