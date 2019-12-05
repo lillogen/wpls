@@ -15,7 +15,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{subfig}
-\usepackage{algorithm2e}
+\usepackage[linesnumbered, lined, boxed, commentsnumbered]{algorithm2e}
 \usepackage[bottom]{footmisc}
 
 
@@ -262,23 +262,56 @@ Die beste Chance hat der Angreifer generell, wenn wenig Bewegung im Raum ist. So
 \section{Quantisierer Jana Multibit}
 \subsection*{a)}
 Der Quantisierer nutzt die \\
+\subsection*{b)}
 \begin{algorithm}[H]
 \DontPrintSemicolon
-\KwData{RSS\_Data []}
-\KwResult{how to write algorithm with \LaTeX }
-Range = (max $\in$ RSS\_Data ) - (min $\in$ RSS\_Data) \;
-N = $\lfloor log_2(Range) \rfloor$\;
-\While{not at end of this document}{
- read current\;
- \eIf{understand}{
-  go to next section\;
-  $i \gets j$\;
-  current section becomes this one\;
-  }{
-  go back to the beginning of current section\;
- }
+\SetAlgoLined
+\KwData{rss\_data []}
+range $\gets$ (max $\in$ rss\_data ) - (min $\in$ rss\_data) \;
+N $\gets$$\lfloor log_2(range) \rfloor$\;
+M $\gets$ $2^N$ \;
+splitinterval(range, M)\;
+\ForEach{interval}{
+	assign(N\_bit\_value)
 }
-\caption{How to write algorithms}
+\ForEach{measurement}{
+	\ForEach{interval}{
+	\If{rss in interval}{extract(interval.getNbit())}
+	}
+}
+\caption{Quantisierer Jana Multibit}
 \end{algorithm}
 \section{Quantisierer Mathur Suhas}
+\subsection*{a)}
+Der Quantisierer nutzt die \\
+\subsection*{b)}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\DontPrintSemicolon
+\SetAlgoLined
+\Input{$\hat{h}_a$, $\hat{h}_b$}
+\Output{keys $K_a$ = $K_b$}
+Alice:\;
+\ForEach{element $\in$ $\hat{h}_a$}{
+	\If{element > $q_+$ or element < q}{
+	store index of element in list L'
+	}
+}
+choose random entrys of L' \& store in L\;
+send L to Bob\;
+Bob:\;
+\ForEach{element $\in$ $\hat{h}_b$}{
+	\ForEach{index in L}{
+		\If{$\hat{h}_b$(index) > $q_+$ or $\hat{h}_b$(index) < q}{
+		store index in $\tilde{L}$
+		}
+	}	
+} 
+$K_b$ = Q($\hat{h}_b$($\tilde{L}$))\;
+Send $\tilde{L}$ to Alice\;
+Alice:\;
+$K_a$ = Q($\hat{h}_a$($\tilde{L}$))\;
+\caption{Cross-Level Algorithmus}
+\end{algorithm}
 \end{document}
