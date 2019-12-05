@@ -52,7 +52,7 @@ def correlation(X, Y):
 	if z != 0:
 		return (oben/z)
 	else:
-		return (0)
+		return None
 
 
 """
