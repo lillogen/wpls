@@ -2,3 +2,4 @@ Backup
 Abgabe_*/wpls_*.pdf
 Abgabe_3/RPI_Data
 **/__pycache__
+*.pyc
