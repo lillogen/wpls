@@ -160,13 +160,13 @@ Eve & -69.58161 & 3.10826 \\
 \end{table}
 
 \subsubsection*{b) ohne Bewegung}
-Durch die hohe Entfernung, wirken sich nun schon kleinste Veränderungen auf den RSSI Wert aus, die Absoluten Werte sind im die -85 dB. Es gab keine direkte Verbindung mehr, es kamen also nur noch reflextierte Signale an. Die Werte sind so unkorreliert, da Signale teilweise verlorengegangen sind oder zu schwach waren und nicht angekommen sind, dies geschah aber nur in eine Richtung.
+Durch die hohe Entfernung, wirken sich nun schon kleinste Veränderungen auf den RSSI Wert aus, die Absoluten Werte sind im die -85 dB. Es gab keine direkte Verbindung mehr, es kamen also nur noch reflextierte Signale an. Die Werte sind so unkorreliert, da Signale teilweise verlorengegangen sind oder zu schwach waren und nicht angekommen sind, dies geschah aber nur in eine Richtung. Das die Werte so unterschiedlich sind liegt daran, das die Hardware nicht perfekt ist und es so zu kleinen Fehler kommen kann. Des weiteren gibt es zufällige Veränderungen des Channel, die nicht bidirektional sind, das heißt nur in eine Richtung. Dies kommt aufgrund des hohen Abstanden mehr zum vorschein als bei anderen Messungen.
 
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_ohneBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_ohneBwg_A_B/output_Ex3/correlation_AE.png}}
-\caption{Korrelation ohne Bewegung \textbf{Blocksize 100}}
+\caption{Korrelation ohne Bewegung \textbf{Blocksize 10}}
 \label{fig:3_b_o}
 \end{figure}
 
@@ -191,7 +191,7 @@ Mit Bewegungen sehen wir, das wir wieder eine sehr starke Korrelation zwischen A
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/3_b_mitBwg_A_B/output_Ex3/correlation_AE.png}}
-\caption{Korrelation mit Bewegung \textbf{Blocksize 20}}
+\caption{Korrelation mit Bewegung \textbf{Blocksize 10}}
 \label{fig:3_b_m}
 \end{figure}
 
@@ -215,7 +215,7 @@ Durch die Bewegung des Knoten B erhöhen wir die Entropie immenz. Wie in Abbildu
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/4_mitBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/4_mitBwg_A_B/output_Ex3/correlation_AE.png}}
-\caption{Korrelation mit Bewegung \textbf{Blocksize 20}}
+\caption{Korrelation mit Bewegung \textbf{Blocksize 10}}
 \label{fig:4}
 \end{figure}
 
