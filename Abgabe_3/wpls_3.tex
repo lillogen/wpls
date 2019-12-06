@@ -65,7 +65,7 @@ Implementiert.
 Wir haben zwei Ziele, zum einen wollen wir das Eve und Bob möglichst unterschiedliche Impulsantworten zu Alice haben zum anderen, dass wir möglichst viel Entropie auf dem Channel haben, um möglichst viele Schlüsselbits ableiten zu können.\\
 Die Bilder mit blauen Punkte sind die Korrelation A-B mit B-A und die mit den roten Punkten B-A mit A-E.
 \subsection*{1}
-In der Abbildung \ref{fig:1} ist zu sehen, das die Werte doch recht unkorreliert sind. Sowohl von Alice und Bob, als auch von Eve. Dadurch, das wir uns nicht Bewegen ist wenig Entropie im Raum, es verändert sich die Umgebung also nicht. Deshalb war es auch nötig die Blockgröße so hoch zu setzen. Es hat sich nichts geändert, daher war der RSSI-Wert relativ konstant und die Standardabweichung sehr sehr gering. Um so einer Division durch 0 zu entgehen haben wir die 0-Werte rausgenommen.
+In der Abbildung \ref{fig:1} ist zu sehen, das die Werte doch recht unkorreliert sind. Sowohl von Alice und Bob, als auch von Eve. Dadurch, das wir uns nicht Bewegen ist wenig Entropie im Raum, es verändert sich die Umgebung also nicht. Es hat sich nichts geändert, daher war der RSSI-Wert relativ konstant und die Standardabweichung sehr sehr gering. Um so einer Division durch 0 zu entgehen haben wir die 0-Werte rausgenommen. Die Werte sind so unkorreliert, da der Channel unidirektional durch Interferenz verändert wird und auch thermal noise hier eine größere Rolle spielt. 
 \begin{figure}[H]
 \centering
 \subfloat[][]{\includegraphics[width=0.4\textwidth]{Messungen/1_ohneBwg_A_B/output_Ex3/correlation_AB.png}} \qquad
@@ -160,7 +160,7 @@ Eve & -69.58161 & 3.10826 \\
 \end{table}
 
 \subsubsection*{b) ohne Bewegung}
-Durch die hohe Entfernung, wirken sich nun schon kleinste Veränderungen auf den RSSI Wert aus, die Absoluten Werte sind im die -85 dB. Es gab keine direkte Verbindung mehr, es kamen also nur noch reflextierte Signale an. Die Werte sind so unkorreliert, da Signale teilweise verlorengegangen sind oder zu schwach waren und nicht angekommen sind, dies geschah aber nur in eine Richtung. Das die Werte so unterschiedlich sind liegt daran, das die Hardware nicht perfekt ist und es so zu kleinen Fehler kommen kann. Des weiteren gibt es zufällige Veränderungen des Channel, die nicht bidirektional sind, das heißt nur in eine Richtung. Dies kommt aufgrund des hohen Abstanden mehr zum vorschein als bei anderen Messungen.
+Durch die hohe Entfernung, wirken sich nun schon kleinste Veränderungen auf den RSSI Wert aus, die Absoluten Werte sind um die -85 dB. Es gab keine direkte Verbindung mehr, es kamen also nur noch reflextierte Signale an. Die Werte sind so unkorreliert, da Signale teilweise verlorengegangen sind oder zu schwach waren und nicht angekommen sind, dies geschah aber nur in eine Richtung. Das die Werte so unterschiedlich sind liegt daran, das die Hardware nicht perfekt ist, Stichwort 'thermal noise' und es so zu kleinen Fehler kommen kann. Des weiteren gibt es zufällige Veränderungen des Channel, die nicht bidirektional sind, das heißt nur in eine Richtung. Dies kommt aufgrund des hohen Abstanden mehr zum vorschein als bei anderen Messungen. 
 
 \begin{figure}[H]
 \centering
@@ -257,8 +257,9 @@ Eve & -58.22699 & 7.88637 \\
 \caption{absolute Daten der 5. Messung}
 \end{table}
 \subsection*{Fazit}
-Abschließend ist zu sagen, das wir viel Bewegung brauchen um Entropie auf den Channel zu bekommen, um die Standardabweichung zu erhöhen. Des weiteren ist wichtig, das der Abstand zwischen Eve und Bob nicht auf intermediate Range kommt, also der perfekte Abstand für eine Angriff ist wohl zwischen 50 cm und 1 cm aber diesem Wert genau zu ermitteln war nicht Teil dieses Versuches. Die Blocklänge glättet die Ergebnisse ab, so fallen einzelne ausrutscher nicht mehr auf. \\
-Die beste Chance hat der Angreifer generell, wenn wenig Bewegung im Raum ist. So sind die RSSI-Werte homogen und unterscheiden sich nur um einen linearen Wert. Bei Bewegung, egal welchen Abstandes, hat der Angreifer in der Regel keine Chance da die Korrelation zu schwach ist. 
+Abschließend ist zu sagen, das wir viel Bewegung brauchen um Entropie auf den Channel zu bekommen, um die Standardabweichung zu erhöhen. Des weiteren ist wichtig, das der Abstand zwischen Eve und Bob nicht auf intermediate Range kommt, also der perfekte Abstand für eine Angriff ist wohl zwischen 50 cm und 1 cm aber diesem Wert genau zu ermitteln war nicht Teil dieses Versuches. Die Blocklänge glättet die Ergebnisse ab, so fallen einzelne ausrutscher durch noise nicht mehr auf. \\
+Die beste Chance hat der Angreifer generell, wenn wenig Bewegung im Raum ist. So sind die RSSI-Werte homogen und unterscheiden sich nur um einen linearen Wert. Bei Bewegung, egal welchen Abstandes, hat der Angreifer in der Regel keine Chance da die Korrelation zu schwach ist.\\
+Wichtig ist ebenfalls, das der Abstand nicht zu groß wird, da sonst andere physikalische Faktoren überhand gewinnen und die Korrelation zwischen Alice und Bob erheblich sinkt.
 \section{Quantisierer Jana Multibit}
 \subsection*{a)}
 Der Quantisierer nutzt die \\
