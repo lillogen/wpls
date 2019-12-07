@@ -262,7 +262,7 @@ Die beste Chance hat der Angreifer generell, wenn wenig Bewegung im Raum ist. So
 Wichtig ist ebenfalls, das der Abstand nicht zu groß wird, da sonst andere physikalische Faktoren überhand gewinnen und die Korrelation zwischen Alice und Bob erheblich sinkt.
 \section{Quantisierer Jana Multibit}
 \subsection*{a)}
-Der Quantisierer nutzt die \\
+Der Quantisierer nutzt die gesamte Bandbreite der empfangenen Samples. Es werden die Samples Empfangen, der kleinste und größte Wert ermittelt, anhand der Differenz die Anzahl der Abzuleitenden Bits. Dann wird der Wertebereich in gleich Große Intervalle aufgeteilt. Dann wird eine N-Bit Zuordnung für jedes Intervall gesucht. Dannach werden die RSS Daten durchgegangen und Anhand der Position (welches Intervall) die Secretbits generiert.
 \subsection*{b)}
 \begin{algorithm}[H]
 \DontPrintSemicolon
@@ -273,13 +273,14 @@ N $\gets$$\lfloor log_2(range) \rfloor$\;
 M $\gets$ $2^N$ \;
 splitinterval(range, M)\;
 \ForEach{interval}{
-	assign(N\_bit\_value)
+	assignToInterval(N\_bit\_value)
 }
 \ForEach{measurement}{
 	\ForEach{interval}{
-	\If{rss in interval}{extract(interval.getNbit())}
+	\If{rss in interval}{x += extract(interval.getNbit())}
 	}
 }
+strem = reconiliation(x)
 \caption{Quantisierer Jana Multibit}
 \end{algorithm}
 \section{Quantisierer Mathur Suhas}
