@@ -33,12 +33,37 @@ def st_abw(path_):
 
 	return abweichung,mittelwert
 
+def entropie(path_):
+	s = []
+	entro = 0
+	with open(path_, 'r') as csvfile:
+		spamreader = csv.reader(csvfile, delimiter=' ')
+		for row in spamreader:
+			x = str(row[0].split(";")[1:]).strip("[]'")
+			x = int(str(x),10)
+			s.append(x)
+	counter = []
+	for i in range(-120,20):
+		counter.append(s.count(i))
+	len_s = len(s)
+	for i in range(0,140):
+		pai = counter[i]/len_s
+		if counter[i]!=0:
+			entro+= -(math.log2(pai)*pai)
+	return entro
+
+
+
+
 abweichung,mittelwert = st_abw(path_+"/"+a)
-print("Alice Mittelwert ist :","%.5f" %mittelwert, " bei einer Standardabweichung von ", "%.5f" %abweichung)
+entro = entropie(path_+"/"+a)
+print("Alice Mittelwert ist :","%.5f" %mittelwert, "| bei einer Standardabweichung von ", "%.5f" %abweichung, "| die Entropie Beträgt ", "%.5f"%entro)
 abweichung,mittelwert = st_abw(path_+"/"+b)
-print("Bob's Mittelwert ist :","%.5f" %mittelwert, " bei einer Standardabweichung von ", "%.5f" %abweichung)
+entro = entropie(path_+"/"+b)
+print("Bob's Mittelwert ist :","%.5f" %mittelwert, "| bei einer Standardabweichung von ", "%.5f" %abweichung, "| die Entropie Beträgt ", "%.5f"%entro)
 abweichung,mittelwert = st_abw(path_+"/"+c)
-print("Eve's Mittelwert ist :","%.5f" %mittelwert, " bei einer Standardabweichung von ", "%.5f" %abweichung)
+entro = entropie(path_+"/"+c)
+print("Eve's Mittelwert ist :","%.5f" %mittelwert, "| bei einer Standardabweichung von ", "%.5f" %abweichung, "| die Entropie Beträgt ", "%.5f"%entro)
 
 print("&","Mittelwert","&","empirische Standardabweichung","\\\\")
 print("\hline")
@@ -50,3 +75,5 @@ print("Bob","&","%.5f" %mittelwert,"&","%.5f" %abweichung,"\\\\")
 abweichung,mittelwert = st_abw(path_+"/"+c)
 print("\hline")
 print("Eve","&","%.5f" %mittelwert,"&","%.5f" %abweichung,"\\\\")
+
+entropie(path_+"/"+a)

@@ -262,7 +262,7 @@ Die beste Chance hat der Angreifer generell, wenn wenig Bewegung im Raum ist. So
 Wichtig ist ebenfalls, das der Abstand nicht zu groß wird, da sonst andere physikalische Faktoren überhand gewinnen und die Korrelation zwischen Alice und Bob erheblich sinkt.
 \section{Quantisierer Jana Multibit}
 \subsection*{a)}
-Der Quantisierer nutzt die gesamte Bandbreite der empfangenen Samples. Es werden die Samples Empfangen, der kleinste und größte Wert ermittelt, anhand der Differenz die Anzahl der Abzuleitenden Bits. Dann wird der Wertebereich in gleich Große Intervalle aufgeteilt. Dann wird eine N-Bit Zuordnung für jedes Intervall gesucht. Dannach werden die RSS Daten durchgegangen und Anhand der Position (welches Intervall) die Secretbits generiert.
+Der Quantisierer nutzt die gesamte Bandbreite der empfangenen Samples. Es werden die Samples Empfangen, der kleinste und größte Wert ermittelt, anhand der Differenz die Anzahl der Abzuleitenden Bits. Dann wird der Wertebereich in gleich Große Intervalle aufgeteilt. Dann wird eine N-Bit Zuordnung für jedes Intervall gesucht. Dannach werden die RSS Daten durchgegangen und Anhand der Position (welches Intervall) die Secretbits generiert. Es werden pro gemessener RSS Wert mehrere Bits extrahiert.
 \subsection*{b)}
 \begin{algorithm}[H]
 \DontPrintSemicolon
@@ -280,12 +280,12 @@ splitinterval(range, M)\;
 	\If{rss in interval}{x += extract(interval.getNbit())}
 	}
 }
-strem = reconiliation(x)
+stream = reconiliation(x)
 \caption{Quantisierer Jana Multibit}
 \end{algorithm}
 \section{Quantisierer Mathur Suhas}
 \subsection*{a)}
-Alice und Bob haben einen Vektor an Messdaten, dieser Vektor enthält für jeden Zeitpunkt die berechneten Werte von \textbf{h}. Dann wird ein oberer und untere Threshhold definiert. Alice sucht sich eine Seqenz aus, in der m oder mehr \textbf{h} Werte über oder unter den Threshholdwerten liegen. Dann sendet Alice Bob den mittleren Zeitpunkt einiger zufällig ausgesuchter Werte die zuvor gefunden wurden. Bob schaut nun, ob \textit{m-1} Werte um den Zeitpunkt ebenfalls über oder unten den Thresholds liegen. Bob macht eine Liste, in der alle Matchings stehen und sendet diese Alice. Alice und Bob berechnen nun die Bits von jedem Wert an dem entsprechenden Index. (m muss vorher definiert werden, da steht aber nichts von im Text)
+Alice und Bob haben einen Vektor an Messdaten, dieser Vektor enthält für jeden Zeitpunkt die berechneten Werte von \textbf{h}. Dann wird ein oberer und untere Threshhold definiert. Alice sucht sich eine Seqenz aus, in der m oder mehr berechnete \textbf{h} Werte über oder unter den Threshholdwerten liegen. Dann sendet Alice Bob den mittleren Zeitpunkt einiger zufällig ausgesuchter Werte die zuvor gefunden wurden. Bob schaut nun, ob \textit{m-1} Werte um den Zeitpunkt ebenfalls über oder unten den Thresholds liegen. Bob macht eine Liste, in der alle Matchings stehen und sendet diese Alice. Alice und Bob berechnen nun die Bits von jedem Wert an dem entsprechenden Index. (m muss vorher definiert werden, da steht aber nichts von im Text)
 \subsection*{b)}
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -305,7 +305,7 @@ send L to Bob\;
 Bob:\;
 \ForEach{element $\in$ $\hat{h}_b$}{
 	\ForEach{index in L}{
-		\If{$\hat{h}_b$(index) > $q_+$ or $\hat{h}_b$(index) < q}{
+		\If{$\hat{h}_b$(index) > $q_+$ \textbf{or} $\hat{h}_b$(index) < q}{
 		store index in $\tilde{L}$
 		}
 	}	
@@ -317,4 +317,6 @@ $K_a$ = Q($\hat{h}_a$($\tilde{L}$))\;
 \caption{Cross-Level Algorithmus}
 \end{algorithm}
 \section{Bonus: Reading Assignment}
+\subsection*{a)}
+Die Authoren wollen ein mathematisches Modell eines 'Kanal untersuchungs Systems' aufstellen und den Zusammenhang zwischen Biterzeugungsrate und Kanaluntersuchungsrate herstellen. (hört sich auf deutsch ein bisschen blöd an :D). Sie wollen des weiteren anhand der Entropie die Biterzeugungsrate ableiten
 \end{document}
