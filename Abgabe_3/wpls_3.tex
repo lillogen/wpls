@@ -285,7 +285,7 @@ strem = reconiliation(x)
 \end{algorithm}
 \section{Quantisierer Mathur Suhas}
 \subsection*{a)}
-Der Quantisierer nutzt die \\
+Alice und Bob haben einen Vektor an Messdaten, dieser Vektor enthält für jeden Zeitpunkt die berechneten Werte von \textbf{h}. Dann wird ein oberer und untere Threshhold definiert. Alice sucht sich eine Seqenz aus, in der m oder mehr \textbf{h} Werte über oder unter den Threshholdwerten liegen. Dann sendet Alice Bob den mittleren Zeitpunkt einiger zufällig ausgesuchter Werte die zuvor gefunden wurden. Bob schaut nun, ob \textit{m-1} Werte um den Zeitpunkt ebenfalls über oder unten den Thresholds liegen. Bob macht eine Liste, in der alle Matchings stehen und sendet diese Alice. Alice und Bob berechnen nun die Bits von jedem Wert an dem entsprechenden Index. (m muss vorher definiert werden, da steht aber nichts von im Text)
 \subsection*{b)}
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -296,7 +296,7 @@ Der Quantisierer nutzt die \\
 \Output{keys $K_a$ = $K_b$}
 Alice:\;
 \ForEach{element $\in$ $\hat{h}_a$}{
-	\If{element > $q_+$ or element < q}{
+	\If{(element > $q_+$ \textbf{or} element < $q_{-}$) \textbf{and} rand()}{
 	store index of element in list L'
 	}
 }
@@ -316,4 +316,5 @@ Alice:\;
 $K_a$ = Q($\hat{h}_a$($\tilde{L}$))\;
 \caption{Cross-Level Algorithmus}
 \end{algorithm}
+\section{Bonus: Reading Assignment}
 \end{document}
