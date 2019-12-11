@@ -49,7 +49,7 @@ $ $
 
 \begin{document}
 \hwheadtwo
-Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_3}.
+Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.
 \section{Messungen}
 Eine schematische Zeichnung der Messumgebung ist in Abbildung \ref{fig:1_1} zu sehen.
 \begin{figure}[H]
@@ -156,7 +156,7 @@ Bob & -48.79270 & 1.79899 \\
 \hline
 Eve & -69.58161 & 3.10826 \\
 \end{tabular}
-\caption{absolute Daten der 2. Messung mit Bewegung}
+\caption{absolute Daten der 3. Messung mit Bewegung}
 \end{table}
 
 \subsubsection*{b) ohne Bewegung}
@@ -285,7 +285,7 @@ stream = reconiliation(x)
 \end{algorithm}
 \section{Quantisierer Mathur Suhas}
 \subsection*{a)}
-Alice und Bob haben einen Vektor an Messdaten, dieser Vektor enthält für jeden Zeitpunkt die berechneten Werte von \textbf{h}. Dann wird ein oberer und untere Threshhold definiert. Alice sucht sich eine Sequenz aus, in der m oder mehr berechnete \textbf{h} Werte über oder unter den Threshholdwerten liegen. Dann sendet Alice Bob den mittleren Zeitpunkt einiger zufällig ausgesuchter Werte, welche zuvor gefunden wurden. Bob schaut nun, ob \textit{m-1} Werte um den Zeitpunkt ebenfalls über oder unter den Thresholds liegen. Bob macht eine Liste, in der alle Matchings stehen und sendet diese Alice. Alice und Bob berechnen nun die Bits von jedem Wert an dem entsprechenden Index. (m muss vorher definiert werden, da steht aber nichts von im Text).
+Alice und Bob haben einen Vektor an Messdaten, dieser Vektor enthält für jeden Zeitpunkt die berechneten Werte von \textbf{h}. Dann wird ein oberer und untere Threshhold definiert. Alice sucht sich eine Sequenz aus, in der m oder mehr berechnete \textbf{h} Werte über oder unter den Threshholdwerten liegen. Dann sendet Alice Bob den mittleren Zeitpunkt einiger zufällig ausgesuchter Werte, welche zuvor gefunden wurden. Bob schaut nun, ob \textit{m-1} Werte um den Zeitpunkt ebenfalls über oder unter den Thresholds liegen. Bob macht eine Liste, in der alle Matchings stehen und sendet diese Alice. Alice und Bob leiten nun die Bits von jedem Wert an dem entsprechenden Index ab(m muss vorher definiert werden, da steht aber bis zum Algo nichts von im Text, erst später). Konkret eine 1 falls der Wert über $q_+$ oder eine 0 falls der Wert unter $q_-$ liegt.
 \subsection*{b)}
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
