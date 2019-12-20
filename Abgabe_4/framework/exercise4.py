@@ -94,13 +94,16 @@ def quant1(A, B, E, args):
     x = [0]*m
     #print(number_of_bits)
     #ran = ran[]/m
-    x = gray_code(m)
-    
+    x = gray_code(number_of_bits)
+    print(x)
+    #x = numpy.flip(x)
+    #print(x)
+
     for i in range(len(A)):
         gcode = int(math.floor(float(A[i]-min_a[0])/ran[0]*m))
         if gcode == m:
             gcode= m-1
-        print(gcode)
+        #print(gcode)
         bA.append(x[gcode])  
 
         gcode = int(math.floor(float(B[i]-min_a[1])/ran[1]*m))
