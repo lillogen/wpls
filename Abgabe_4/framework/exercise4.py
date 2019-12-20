@@ -18,8 +18,10 @@
 
 
 import utils
+from utils import gray_code
 import numpy
 from subprocess import check_output
+
 
 """
 Excersise Bit Error Rate:
@@ -48,7 +50,7 @@ def MI(A, B):
     with open("MI_temp.dat", "w+") as tmp:
         for (a, b) in zip(A, B):
             tmp.write("%f %f\n" % (a, b))
-    return float(check_output(["./MIhigherdim", "MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
+    #return float(check_output(["./MIhigherdim", "MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
 
 
 """
@@ -77,13 +79,56 @@ def quant1(A, B, E, args):
     # Number of bits per symbol (parameter)
     number_of_bits = args.bits;
     # After you have finished, bA, bB and bE should be of same length and should be of the form [1, 0, 0, 1, 1, 1 ...]
-
     ### YOUR CODE GOES HERE ###
+    max_a = [max(A),max(B),max(E)]
+    min_a = [min(A),min(B),min(E)]
+    import math
+    ran = [max_a[0]-min_a[0],max_a[1]-min_a[1],max_a[2]-min_a[2]]
+    
+    ran = [1 if x==0 else x for x in ran]
+    
+    #n = [math.log(ran[0],2),math.log(ran[1],2),math.log(ran[2],2)]
+    
+    m = 2**number_of_bits
 
-    return utils.not_yet_implemented("quant1")
-    # return (bA, bB, bE) #After implementation, return binary vectors as tuple
+    x = [0]*m
+    #print(number_of_bits)
+    #ran = ran[]/m
+    x = gray_code(m)
+    
+    for i in range(len(A)):
+        gcode = int(math.floor(float(A[i]-min_a[0])/ran[0]*m))
+        if gcode == m:
+            gcode= m-1
+        print(gcode)
+        bA.append(x[gcode])  
+
+        gcode = int(math.floor(float(B[i]-min_a[1])/ran[1]*m))
+        if gcode == m:
+            gcode= m-1
+        bB.append(x[gcode])
+
+        gcode = int(math.floor(float(E[i]-min_a[2])/ran[2]*m))
+        if gcode == m:
+            gcode= m-1
+        bE.append(x[gcode])
 
 
+
+    #bA = [m-1 if x==m else x for x in bA]
+    #bB = [m-1 if x==m else x for x in bB]
+    #bE = [m-1 if x==m else x for x in bE]
+
+    #print(bA)
+
+    bA = numpy.concatenate(bA,axis=0).tolist()
+    bB = numpy.concatenate(bB,axis=0).tolist()
+    bE = numpy.concatenate(bE,axis=0).tolist()
+    return (bA,bB,bE)  
+
+    #return utils.not_yet_implemented("quant1")
+    ##After implementation, return binary vectors as tuple
+    
 def quant2(A, B, E, args):
     bA = []
     bB = []
@@ -103,7 +148,7 @@ def quant2(A, B, E, args):
 
     ### YOUR CODE GOES HERE ###
 
-    return not_yet_implemented("quant2")
+    return utils.not_yet_implemented("quant2")
 
     # return bA, bB, bE  # After implementation, return binary vectors as tuple
 
