@@ -118,7 +118,7 @@ def plot_quantizizer(meas_A, meas_B, meas_E, ts, args):
 
     if "data" in map(str.lower, args_out):
         ## Store bitstream
-        for b, store_path in zip([bA, bB, bE], [os.path.join(destination, "data/%s_%s.csv" % (i, ts)) for i in
+        for b, store_path in zip([bA, bB, bE], [os.path.join(destination, "data/%s.csv" % (i)) for i in
                                                 ["Quantized_ab", "Quantized_ba", "Quantized_ae"]]):
             with open(store_path, "w+") as out:
                 out.write("\n".join(["%d" % i for i in b]))
@@ -137,12 +137,12 @@ def plot_quantizizer(meas_A, meas_B, meas_E, ts, args):
 
         plot([measure_shortedA, measure_shortedB, measure_shortedE], ["blue", "green", "red"], xlabel="Time",
              ylabel="Amplitude", legend=["A", "B", "E"], linestyle='-', marker='.')
-        multiple_save(os.path.join(destination, "measurement_shortened_%s" % ts))
+        multiple_save(os.path.join(destination, "measurement_shortened"))
         plt.clf()
 
         subplots([quant_shortedA, quant_shortedB, quant_shortedE], ["blue", "green", "red"], xlabel="Time",
                  ylabel="Amplitude", legend=["A", "B", "E"], linestyle='-', marker='.', drawstyle='steps-post')
-        multiple_save(os.path.join(destination, "quantize_shortened_%s" % ts))
+        multiple_save(os.path.join(destination, "quantize_shortened"))
         plt.clf()
 
 
@@ -273,7 +273,7 @@ if __name__ == "__main__":
         try:
             plot_correlation(meas_A, meas_B, meas_E, ts, args)
         except NotImplementedError as e:
-            print e
+            print(e)
 
     if 2 in args.excercise:
         plot_quantizizer(meas_A, meas_B, meas_E, ts, args)

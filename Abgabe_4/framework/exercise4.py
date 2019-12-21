@@ -95,35 +95,31 @@ def quant1(A, B, E, args):
     #print(number_of_bits)
     #ran = ran[]/m
     x = gray_code(number_of_bits)
-    print(x)
-    #x = numpy.flip(x)
-    #print(x)
+    x = numpy.flip(x,0)
+    print("gray_code_Array",x)
+    print("Range:", ran)
 
-    for i in range(len(A)):
-        gcode = int(math.floor(float(A[i]-min_a[0])/ran[0]*m))
+    for i in range(0,len(A)):
+        gcode = int(math.floor(float(abs(A[i])-abs(max_a[0]))*m/ran[0]))
         if gcode == m:
             gcode= m-1
-        #print(gcode)
         bA.append(x[gcode])  
 
-        gcode = int(math.floor(float(B[i]-min_a[1])/ran[1]*m))
+        gcode = int(math.floor(float(abs(B[i])-abs(max_a[1]))*m/ran[1]))
         if gcode == m:
             gcode= m-1
         bB.append(x[gcode])
 
-        gcode = int(math.floor(float(E[i]-min_a[2])/ran[2]*m))
+        gcode = int(math.floor(float(abs(E[i])-abs(max_a[2]))*m/ran[2]))
         if gcode == m:
             gcode= m-1
         bE.append(x[gcode])
-
-
 
     #bA = [m-1 if x==m else x for x in bA]
     #bB = [m-1 if x==m else x for x in bB]
     #bE = [m-1 if x==m else x for x in bE]
 
     #print(bA)
-
     bA = numpy.concatenate(bA,axis=0).tolist()
     bB = numpy.concatenate(bB,axis=0).tolist()
     bE = numpy.concatenate(bE,axis=0).tolist()
