@@ -141,9 +141,9 @@ def quant2(A, B, E, args):
     m_b = numpy.mean(B)
     m_e = numpy.mean(E)
 
-    std_a = numpy.std(A)
-    std_b = numpy.std(B)
-    std_e = numpy.std(E)
+    std_a = numpy.std(A, ddof=1) #durch n-ddof teilen (ddof=1)
+    std_b = numpy.std(B, ddof=1)
+    std_e = numpy.std(E, ddof=1)
 
 
     q_a_plus = (m_a + alpha * std_a)
@@ -154,8 +154,7 @@ def quant2(A, B, E, args):
     q_b_minus = (m_b - alpha * std_b)
     q_e_minus = (m_e - alpha * std_e)
 
-    print(q_b_plus,q_b_minus)
-
+    #print(q_b_plus,q_b_minus)
     L = []
     i = 0
 
@@ -171,6 +170,7 @@ def quant2(A, B, E, args):
             #immer bis zum letzten Element durchgehen
             while A[i] < q_a_minus and i < len(A)-1:
                 i+=1
+
             if x == 1:
                 continue
             app_var = math.floor(float(i_start+i)/2)
@@ -202,28 +202,31 @@ def quant2(A, B, E, args):
     #Berechne Lschlange
     
     L_Schlange = []
+
     for i in L:
+        i = int(i)
         x = 0 
-        start = i-math.floor(float(m-2)/2)
+        start = int(i-math.floor(float(m-2)/2))
+        end = int(i+math.ceil(float(m-2)/2))
+        #print(end,start+m-2)
         if B[start] < q_b_minus :
-            for z in range(0,m-1):
+            for z in range(0,end-start+1):
                 if B[start+z] >= q_b_minus:
                     x = 1
             if x != 1:
-                print("Null")
                 L_Schlange.append(i)
                 bB.append(0)
             continue
 
         if B[start] > q_b_plus :
-            for z in range(0,m-1):
+            for z in range(0,end-start+1):
                 if B[start+z] <= q_b_minus:
                     x = 1
             if x != 1:
                 L_Schlange.append(i)
                 bB.append(1)
 
-    print(L_Schlange)
+    #print(L_Schlange)
 
     for i in L_Schlange:
         if A[i] > q_a_plus:
