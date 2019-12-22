@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
 #########################################
@@ -14,9 +14,9 @@
 
 
 import time
-
+import os
 from exercise4 import ber, MI, quant0, quant1, quant2
-from utils import *
+import utils as ut
 
 """
 Prolog of each exercise, imports measurements and generates a timestamp
@@ -25,11 +25,11 @@ Prolog of each exercise, imports measurements and generates a timestamp
 
 def prolog(args):
     # import measurements and trim them to minimal length
-    meas_A = read_measurement(args.A)
-    meas_B = read_measurement(args.B)
-    meas_E = read_measurement(args.E)
+    meas_A = ut.read_measurement(args.A)
+    meas_B = ut.read_measurement(args.B)
+    meas_E = ut.read_measurement(args.E)
 
-    meas_A, meas_B, meas_E = filter_measurements(meas_A, meas_B, meas_E)
+    meas_A, meas_B, meas_E = ut.filter_measurements(meas_A, meas_B, meas_E)
 
     # determine minimal length
     min_len = min(len(meas_A), len(meas_B), len(meas_E))
@@ -64,40 +64,40 @@ def plot_correlation(meas_A, meas_B, meas_E, ts, args):
     # A <-> B
     from exercise3 import correlation
 
-    correlation_coefficients = map(correlation, chunks(meas_A, args.size), chunks(meas_B, args.size))
+    correlation_coefficients = list(map(correlation, ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size)))
 
     if args.style == "dots":
-        dots(correlation_coefficients, "blue", xlabel="Blocks",
+        ut.dots(correlation_coefficients, "blue", xlabel="Blocks",
              ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow B$")
     elif args.style == "line":
-        timeplot(correlation_coefficients, "blue", xlabel="Blocks",
+        ut.timeplot(correlation_coefficients, "blue", xlabel="Blocks",
                  ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow B$")
     else:
         print("Illegal argument for style. Using dots instead. For help view documnetation.")
-        dots(correlation_coefficients, "blue", xlabel="Blocks",
+        ut.dots(correlation_coefficients, "blue", xlabel="Blocks",
              ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow B$")
 
-    multiple_save(os.path.join(destination, "correlation_AB_%s" % ts))
-    store_list(os.path.join(destination, "data/correlation_AB_%s.csv" % ts), correlation_coefficients)
-    plt.clf()
+    ut.multiple_save(os.path.join(destination, "correlation_AB_%s" % ts))
+    ut.store_list(os.path.join(destination, "data/correlation_AB_%s.csv" % ts), correlation_coefficients)
+    ut.plt.clf()
 
     # Apply correlation function implemented by the student and store plot and correlation coefficients in csv file
     # A <-> E
-    correlation_coefficients = map(correlation, chunks(meas_A, args.size), chunks(meas_E, args.size))
+    correlation_coefficients = list(map(correlation, ut.chunks(meas_A, args.size), ut.chunks(meas_E, args.size)))
 
     if args.style == "dots":
-        dots(correlation_coefficients, "red", xlabel="Blocks",
+        ut.dots(correlation_coefficients, "red", xlabel="Blocks",
              ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow E$")
     elif args.style == "line":
-        timeplot(correlation_coefficients, "blue", xlabel="Blocks",
+        ut.timeplot(correlation_coefficients, "blue", xlabel="Blocks",
                  ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow B$")
     else:
-        dots(correlation_coefficients, "blue", xlabel="Blocks",
+        ut.dots(correlation_coefficients, "blue", xlabel="Blocks",
              ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow E$")
 
-    multiple_save(os.path.join(destination, "correlation_AE_%s" % ts))
-    store_list(os.path.join(destination, "data/correlation_AE_%s.csv" % ts), correlation_coefficients)
-    plt.clf()
+    ut.multiple_save(os.path.join(destination, "correlation_AE_%s" % ts))
+    ut.store_list(os.path.join(destination, "data/correlation_AE_%s.csv" % ts), correlation_coefficients)
+    ut.plt.clf()
 
 
 def apply_quantizizer(meas_A, meas_B, meas_E, args):
@@ -106,7 +106,7 @@ def apply_quantizizer(meas_A, meas_B, meas_E, args):
     bA = []
     bB = []
     bE = []
-    for pair in zip(chunks(meas_A, args.size), chunks(meas_B, args.size), chunks(meas_E, args.size)):
+    for pair in zip(ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size), ut.chunks(meas_E, args.size)):
         bA, bB, bE = (arr + val for arr, val in zip((bA, bB, bE), (Qs[args.quantizer](*pair, args=args))))
 
     return bA, bB, bE
@@ -129,96 +129,96 @@ def plot_quantizizer(meas_A, meas_B, meas_E, ts, args):
         measure_shortedB = []
         measure_shortedE = []
 
-        for pair in zip(chunks(meas_A, args.size), chunks(meas_B, args.size), chunks(meas_E, args.size)):
+        for pair in zip(ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size), ut.chunks(meas_E, args.size)):
             measure_shortedA, measure_shortedB, measure_shortedE = (arr + val[::2] for arr, val in zip(
                 (measure_shortedA, measure_shortedB, measure_shortedE), pair))
         quant_shortedA, quant_shortedB, quant_shortedE = apply_quantizizer(measure_shortedA, measure_shortedB,
                                                                            measure_shortedE, args)
 
-        plot([measure_shortedA, measure_shortedB, measure_shortedE], ["blue", "green", "red"], xlabel="Time",
+        ut.plot([measure_shortedA, measure_shortedB, measure_shortedE], ["blue", "green", "red"], xlabel="Time",
              ylabel="Amplitude", legend=["A", "B", "E"], linestyle='-', marker='.')
-        multiple_save(os.path.join(destination, "measurement_shortened"))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "measurement_shortened"))
+        ut.plt.clf()
 
-        subplots([quant_shortedA, quant_shortedB, quant_shortedE], ["blue", "green", "red"], xlabel="Time",
+        ut.subplots([quant_shortedA, quant_shortedB, quant_shortedE], ["blue", "green", "red"], xlabel="Time",
                  ylabel="Amplitude", legend=["A", "B", "E"], linestyle='-', marker='.', drawstyle='steps-post')
-        multiple_save(os.path.join(destination, "quantize_shortened"))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "quantize_shortened"))
+        ut.plt.clf()
 
 
 def plot_ber(meas_A, meas_B, meas_E, ts, args):
     bA, bB, bE = apply_quantizizer(meas_A, meas_B, meas_E, args)
 
     ## Apply BER function implemented by the student and store plot and csv file
-    ber_AB = map(ber, chunks(bA, args.size), chunks(bB, args.size))
-    ber_AE = map(ber, chunks(bA, args.size), chunks(bE, args.size))
+    ber_AB = list(map(ber, ut.chunks(bA, args.size), ut.chunks(bB, args.size)))
+    ber_AE = list(map(ber, ut.chunks(bA, args.size), ut.chunks(bE, args.size)))
 
     if "data" in map(str.lower, args.out):
-        store_list(os.path.join(destination, "data/ber_AB_%s.csv" % ts), ber_AB)
-        store_list(os.path.join(destination, "data/ber_AE_%s.csv" % ts), ber_AE)
+        ut.store_list(os.path.join(destination, "data/ber_AB.csv" ), ber_AB)
+        ut.store_list(os.path.join(destination, "data/ber_AE.csv" ), ber_AE)
 
     if 'plots' in map(str.lower, args.out):
-        func = timeplot if args.style == "line" else dots
+        func = ut.timeplot if args.style == "line" else ut.dots
 
         func(ber_AB, "blue", xlabel="Blocks", ylabel="Bit Error Rate $\\rho$ for $A \leftrightarrow B$")
-        multiple_save(os.path.join(destination, "ber_AB_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "ber_AB" ))
+        ut.plt.clf()
         func(ber_AE, "blue", xlabel="Blocks", ylabel="Bit Error Rate $\\rho$ for $A \leftrightarrow E$")
-        multiple_save(os.path.join(destination, "ber_AE_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "ber_AE" ))
+        ut.plt.clf()
 
 
 def plot_entropy(meas_A, meas_B, meas_E, ts, args):
     # A <-> A
-    ee_A = map(MI, chunks(meas_A, args.size), chunks(meas_A, args.size))
-    ee_B = map(MI, chunks(meas_B, args.size), chunks(meas_B, args.size))
-    ee_E = map(MI, chunks(meas_E, args.size), chunks(meas_E, args.size))
+    ee_A = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_A, args.size)))
+    ee_B = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_B, args.size)))
+    ee_E = list(map(MI, ut.chunks(meas_E, args.size), ut.chunks(meas_E, args.size)))
     if "data" in map(str.lower, args.out):
-        store_list(os.path.join(destination, "data/h_A_%s.csv" % ts), ee_A)
-        store_list(os.path.join(destination, "data/h_B_%s.csv" % ts), ee_B)
-        store_list(os.path.join(destination, "data/h_E_%s.csv" % ts), ee_E)
+        ut.store_list(os.path.join(destination, "data/h_A.csv"), ee_A)
+        ut.store_list(os.path.join(destination, "data/h_B.csv"), ee_B)
+        ut.store_list(os.path.join(destination, "data/h_E.csv"), ee_E)
 
     if 'plots' in map(str.lower, args.out):
-        func = timeplot if args.style == "line" else dots
+        func = ut.timeplot if args.style == "line" else ut.dots
 
         func(ee_A, "blue", xlabel="Blocks", ylabel="H(A)")
-        multiple_save(os.path.join(destination, "h_A_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "h_A"))
+        ut.plt.clf()
 
         func(ee_B, "blue", xlabel="Blocks", ylabel="H(B)")
-        multiple_save(os.path.join(destination, "h_B_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "h_B"))
+        ut.plt.clf()
 
         func(ee_E, "blue", xlabel="Blocks", ylabel="H(E)")
-        multiple_save(os.path.join(destination, "h_E_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "h_E"))
+        ut.plt.clf()
     return
 
 
 def plot_mi(meas_A, meas_B, meas_E, ts, args):
     # A <-> B
-    mi_AB = map(MI, chunks(meas_A, args.size), chunks(meas_B, args.size))
-    mi_AE = map(MI, chunks(meas_A, args.size), chunks(meas_E, args.size))
-    mi_BE = map(MI, chunks(meas_B, args.size), chunks(meas_E, args.size))
+    mi_AB = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size)))
+    mi_AE = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_E, args.size)))
+    mi_BE = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_E, args.size)))
     if "data" in map(str.lower, args.out):
-        store_list(os.path.join(destination, "data/mi_AB_%s.csv" % ts), mi_AB)
-        store_list(os.path.join(destination, "data/mi_AE_%s.csv" % ts), mi_AE)
-        store_list(os.path.join(destination, "data/mi_BE_%s.csv" % ts), mi_BE)
+        ut.store_list(os.path.join(destination, "data/mi_AB.csv" ), mi_AB)
+        ut.store_list(os.path.join(destination, "data/mi_AE.csv" ), mi_AE)
+        ut.store_list(os.path.join(destination, "data/mi_BE.csv" ), mi_BE)
 
     if 'plots' in map(str.lower, args.out):
-        func = timeplot if args.style == "line" else dots
+        func = ut.timeplot if args.style == "line" else ut.dots
 
         func(mi_AB, "blue", xlabel="Blocks", ylabel="MI for $A \leftrightarrow B$")
-        multiple_save(os.path.join(destination, "mi_AB_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "mi_AB"))
+        ut.plt.clf()
 
         func(mi_AE, "red", xlabel="Blocks", ylabel="MI for $A \leftrightarrow E$")
-        multiple_save(os.path.join(destination, "mi_AE_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "mi_AE"))
+        ut.plt.clf()
 
         func(mi_BE, "green", xlabel="Blocks", ylabel="MI for $B \leftrightarrow E$")
-        multiple_save(os.path.join(destination, "mi_BE_%s" % ts))
-        plt.clf()
+        ut.multiple_save(os.path.join(destination, "mi_BE"))
+        ut.plt.clf()
     return
 
 
@@ -229,11 +229,11 @@ if __name__ == "__main__":
     args_parser = ArgumentParser()
 
     # Required parameter
-    args_parser.add_argument("-A", "-a", metavar="PATH_TO_NODE_A", type=path, required=True,
+    args_parser.add_argument("-A", "-a", metavar="PATH_TO_NODE_A", type=ut.path, required=True,
                              help="Path to node A measurement")
-    args_parser.add_argument("-B", "-b", metavar="PATH_TO_NODE_B", type=path, required=True,
+    args_parser.add_argument("-B", "-b", metavar="PATH_TO_NODE_B", type=ut.path, required=True,
                              help="Path to node B measurement")
-    args_parser.add_argument("-E", "-e", metavar="PATH_TO_NODE_E", type=path, required=True,
+    args_parser.add_argument("-E", "-e", metavar="PATH_TO_NODE_E", type=ut.path, required=True,
                              help="Path to node E measurement")
 
     args_parser.add_argument("-X", "--excercise", metavar="Number of task", choices=[1, 2, 3, 4], type=int,

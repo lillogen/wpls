@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python2
+﻿#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
 ##############################################
@@ -17,7 +17,6 @@
 ##############################################
 
 
-import utils
 from utils import gray_code
 import numpy
 from subprocess import check_output
@@ -55,10 +54,10 @@ Do not change this code
 def MI(A, B):
     if len(A) != len(B):
         raise ValueError("A and B must have the same length")
-    with open("MI_temp.dat", "w+") as tmp:
+    with open("/tmp/MI_temp.dat", "w+") as tmp:
         for (a, b) in zip(A, B):
             tmp.write("%f %f\n" % (a, b))
-    return float(check_output(["./MIhigherdim", "MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
+    return float(check_output(["./MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
 
 
 """
@@ -158,7 +157,8 @@ def quant2(A, B, E, args):
     L = []
     i = 0
 
-    while i < len(A)-m:
+    #Alice get L
+    while i <= len(A)-m:
         if A[i] < q_a_minus:
             x = 0
             for z in range(0,m):
@@ -192,19 +192,18 @@ def quant2(A, B, E, args):
 
             if x == 1:
                 continue
-            app_var = math.floor(float(i_start+i)/2)
+            app_var = int(math.floor(float(i_start+i)/2))
             L.append(app_var)
             continue
 
         i+=1
-    #print(L)
+    #print(len(L))
 
     #Berechne Lschlange
     
     L_Schlange = []
 
     for i in L:
-        i = int(i)
         x = 0 
         start = int(i-math.floor(float(m-2)/2))
         end = int(i+math.ceil(float(m-2)/2))
