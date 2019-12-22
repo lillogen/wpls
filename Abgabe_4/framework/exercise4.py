@@ -96,12 +96,13 @@ def quant1(A, B, E, args):
     #n = [math.log(ran[0],2),math.log(ran[1],2),math.log(ran[2],2)]
     
     m = 2**number_of_bits
-    x = numpy.flip(gray_code(number_of_bits),0)
+    x = numpy.flip(gray_code(number_of_bits),0)  #Array umdrehen, damit Bereichsgrenzen mit vorgabe übereinstimmen
+
     for i in range(0,len(A)):
-        gcode = int(math.floor(float(abs(A[i])-abs(max_a[0]))*m/ran[0]))
-        if gcode == m:
+        gcode = int(math.floor(float(abs(A[i])-abs(max_a[0]))*m/ran[0])) #Arrayindex(Bereichsgrenze) berechnen
+        if gcode == m:  #ran[0]*m /ran[0] anfangen, dann kommt 4 raus, ist aber kein gültiger Index
             gcode= m-1
-        bA.append(x[gcode])  
+        bA.append(x[gcode])  #Gray_code an stelle x einfügen
 
         gcode = int(math.floor(float(abs(B[i])-abs(max_a[1]))*m/ran[1]))
         if gcode == m:
@@ -113,7 +114,7 @@ def quant1(A, B, E, args):
             gcode= m-1
         bE.append(x[gcode])
 
-    bA = numpy.concatenate(bA,axis=0).tolist()
+    bA = numpy.concatenate(bA,axis=0).tolist() #Array of arrays zum Array of Zahlen machen
     bB = numpy.concatenate(bB,axis=0).tolist()
     bE = numpy.concatenate(bE,axis=0).tolist()
     return (bA,bB,bE)  
@@ -136,20 +137,19 @@ def quant2(A, B, E, args):
     """
 
     ### YOUR CODE GOES HERE ###
-    m_a = numpy.mean(A)
+    m_a = numpy.mean(A) #Mittelwert
     m_b = numpy.mean(B)
     m_e = numpy.mean(E)
 
-    std_a = numpy.std(A, ddof=1) #durch n-ddof teilen (ddof=1)
+    std_a = numpy.std(A, ddof=1) #durch n-ddof teilen (ddof=1) std-derivation Berechnen
     std_b = numpy.std(B, ddof=1)
     std_e = numpy.std(E, ddof=1)
 
-
-    q_a_plus = (m_a + alpha * std_a)
+    q_a_plus = (m_a + alpha * std_a) #q+ 
     q_b_plus = (m_b + alpha * std_b)
     q_e_plus = (m_e + alpha * std_e)
 
-    q_a_minus = (m_a - alpha * std_a)
+    q_a_minus = (m_a - alpha * std_a) #q-
     q_b_minus = (m_b - alpha * std_b)
     q_e_minus = (m_e - alpha * std_e)
 
@@ -161,22 +161,26 @@ def quant2(A, B, E, args):
     while i <= len(A)-m:
         if A[i] < q_a_minus:
             x = 0
+            #Teste ob weitere m kleiner als q- sind
             for z in range(0,m):
                 if A[i+z] >= q_a_minus:
                     x = 1
                     break
             #Wenn es m Werte gab anhängen
             i_start = i
-            #immer bis zum letzten Element durchgehen
+            #immer bis zum letzten Element, welches kleiner als q- ist durchgehen
             while A[i] < q_a_minus and i < len(A)-1:
                 i+=1
 
+            #wenn weniger als m Werte unter q- mache die while Schleife weiter
             if x == 1:
                 continue
+            #Anhängen falls mehr als m Werte unter q-
             app_var = math.floor(float(i_start+i)/2)
             L.append(app_var)
             continue
 
+        #Wie oben nur mit "größer" und q+
         if A[i] > q_a_plus:
             x = 0
             for z in range(0,m):
@@ -200,33 +204,39 @@ def quant2(A, B, E, args):
     #print(len(L))
 
     #Berechne Lschlange
-    
     L_Schlange = []
 
+    #Bob überprüft auf matchings
     for i in L:
         x = 0 
+        #Wie im Paper beschrieben ermittele Anfangswert
         start = int(i-math.floor(float(m-2)/2))
+        #Wie im Paper beschrieben ermittele Endwert
         end = int(i+math.ceil(float(m-2)/2))
-        #print(end,start+m-2)
+        #Teste ob alle Werte zwischen start und end kleiner als q- sind
         if B[start] < q_b_minus :
             for z in range(0,end-start+1):
                 if B[start+z] >= q_b_minus:
                     x = 1
+            #Wenn dies der Fall ist hänge i an Lschlange an und leite 1 Bit ab
             if x != 1:
                 L_Schlange.append(i)
                 bB.append(0)
             continue
 
+        #Teste ob alle Werte zwischen start und end größer als q+ sind
         if B[start] > q_b_plus :
             for z in range(0,end-start+1):
                 if B[start+z] <= q_b_minus:
                     x = 1
+            #Wenn dies der Fall ist hänge i an Lschlange an und leite 1 Bit ab
             if x != 1:
                 L_Schlange.append(i)
                 bB.append(1)
 
     #print(L_Schlange)
 
+    #Alice und Bob leiten bits anhang von L_Schlange ab
     for i in L_Schlange:
         if A[i] > q_a_plus:
             bA.append(1)

@@ -199,11 +199,11 @@ def plot_mi(meas_A, meas_B, meas_E, ts, args):
     # A <-> B
     mi_AB = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size)))
     mi_AE = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_E, args.size)))
-    mi_BE = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_E, args.size)))
+    mi_BA = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_A, args.size)))
     if "data" in map(str.lower, args.out):
         ut.store_list(os.path.join(destination, "data/mi_AB.csv" ), mi_AB)
         ut.store_list(os.path.join(destination, "data/mi_AE.csv" ), mi_AE)
-        ut.store_list(os.path.join(destination, "data/mi_BE.csv" ), mi_BE)
+        ut.store_list(os.path.join(destination, "data/mi_BE.csv" ), mi_BA)
 
     if 'plots' in map(str.lower, args.out):
         func = ut.timeplot if args.style == "line" else ut.dots
@@ -216,8 +216,8 @@ def plot_mi(meas_A, meas_B, meas_E, ts, args):
         ut.multiple_save(os.path.join(destination, "mi_AE"))
         ut.plt.clf()
 
-        func(mi_BE, "green", xlabel="Blocks", ylabel="MI for $B \leftrightarrow E$")
-        ut.multiple_save(os.path.join(destination, "mi_BE"))
+        func(mi_BA, "green", xlabel="Blocks", ylabel="MI for $B \leftrightarrow A$")
+        ut.multiple_save(os.path.join(destination, "mi_BA"))
         ut.plt.clf()
     return
 
