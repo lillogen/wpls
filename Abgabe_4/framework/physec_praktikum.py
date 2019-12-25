@@ -180,16 +180,16 @@ def plot_entropy(meas_A, meas_B, meas_E, ts, args):
     if 'plots' in map(str.lower, args.out):
         func = ut.timeplot if args.style == "line" else ut.dots
 
-        func(ee_A, "blue", xlabel="Blocks", ylabel="H(A)")
-        ut.multiple_save(os.path.join(destination, "h_A"))
+        func(ee_A, "blue", xlabel="Blocks", ylabel="Entropy(A)")
+        ut.multiple_save(os.path.join(destination, "Entropy_A"))
         ut.plt.clf()
 
-        func(ee_B, "blue", xlabel="Blocks", ylabel="H(B)")
-        ut.multiple_save(os.path.join(destination, "h_B"))
+        func(ee_B, "green", xlabel="Blocks", ylabel="Entropy(B)")
+        ut.multiple_save(os.path.join(destination, "Entropy_B"))
         ut.plt.clf()
 
-        func(ee_E, "blue", xlabel="Blocks", ylabel="H(E)")
-        ut.multiple_save(os.path.join(destination, "h_E"))
+        func(ee_E, "red", xlabel="Blocks", ylabel="Entropy(E)")
+        ut.multiple_save(os.path.join(destination, "Entropy_E"))
         ut.plt.clf()
     return
 
@@ -208,15 +208,15 @@ def plot_mi(meas_A, meas_B, meas_E, ts, args):
         func = ut.timeplot if args.style == "line" else ut.dots
 
         func(mi_AB, "blue", xlabel="Blocks", ylabel="MI for $A \leftrightarrow B$")
-        ut.multiple_save(os.path.join(destination, "mi_AB"))
+        ut.multiple_save(os.path.join(destination, "mutal_information_AB"))
         ut.plt.clf()
 
         func(mi_AE, "red", xlabel="Blocks", ylabel="MI for $A \leftrightarrow E$")
-        ut.multiple_save(os.path.join(destination, "mi_AE"))
+        ut.multiple_save(os.path.join(destination, "mutal_information_AE"))
         ut.plt.clf()
 
         func(mi_BA, "green", xlabel="Blocks", ylabel="MI for $B \leftrightarrow A$")
-        ut.multiple_save(os.path.join(destination, "mi_BA"))
+        ut.multiple_save(os.path.join(destination, "mutal_information_BA"))
         ut.plt.clf()
     return
 
