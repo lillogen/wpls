@@ -14,6 +14,8 @@
 
 from math import log
 import os
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import threading
 
