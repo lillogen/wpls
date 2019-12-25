@@ -1,0 +1,198 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{txfonts} %Times New Roman Font
+\usepackage{titlesec} %Format der Headings ändern
+\usepackage{times}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage[bottom]{footmisc}
+
+
+\renewcommand{\thesection}{\arabic{section}.} %Nummerierung der Sections anpassen
+\renewcommand{\labelenumi}{\alph{enumi})}  %Nummerierung der Listen anpassen
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{} %Format der Section Überschrift ändern
+\setlength{\parindent}{0pt} %Keine Einrückung bei neuen Paragraphen
+\geometry{left=2.0cm,textwidth=17cm,top=2.5cm,textheight=23cm}
+
+% Anpassen %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\student}{Benedict Schlüter\\ 108018212913 } % Namen eintragen
+\newcommand{\partner}{Christoph Lange\\ 108015222248} % Matrikelnummer eintragen
+\newcommand{\group}{1} % Gruppennummer eintragen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\hwheadtwo}{$ $
+  \vspace{-2cm}
+  
+\noindent \student \qquad \qquad  Wireless Physical Layer Security Praktikum \hfill WS 2019/2020 \\
+\noindent \partner \\
+%\noindent \thirdone \\  % einkommentieren, falls ihr eine 3er Gruppe seid
+\noindent Gruppe:~\group\\
+$ $
+
+  
+\begin{center}    
+{\Large \bf Abgabe PHYSEC 2}
+\end{center}
+}
+
+\begin{document}
+\hwheadtwo
+Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2} wobei clonen hier auch kacke ist weil so große Binärdateien da drin sind.
+\section{FM-Empfänger}
+\subsection*{a)}
+Der gesamte Flowgraph ist in der folgenden Abbildung zu betrachten. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_1/flowgraph1.png} 
+\caption{Flowgraph}
+\label{fig:1_1}
+\end{figure}
+Als erstes wird der Block \textbf{RTL-SDR Source} eingefügt, um ein Signal zu initiieren. Die Frequenz, auf der wir uns bewegen wird zum einen von den Blöcken mit den ID's \textbf{channel} sowie \textbf{senderauswahl} gesteuert. Der Block channel sorgt dafür, dass über eine graphische Leiste die Frequenz angepasst werden kann. Der Block senderauswahl hat drei Optionen, in denen bestimmte Frequenzen, von den aufgetragenen Radiosendern, festgelegt worden. Diese Optionen sind nachher in der GUI über drei Radiobuttons zu steuern. Die Samplerate der Quelle wird über die Variable \textbf{samprate} gesteuert und wurde auf 2e6 festgesetzt.\\
+Das Signal wird anschließend gesplittet und in einen Low-Pass-Filter und in eine graphische Ausgabe geleitet. Der Tiefpassfilter killt die hohen, negativ wie positiv, Frequenzen. Die Cuttoffreq gibt hierbei an, wie breit der Filter sein soll und die Transition Width die Schulterbreite des Filter. Also wie stark bzw. schnell der Abfall von 'Passieren' zum Noisefloor sein soll. Decimation Downsamplet das Signal um den Faktor 10.\\ Die graphische Oberfläche dient der Bedienung von Radio-Buttons oder Schiebereglern, auf die noch eingegangen wird.\\
+Um ein Audiosignal zu bekommen, welches exakt 48-tausend Samples pro Sekunde beträgt, wird der Resampler im nächsten Schritt benutzt. Dieser upsampelt das Signal mit 12 und downsampelt es danach mit 5. Um das Signal zu demodulieren, wird eine Wideband Frequency Modulation durch geführt und es wird wieder mit 10 dezimiert. Dabei wird das Signal von complex in reell umgewandelt.\\
+Die multiply Konstante dient lediglich der Lautstärkevariation. Diese wird über den Block mit der ID \textbf{audiogain} realisiert, die über den Schieberegler die multiply Konstante verändern. Darauf hin wandert das Signal mit der gewünschten Lautstärke in den Audiosink, wo das Signal in Schall umgewandelt wird. \\
+Außerdem geht das Signal in einen Selector, der entscheidet, ob das Signal in den Filesink geschrieben werden soll oder ob das Signal im Nullsink verfällt. Dies wird über den Chooserblock mit der ID \textbf{record} geregelt. Wird bei dem Chooser Record ausgewählt so wird das Signal in den Filesink geschrieben und bei Dont Record verworfen. \\
+So konnten wir alle angeforderten Funktionen realisieren.\\
+
+Wir haben am Pythoncode nichts verändert, daher haben wir nur die .grc Datei in der Zip. Diese klappt sowohl mit 3.8 als auch mit 3.7.
+\section{Spectrum Spraying}
+Am Anfang mussten wir das Bild in eine binäre Matrix umwandeln. Dafür mussten wir zunächst einen threshold Wert festlegen, diesen hätte man auch dynamisch an das Bild anpassen können usw. aber wir haben nun die einfachste Variante gewählt und alle rgb's unter (127) auf null alles was darüber war auf 1 gesetzt. \\
+Nun hatten wir die Matrix. Als nächstes sind wir die Matrix Zeile für Zeile durchgegangen, und haben für jede 1 eine e hoch i Funktion mit der ensprechenden Frequenz (aktueller Index) zum Signal hinzugefügt. Nun mussen wir nur noch die Daten Array für Array in eine Datei schreiben und haben folgende Ergebnisse bekommen. \\
+\begin{figure}[H]
+\centering
+ \subfloat[][]{\includegraphics[width=0.4\textwidth]{Dateien/Aufgabe_2/Bilder/donald.png}}
+\qquad
+\subfloat[][]{\includegraphics[width=0.4\textwidth]{Dateien/Aufgabe_2/Bilder/finger.png} }
+\caption{Spectrum Bilder 2.0}
+\label{fig:2_2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_2/Bilder/physec.png} 
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_2/Bilder/star.png} 
+\caption{Spectrum Bilder}
+\label{fig:2_1}
+\end{figure}
+FFT-size 4096 bei Physec und Stern\\
+FFT-size 2048 bei test und Donald\\
+\section{Spectrum Sensing}
+Zum vorgehen, es war nötig das angegebene Frequenzband Teil für Teil zu durchlaufen, da unser SDR nur eine sehr kleine Bandbreite hatte. Diese Teile wurden dann mittels FFT transformiert und an ein Array angehangen, welches wir am ende des Programms geplottet haben.\\
+Die Werte auf der Y-Achse sind in der Einheit $10^{db/10}$, da es so einfacher ist starke Signale zu identifizieren. Eine andere Einehit kann sehr einfach in dem Script ausgewählt werden.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{Dateien/Aufgabe_3/Figure_1.png} 
+\caption{Spectrum von 50MHz bis 1.5GHz}
+\label{fig:3_1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{Dateien/Aufgabe_3/spectrum-2.jpg} 
+\caption{fünf makierte Signale}
+\label{fig:3_1_1}
+\end{figure}
+Signal 1 ist ein Radiosender, höchstwahrscheinlich Eins-Live \\
+Signal 2 sehr schmalbandiger energiereicher Peak kp was das ist\\
+Signal 3 sehr schmalbandiger energiereicher Peak kp was das ist\\
+Signal 4 DVB T oder sowas \\
+Signal 5 ist aus dem GSM Band\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/radio.png} 
+\caption{Radiostationen}
+\label{fig:3_2}
+\end{figure}
+Jeder Peak ist eine Radiostation bzw ein Radiosignal, theoretisch könnte man es automatisch per RDS erkennen lassen, aber die Signale sind zu schwach bzw. unser SDR ist zu schlecht dafür. Selbst in GQRX sind die Signale zu schwach um sie per RDS erkenne zu lassen. Also googeln wir, um die Namen der Stationen herauszufinden. In Abbildung \ref{fig:3_4} ist zu sehen, wie schwach die Radiosignale sind.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Frequenz & Name & Bandbreite \\
+\hline
+87.8MHz & 	WDR Eins Live & 34kHz \\
+\hline
+88.8MHz & WDR 5 & 100kHz\\
+\hline
+90.3MHz & WDR 5 & 100kHz\\
+\hline
+90.8MHz & 90.8 Radio Herne & 80kHz \\
+\hline
+92MHz & WDR 5 & 70kHz\\
+\hline
+93.5MHz & WDR 2 & 82kHz \\
+\hline
+94.2MHz & WDR 2 & 70kHz\\
+\hline 
+94.6MHz & Radio Vest & 60kHz\\
+\hline
+95.1MHz & WDR 3 & 60kHz \\
+\hline
+96.1MHz & Radio Emscher Lippe & 82kHz\\
+\hline
+96.5MHz & Deutschlandfunk Kultur & 82kHz\\
+\hline
+98.1MHz & WDR 3 & 82kHz\\
+\hline
+98.5MHZ & Radio Bochum & 82kHz \\
+\hline
+99.2MHz & WDR 2 Rhein-Ruhr &82kHz\\
+\hline
+100MHz & WDR 4 & 54kHz \\
+\hline
+101.3MHz & WDR 4 & 100kHz \\
+\hline
+102.8MHz & Deutschlandfunk (DLF)&90kHz\\
+\hline
+103.3MHz & Funkhaus Europa & 90kHz\\
+\hline
+106.7MHz & 1-Live & 90kHz\\
+\hline
+108MHz & irgentein Grenzsignal & 5kHz\\
+\hline
+\end{tabular}
+\end{table}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/radio_Komm.jpg} 
+\caption{Zuordnung der Radiosender}
+\label{fig:3_3}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Dateien/Aufgabe_3/gqrx_radio.png} 
+\caption{GQRX (Airspy r2)}
+\label{fig:3_4}
+\end{figure}
+\section{Reading Assignment}
+\subsection*{Angriffe:}
+	\subsubsection*{Resource Depletion Attack:}
+		Bei dem Resource Depletion Attack wird das Netzwerk vom Angreifer mit unnötigen Anfragen überflutet, um eine große Menge der Bandbreite des Netzwerkes, der Rechenleistung sowie des Speichers zu verbrauchen. Durch das Spoofen der IP-, oder der MAC-Adresse versucht er seiner Identität zu verschleiern und die Attackdetection scheitert an den gefälschten Adressen.
+	\subsubsection*{Masquerade Attack:}
+		Bei dem Masquerade Attack gibt sich der Angreifer als gültiger Knoten aus. Dies geht mit IP-, oder MAC-Spoofing einher und hat diesselbe Konsequenz wie beim RD-Attack.
+
+\subsection*{Eigenschaften von Signalprints:}
+	\subsubsection*{Hard to spoof:}
+		Die Angreifen haben nur sehr geringen Einfluss auf den RSSI (Received Signal Strengh Indicator). Dadurch wird es schwer diesen zu spoofen. 
+	\subsubsection*{Strong correlation with physical location:}
+		Der RSSI, der an den Knoten empfangen wird hängt von der Entfernung und den Umgebungsfaktoren zwischen Sender und Empfänger ab. Auch wenn ein einzelner RSSI keine genaue Auskunft über die Position geben kann, können das eine ausreichende Menge dieser. Es kann nicht genau der Sender identifiziert werden aber immerhin dessen physikalische Position.
+	\subsubsection*{Small variation over moderate intervals of time:}
+		Es hat sich gezeigt, dass Signalprints sich nur in kleinen Werten unterscheiden, wenn die Umwelteinflüsse ebenso gering sind.
+
+\subsection*{Die drei Phasen des Algorithmus}
+	\subsubsection*{Node Induction:}
+		Um einen Sender zu identifizieren muss ein empfangerner Signalprint mit einem referenzieren Signalprint verglichen werden. Wenn ein neuer Sensor mit dem Netzwerk agieren will, so besitzt dieser noch keine Referenz.  Daher können Signalprints nicht bei der ersten Interaktion des neuen Sensors wirken. Dafür wird ein neuer Sensor, wenn er dem Netzwerk beitritt, wird der Kanal angegeben, auf welchem er senden wird. Die Empfänger im Netzwerk empfangen dann auf diesem Kanal und jeder Knoten misst den individuelle RSSI. 
+	\subsubsection*{Frequent Hello Message:}
+		Aufgrund vom einer entladenen Batterie kann die Sendeleistung sinken. Daher sinkt auch der RSSI-Wert, welcher gemessen wird. Dies wird nach der Zeit den Vergleich des RSSI-Werts und dem Vergleichswert beeinflussen. Um dies zu verhindern werden wiederholt 'Hallo' Pakete gesendet. Der RSSI-Wert all dieser Pakete wird verglichen und sollte sich herausstellen, dass der Unterschied größer als 1.5dBm wird, so wird ein neuer Signalprint angefordert. Dieser gilt dann als neue Referenz.
+	\subsubsection*{Data Transmission:}
+		Es ist nicht jeden Datenübertragung mit einer Signalprint-Verifikation verbunden. Je höher die Anzahl an Empfängern im Netzwerk, umso höher ist auch die Genauigkeit der Signalprints. Manchmal gibt es aber eventuell nicht genügend Teilnehmer, um ein ausreichend genauen Signalprint zu erstellen. Daher werden zwei Schritte eingeleitet. Zuerst wird das Netzwerk auf verdächtige Aktivität geprüft und anschließend, wenn eine entdeckt wurde, dann wird das Netzwerk eine ausreichende Menge an Empfängern auf den gewählten Channel ausrichten, um ein Signalprint zu generieren.
+\end{document}
