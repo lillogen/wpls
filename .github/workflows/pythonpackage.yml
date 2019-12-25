@@ -36,3 +36,8 @@ jobs:
         python3 ../framework/physec_praktikum.py -A A.csv -B B.csv -E E.csv -X 2 -Q 1 --size 100 
         python3 ../framework/physec_praktikum.py -A A.csv -B B.csv -E E.csv -X 3 -Q 1 --size 100 
         python3 ../framework/physec_praktikum.py -A A.csv -B B.csv -E E.csv -X 4 -Q 1 --size 100 
+    - name: Upload PDF 
+      uses:  actions/upload-artifact@v1
+      with:
+        name: Schlüter_Lange_Assignment_4
+        path: Abgabe_4/
