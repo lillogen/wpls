@@ -1,2 +1,0 @@
-python physec_praktikum.py -A 'ab.csv' -B 'ba.csv' -E 'ae.csv' -X 4 -Q 1
-
