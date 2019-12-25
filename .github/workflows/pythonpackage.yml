@@ -21,6 +21,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        apt-get install python-tk
     - name: Lint with flake8
       run: |
         pip install flake8
@@ -29,15 +30,20 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test four
+    - name: Test 1
       run: |
-        cd Abgabe_4/Messungen
-        python ../framework/physec_praktikum.py -A A.csv -B B.csv -E E.csv -X 1 -Q 1 --size 100 
-        python ../framework/physec_praktikum.py -A A.csv -B B.csv -E E.csv -X 2 -Q 1 --size 100 
-        python ../framework/physec_praktikum.py -A A.csv -B B.csv -E E.csv -X 3 -Q 1 --size 100 
-        python ../framework/physec_praktikum.py -A A.csv -B B.csv -E E.csv -X 4 -Q 1 --size 100 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 1 -Q 1 --size 100 
+    - name: Test 2
+      run: |
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 2 -Q 1 --size 100 
+    - name: Test 3
+      run: |
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 3 -Q 1 --size 100 
+    - name: Test 4
+      run: |
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 4 -Q 1 --size 100 
     - name: Upload PDF 
       uses:  actions/upload-artifact@v1
       with:
         name: Messungen
-        path: Abgabe_4/Messungen/output_Ex4/
+        path: output_Ex4/
