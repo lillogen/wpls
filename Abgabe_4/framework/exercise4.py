@@ -24,7 +24,6 @@ import math
 import scipy.stats
 
 def correlation(X,Y):
-    pass
     if X[1:] == X[:-1] or Y[1:] == Y[:-1] :
         return None 
     else:
