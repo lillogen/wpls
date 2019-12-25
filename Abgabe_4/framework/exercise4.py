@@ -21,8 +21,14 @@ from utils import gray_code
 import numpy
 from subprocess import check_output
 import math
+import scipy.stats
 
-
+def correlation(X,Y):
+    pass
+    if X[1:] == X[:-1] or Y[1:] == Y[:-1] :
+        return None 
+    else:
+        return scipy.stats.pearsonr(X,Y)[0]
 """
 Excersise Bit Error Rate:
 Implement the Bit Error Rate computation.
@@ -57,7 +63,7 @@ def MI(A, B):
     with open("/tmp/MI_temp.dat", "w+") as tmp:
         for (a, b) in zip(A, B):
             tmp.write("%f %f\n" % (a, b))
-    return float(check_output(["./MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
+    return float(check_output(["../framework/MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
 
 
 """

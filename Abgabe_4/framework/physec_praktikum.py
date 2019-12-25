@@ -15,7 +15,7 @@
 
 import time
 import os
-from exercise4 import ber, MI, quant0, quant1, quant2
+from exercise4 import ber, MI, quant0, quant1, quant2, correlation
 import utils as ut
 
 """
@@ -62,7 +62,6 @@ def prolog(args):
 def plot_correlation(meas_A, meas_B, meas_E, ts, args):
     ## Apply correlation function implemented by the student and store plot and correlation coefficients in csv file
     # A <-> B
-    from exercise3 import correlation
 
     correlation_coefficients = list(map(correlation, ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size)))
 
@@ -77,8 +76,8 @@ def plot_correlation(meas_A, meas_B, meas_E, ts, args):
         ut.dots(correlation_coefficients, "blue", xlabel="Blocks",
              ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow B$")
 
-    ut.multiple_save(os.path.join(destination, "correlation_AB_%s" % ts))
-    ut.store_list(os.path.join(destination, "data/correlation_AB_%s.csv" % ts), correlation_coefficients)
+    ut.multiple_save(os.path.join(destination, "correlation_AB_"))
+    ut.store_list(os.path.join(destination, "data/correlation_AB.csv"), correlation_coefficients)
     ut.plt.clf()
 
     # Apply correlation function implemented by the student and store plot and correlation coefficients in csv file
@@ -95,8 +94,8 @@ def plot_correlation(meas_A, meas_B, meas_E, ts, args):
         ut.dots(correlation_coefficients, "blue", xlabel="Blocks",
              ylabel="Pearson Correlation $\\rho$ for $A \leftrightarrow E$")
 
-    ut.multiple_save(os.path.join(destination, "correlation_AE_%s" % ts))
-    ut.store_list(os.path.join(destination, "data/correlation_AE_%s.csv" % ts), correlation_coefficients)
+    ut.multiple_save(os.path.join(destination, "correlation_AE"))
+    ut.store_list(os.path.join(destination, "data/correlation_AE.csv"), correlation_coefficients)
     ut.plt.clf()
 
 
@@ -163,7 +162,7 @@ def plot_ber(meas_A, meas_B, meas_E, ts, args):
         func(ber_AB, "blue", xlabel="Blocks", ylabel="Bit Error Rate $\\rho$ for $A \leftrightarrow B$")
         ut.multiple_save(os.path.join(destination, "ber_AB" ))
         ut.plt.clf()
-        func(ber_AE, "blue", xlabel="Blocks", ylabel="Bit Error Rate $\\rho$ for $A \leftrightarrow E$")
+        func(ber_AE, "red", xlabel="Blocks", ylabel="Bit Error Rate $\\rho$ for $A \leftrightarrow E$")
         ut.multiple_save(os.path.join(destination, "ber_AE" ))
         ut.plt.clf()
 
@@ -270,11 +269,8 @@ if __name__ == "__main__":
     meas_A, meas_B, meas_E, ts = prolog(args)  # prolog
 
     if 1 in args.excercise:
-        try:
-            plot_correlation(meas_A, meas_B, meas_E, ts, args)
-        except NotImplementedError as e:
-            print(e)
-
+        plot_correlation(meas_A, meas_B, meas_E, ts, args)
+    
     if 2 in args.excercise:
         plot_quantizizer(meas_A, meas_B, meas_E, ts, args)
 
