@@ -39,5 +39,5 @@ jobs:
     - name: Upload PDF 
       uses:  actions/upload-artifact@v1
       with:
-        name: Schlüter_Lange_Assignment_4
-        path: Abgabe_4/
+        name: Messungen
+        path: Abgabe_4/Messungen/output_Ex4/
