@@ -171,7 +171,6 @@ def quant2(A, B, E, args):
                 if A[i+z] >= q_a_minus:
                     x = 1
                     break
-            #Wenn es m Werte gab anhängen
             i_start = i
             #immer bis zum letzten Element, welches kleiner als q- ist durchgehen
             while A[i] < q_a_minus and i < len(A)-1:
@@ -192,8 +191,6 @@ def quant2(A, B, E, args):
                 if A[i+z] <= q_a_plus:
                     x = 1
                     break
-            
-            #Wenn es m Werte gab anhängen
             i_start = i
             #immer bis zum letzten Element durchgehen
             while A[i] > q_a_plus and i < len(A)-1:
