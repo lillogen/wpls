@@ -62,7 +62,7 @@ def MI(A, B):
     with open("/tmp/MI_temp.dat", "w+") as tmp:
         for (a, b) in zip(A, B):
             tmp.write("%f %f\n" % (a, b))
-    return float(check_output(["Abgabe_4/framework/MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
+    return float(check_output(["../framework/MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
 
 
 """
@@ -203,8 +203,7 @@ def quant2(A, B, E, args):
             continue
 
         i+=1
-    #print(len(L))
-
+    #print(L)
     #Berechne Lschlange
     L_Schlange = []
 
@@ -229,7 +228,7 @@ def quant2(A, B, E, args):
         #Teste ob alle Werte zwischen start und end größer als q+ sind
         if B[start] > q_b_plus :
             for z in range(0,end-start+1):
-                if B[start+z] <= q_b_minus:
+                if B[start+z] <= q_b_plus:
                     x = 1
             #Wenn dies der Fall ist hänge i an Lschlange an und leite 1 Bit ab
             if x != 1:
@@ -240,15 +239,16 @@ def quant2(A, B, E, args):
 
     #Alice und Bob leiten bits anhang von L_Schlange ab
     for i in L_Schlange:
+        i = int(i)
         if A[i] > q_a_plus:
             bA.append(1)
         elif A[i] < q_a_minus:
             bA.append(0)
 
 
-        if E[i] > q_e_plus:
+        if E[i] > m_e:
             bE.append(1)
-        elif E[i] < q_e_minus:
+        elif E[i] <= m_e:
             bE.append(0)
 
     return bA, bB, bE  # After implementation, return binary vectors as tuple
