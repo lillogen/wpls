@@ -1,0 +1,63 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{txfonts} %Times New Roman Font
+\usepackage{titlesec} %Format der Headings ändern
+\usepackage{times}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage[linesnumbered, lined, boxed, commentsnumbered]{algorithm2e}
+\usepackage[bottom]{footmisc}
+
+
+\renewcommand{\thesection}{\arabic{section}.} %Nummerierung der Sections anpassen
+\renewcommand{\labelenumi}{\alph{enumi})}  %Nummerierung der Listen anpassen
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{} %Format der Section Überschrift ändern
+\setlength{\parindent}{0pt} %Keine Einrückung bei neuen Paragraphen
+\geometry{left=2.0cm,textwidth=17cm,top=2.5cm,textheight=23cm}
+
+% Anpassen %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\student}{Benedict Schlüter\\ 108018212913 } % Namen eintragen
+\newcommand{\partner}{Christoph Lange\\ 108015222248} % Matrikelnummer eintragen
+\newcommand{\group}{1} % Gruppennummer eintragen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\hwheadtwo}{$ $
+  \vspace{-2cm}
+  
+\noindent \student \qquad \qquad  Wireless Physical Layer Security Praktikum \hfill WS 2019/2020 \\
+\noindent \partner \\
+%\noindent \thirdone \\  % einkommentieren, falls ihr eine 3er Gruppe seid
+\noindent Gruppe:~\group\\
+$ $
+
+  
+\begin{center}    
+{\Large \bf Abgabe PHYSEC 4}
+\end{center}
+}
+
+\begin{document}
+\hwheadtwo
+Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.
+\section{Absorberhalle}
+\section{Bit Error Rate}
+Implementiert, aber nicht so wie definiert, wenn alle Bits falsch sind haben wir laut der Definition auf der Folie ein Biterrorrate von 0, jedoch ist dies falsch, da wir einmal invertieren müssen, damit wir das richtige Ergebnis bekommen. Daher addieren wir, falls wir über 0.5 sind noch 1/len auf die Biterrorrate hinzu, was dem Schritt des Invertierens entspricht
+\section{Implementierung Quantisierer}
+Beide Implementiert, beim ersten kleiner Fehler an einer Bereichsgrenze bei euch oder bei mir, was die Testvektoren (ae) angeht.\\
+Beim zweiten ist mehr falsch aber keine Ahnung was.
+\section{Attack Trees}
+\section{Angriffe}
+\section{Angriffe in der Aborberhalle}
+\section{Bonus: Reading Assignment}
+\end{document}
