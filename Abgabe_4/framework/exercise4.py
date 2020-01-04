@@ -62,7 +62,7 @@ def MI(A, B):
     with open("/tmp/MI_temp.dat", "w+") as tmp:
         for (a, b) in zip(A, B):
             tmp.write("%f %f\n" % (a, b))
-    return float(check_output(["../framework/MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
+    return float(check_output(["/framework/MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
 
 
 """
