@@ -118,7 +118,7 @@ def plot_quantizizer(meas_A, meas_B, meas_E, ts, args):
     if "data" in map(str.lower, args_out):
         ## Store bitstream
         for b, store_path in zip([bA, bB, bE], [os.path.join(destination, "data/%s.csv" % (i)) for i in
-                                                ["Quantized_ab", "Quantized_ba", "Quantized_ae"]]):
+                                                ["Quantized_ab_{}".format(args.quantizer), "Quantized_ba_{}".format(args.quantizer), "Quantized_ae_{}".format(args.quantizer)]]):
             with open(store_path, "w+") as out:
                 out.write("\n".join(["%d" % i for i in b]))
 
@@ -141,7 +141,7 @@ def plot_quantizizer(meas_A, meas_B, meas_E, ts, args):
 
         ut.subplots([quant_shortedA, quant_shortedB, quant_shortedE], ["blue", "green", "red"], xlabel="Time",
                  ylabel="Amplitude", legend=["A", "B", "E"], linestyle='-', marker='.', drawstyle='steps-post')
-        ut.multiple_save(os.path.join(destination, "quantize_shortened"))
+        ut.multiple_save(os.path.join(destination, "quantize_shortened_Quant_{}".format(args.quantizer) ))
         ut.plt.clf()
 
 
@@ -153,17 +153,17 @@ def plot_ber(meas_A, meas_B, meas_E, ts, args):
     ber_AE = list(map(ber, ut.chunks(bA, args.size), ut.chunks(bE, args.size)))
 
     if "data" in map(str.lower, args.out):
-        ut.store_list(os.path.join(destination, "data/ber_AB.csv" ), ber_AB)
-        ut.store_list(os.path.join(destination, "data/ber_AE.csv" ), ber_AE)
+        ut.store_list(os.path.join(destination, "data/ber_AE_Quant_{}.csv".format(args.quantizer) ), ber_AE)
+        ut.store_list(os.path.join(destination, "data/ber_AB_Quant_{}.csv".format(args.quantizer) ), ber_AB)
 
     if 'plots' in map(str.lower, args.out):
         func = ut.timeplot if args.style == "line" else ut.dots
 
         func(ber_AB, "blue", xlabel="Blocks", ylabel="Bit Error Rate $\\rho$ for $A \leftrightarrow B$")
-        ut.multiple_save(os.path.join(destination, "ber_AB" ))
+        ut.multiple_save(os.path.join(destination, "ber_AB_Quant_{}".format(args.quantizer) ))
         ut.plt.clf()
         func(ber_AE, "red", xlabel="Blocks", ylabel="Bit Error Rate $\\rho$ for $A \leftrightarrow E$")
-        ut.multiple_save(os.path.join(destination, "ber_AE" ))
+        ut.multiple_save(os.path.join(destination, "ber_AE_Quant_{}".format(args.quantizer) ))
         ut.plt.clf()
 
 

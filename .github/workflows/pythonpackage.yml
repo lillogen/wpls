@@ -31,16 +31,20 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test 1
       run: |
-        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 1 -Q 1 --size 100 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 1 -Q 1 --size 50 
     - name: Test 2
       run: |
-        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 2 -Q 1 --size 100 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 2 -Q 0 --size 50 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 2 -Q 1 --size 50 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 2 -Q 2 --size 10 
     - name: Test 3
       run: |
-        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 3 -Q 1 --size 100 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 3 -Q 0 --size 50 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 3 -Q 1 --size 50 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 3 -Q 2 --size 10 
     - name: Test 4
       run: |
-        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 4 -Q 1 --size 100 
+        python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/A.csv -B Abgabe_4/Messungen/B.csv -E Abgabe_4/Messungen/E.csv -X 4 -Q 1 --size 50 
     - name: Upload PDF 
       uses:  actions/upload-artifact@v1
       with:
