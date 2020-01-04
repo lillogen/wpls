@@ -70,9 +70,9 @@ Example mean-quantizer.
 """
 def quant0(A, B, E, args):  # A, B, E are lists. Args is not used here but might be necessary when it comes to Q1 and Q2.
     Q = lambda x, t: 1 if x > t else 0  # Q maps to 1 if x>t. Otherwise Q maps to 0.
-    bA = map(Q, A, [numpy.mean(A) for i in range(len(A))])  # bA[i]=Q(A[i], mean(A))
-    bB = map(Q, B, [numpy.mean(B) for i in range(len(B))])
-    bE = map(Q, E, [numpy.mean(E) for i in range(len(E))])
+    bA = list(map(Q, A, [numpy.mean(A) for i in range(len(A))]))  # bA[i]=Q(A[i], mean(A))
+    bB = list(map(Q, B, [numpy.mean(B) for i in range(len(B))]))
+    bE = list(map(Q, E, [numpy.mean(E) for i in range(len(E))]))
     return bA, bB, bE
 
 
