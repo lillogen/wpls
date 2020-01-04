@@ -56,13 +56,13 @@ Do not change this code
 """
 
 
-def MI(A, B):
+def MI(A, B, path):
     if len(A) != len(B):
         raise ValueError("A and B must have the same length")
     with open("/tmp/MI_temp.dat", "w+") as tmp:
         for (a, b) in zip(A, B):
             tmp.write("%f %f\n" % (a, b))
-    return float(check_output(["Abgabe_4/framework/MIhigherdim", "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
+    return float(check_output(["{}/MIhigherdim".format(path), "/tmp/MI_temp.dat", "2", "1", "1", "%d" % len(A), "8"]))
 
 
 """

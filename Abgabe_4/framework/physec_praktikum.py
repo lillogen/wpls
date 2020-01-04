@@ -17,7 +17,7 @@ import time
 import os
 from exercise4 import ber, MI, quant0, quant1, quant2, correlation
 import utils as ut
-
+from itertools import repeat
 """
 Prolog of each exercise, imports measurements and generates a timestamp
 """
@@ -169,9 +169,9 @@ def plot_ber(meas_A, meas_B, meas_E, ts, args):
 
 def plot_entropy(meas_A, meas_B, meas_E, ts, args):
     # A <-> A
-    ee_A = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_A, args.size)))
-    ee_B = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_B, args.size)))
-    ee_E = list(map(MI, ut.chunks(meas_E, args.size), ut.chunks(meas_E, args.size)))
+    ee_A = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_A, args.size), repeat(args.pathto) ))
+    ee_B = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_B, args.size), repeat(args.pathto) ))
+    ee_E = list(map(MI, ut.chunks(meas_E, args.size), ut.chunks(meas_E, args.size), repeat(args.pathto) ))
     if "data" in map(str.lower, args.out):
         ut.store_list(os.path.join(destination, "data/h_A.csv"), ee_A)
         ut.store_list(os.path.join(destination, "data/h_B.csv"), ee_B)
@@ -196,9 +196,9 @@ def plot_entropy(meas_A, meas_B, meas_E, ts, args):
 
 def plot_mi(meas_A, meas_B, meas_E, ts, args):
     # A <-> B
-    mi_AB = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size)))
-    mi_AE = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_E, args.size)))
-    mi_BA = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_A, args.size)))
+    mi_AB = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_B, args.size), repeat(args.pathto) ))
+    mi_AE = list(map(MI, ut.chunks(meas_A, args.size), ut.chunks(meas_E, args.size), repeat(args.pathto) ))
+    mi_BA = list(map(MI, ut.chunks(meas_B, args.size), ut.chunks(meas_A, args.size), repeat(args.pathto) ))
     if "data" in map(str.lower, args.out):
         ut.store_list(os.path.join(destination, "data/mi_AB.csv" ), mi_AB)
         ut.store_list(os.path.join(destination, "data/mi_AE.csv" ), mi_AE)
@@ -258,6 +258,8 @@ if __name__ == "__main__":
     args_parser.add_argument("--alpha", metavar="ALPHA", type=float, required=False, default=0.5, help="Alpha")
     args_parser.add_argument("--m", metavar="M", type=int, required=False, default=3,
                              help="Consecutive number of sample per bits (has to be odd, otherwise m = m -1)")
+    args_parser.add_argument("--pathto", metavar="PA", type=str, required=False, default="Abgabe_4/framework/",
+                             help="Path to executable file MIhigherdim")
 
     args = args_parser.parse_args()
     destination = "output_Ex4/"
