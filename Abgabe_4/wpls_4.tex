@@ -49,7 +49,9 @@ $ $
 
 \begin{document}
 \hwheadtwo
-Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.
+Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.\\
+Achja und wir waren so frei für euch das Framework in Python 3 zu portieren, unter dem Github Link findet ihr das. Des Weiteren nutzen wir gitlab Actions, damit ihr seht, dass unser Code funktioniert ;)\\
+Unser Code geht übrigens nicht mehr mit Python 2, da die map()-Funktion in Python 2 nicht aufhöhrt wenn ein Iterator erschöpft ist.
 \section{Absorberhalle}
 \subsection*{1 und 2 }
 Im Vergleich zur ersten Messung, die wir Zuhause durchgeführt haben, ist doch merklich, dass es viel weniger Interferenzen gibt.\\ 
@@ -173,7 +175,7 @@ Eve & -69.54362 & 2.42951 \\
 \caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
 \label{fig:3b}
 \end{figure}
-Ebenfalls merkwürdig ist, dass die Korrelation so viel schlechter ist, als in der Absorberhalle. Diesen Sachverhalt können wir uns nicht erklären, wir hatte in der Absorberhalle eine Sichtverbindung zwischen den beiden PI's. Wir vermuten, dass unser Körper das Signal 'blockiert' hat und so nichts an der anderen Seite angekommen ist. 
+Ebenfalls merkwürdig ist, dass die Korrelation so viel schlechter ist, als in der Absorberhalle. Diesen Sachverhalt können wir uns nicht erklären, wir hatte in der Absorberhalle eine Sichtverbindung zwischen den beiden PI's. Wir vermuten, dass unsere Körper das Signal 'blockiert' haben und so nichts an der anderen Seite angekommen ist. 
 \subsection*{4}
 In dieser Messung sollten wir Alice zyklisch bewegen (lassen). Wir haben jedoch Zuhause Alice zyklisch mit der Hand bewegt und in der Absorberhalle Alice an einer Schnur befestigt und gependelt.
 \begin{table}[H]
@@ -220,6 +222,7 @@ Die Messung, bei der wir Eve und Bob am Fuß hatten, weißt die schlechtesten Ch
 \caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
 \label{fig:4}
 \end{figure}
+\subsection*{Fazit}
 \clearpage
 \section{Bit Error Rate}
 Implementiert, aber nicht so wie definiert, wenn alle Bits falsch sind haben wir laut der Definition auf der Folie ein Biterrorrate von 0, jedoch ist dies falsch, da wir einmal invertieren müssen, damit wir das richtige Ergebnis bekommen. Daher addieren wir, falls wir über 0.5 sind noch 1/len auf die Biterrorrate hinzu, was dem Schritt des Invertierens entspricht
