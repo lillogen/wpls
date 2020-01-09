@@ -51,6 +51,132 @@ $ $
 \hwheadtwo
 Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.
 \section{Absorberhalle}
+\subsection*{1 und 2 }
+Im Vergleich zur ersten Messung, die wir Zuhause durchgeführt haben, ist doch merklich, dass es viel weniger Interferenzen gibt.\\ 
+Auffälig ist, dass Beispielsweise bei der 1 Messung ohne Bewegung eine viel höhrere standard Abweichung vorhanden ist, als wenn wir Zuhause messen (4.5 gegen 0.5). Bei der zweiten Messung mit Bewegung im Raum, konnten wir das gleich Ergebnis festellen, auch hier ist die Standardabweichung deutlich erhöht.
+\begin{table}[H]
+\centering
+\begin{tabular}{ cc }
+Zuhause & Absorberhalle  \\
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -70.24570 & 5.23857 \\
+\hline
+Bob & -70.02834 & 5.12334 \\
+\hline
+Eve & -58.23386 & 4.41267 \\
+\end{tabular} &
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -65.70090 & 11.01262 \\
+\hline
+Bob & -65.41460 & 10.86356 \\
+\hline
+Eve & -64.49248 & 10.11749 \\
+\end{tabular}
+\end{tabular}
+\end{table}
+Die Korrelation der beiden Ergebnisse ist identisch, nur, dass in der Absorberhalle die Ergebnisse noch näher an der eins liegen als Zuhause.
+\begin{figure}[H]
+\centering
+\subfloat[Zuhause]{\includegraphics[width=0.4\textwidth]{../Abgabe_3/Messungen/2_mitBwg_A_B/output_Ex3/correlation_AB.png}}   \qquad
+\subfloat[Absorber]{\includegraphics[width=0.4\textwidth]{Messungen/A_2_mit_Bwg/output_Ex4/correlation_AB_.png}}
+\caption{2 Korrelation mit Bewegung  \textbf{Blocksize 10}}
+\label{fig:2}
+\end{figure}
+\subsection*{3 A}
+Die 3 Auswertung, 20cm Abstand mit Bewegung, ist schwer zu vergleichen, da die Bewegungen willkürlich waren. Es fällt jedoch auf, dass wir auch erneut eine deutlich höhere std-Abweichung haben, da jede unserer Bewegungen das Signal deutlich verändert.
+\begin{table}[H]
+\centering
+\begin{tabular}{ cc }
+Zuhause & Absorberhalle  \\
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -48.80779 & 1.79983 \\
+\hline
+Bob & -48.79270 & 1.79899 \\
+\hline
+Eve & -69.58161 & 3.10826 \\
+\end{tabular} &
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -48.57021 & 4.79384 \\
+\hline
+Bob & -48.40535 & 4.76761 \\
+\hline
+Eve & -38.24554 & 6.91417 \\
+\end{tabular}
+\end{tabular}
+\end{table}
+Bei der Korrelation tut sich nicht viel, weswegen ich das Bild mal nicht einfüge.\\
+Ohne Bewegung mit 20cm Abstand, bekommen wir in der Absorberhalle mehr Entropie auf den Channel als Zuhause, dies wird erneut deutlich, wenn die std-Abweichung verglichen wird.
+\begin{table}[H]
+\centering
+\begin{tabular}{ cc }
+Zuhause & Absorberhalle  \\
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -49.00072 & 0.02689 \\
+\hline
+Bob & -49.00000 & 0.00000 \\
+\hline
+Eve & -72.23263 & 0.85618 \\
+\end{tabular} &
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -51.39272 & 0.49181 \\
+\hline
+Bob & -51.28600 & 0.51626 \\
+\hline
+Eve & -33.00033 & 0.01819 \\
+\end{tabular}
+\end{tabular}
+\end{table}
+Bei der Korrelation ergibt sich ein ähnliches Bild, da wir des öfteren bei Abschnitten eine std-Abweichung von Null haben und wir durch Null teilen würden, lässt sich für diesen Bereich kein Korrelationswert berechnen.\\
+\subsection*{3 B}
+Bei 10 Meter Entfernung mit Bewegung haben wir eine gegensätzliche Entwicklung als vorher. So ist die std-Abweichung hier Zuhause höher als in der Absorberhalle und auch die Korrelation ist Zuhause 'besser'.
+\begin{table}[H]
+\centering
+\begin{tabular}{ cc }
+Zuhause & Absorberhalle  \\
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -48.80779 & 1.79983 \\
+\hline
+Bob & -48.79270 & 1.79899 \\
+\hline
+Eve & -69.58161 & 3.10826 \\
+\end{tabular} &
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -71.91518 & 1.53653 \\
+\hline
+Bob & -71.75197 & 1.49184 \\
+\hline
+Eve & -69.54362 & 2.42951 \\
+\end{tabular}
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\subfloat[Zuhause]{\includegraphics[width=0.4\textwidth]{../Abgabe_3/Messungen/3_b_mitBwg_A_B/output_Ex3/correlation_AB.png}}   \qquad
+\subfloat[Absorber]{\includegraphics[width=0.4\textwidth]{Messungen/A_3b_mit_Bwg/output_Ex4/correlation_AB_.png}}
+\caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
+\label{fig:2}
+\end{figure}
+Ebenfalls merkwürdig ist, dass die Korrelation so viel schlechter ist, als in der Absorberhalle. Diesen Sachverhalt können wir uns nicht erklären, wir hatte in der Absorberhalle eine Sichtverbindung zwischen den beiden PI's. Wir vermuten, dass unser Körper das Signal 'blockiert' hat und so nichts an der anderen Seite angekommen ist. 
+\subsection*{4}
+In dieser Messung sollten wir Alice zyklisch bewegen (lassen). Wir haben jedoch Zuhause Alice zyklisch mit der Hand bewegt und in der Absorberhalle Alice an einer Schnur befestigt und gependelt 
+\clearpage
 \section{Bit Error Rate}
 Implementiert, aber nicht so wie definiert, wenn alle Bits falsch sind haben wir laut der Definition auf der Folie ein Biterrorrate von 0, jedoch ist dies falsch, da wir einmal invertieren müssen, damit wir das richtige Ergebnis bekommen. Daher addieren wir, falls wir über 0.5 sind noch 1/len auf die Biterrorrate hinzu, was dem Schritt des Invertierens entspricht
 \section{Implementierung Quantisierer}
