@@ -171,11 +171,55 @@ Eve & -69.54362 & 2.42951 \\
 \subfloat[Zuhause]{\includegraphics[width=0.4\textwidth]{../Abgabe_3/Messungen/3_b_mitBwg_A_B/output_Ex3/correlation_AB.png}}   \qquad
 \subfloat[Absorber]{\includegraphics[width=0.4\textwidth]{Messungen/A_3b_mit_Bwg/output_Ex4/correlation_AB_.png}}
 \caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
-\label{fig:2}
+\label{fig:3b}
 \end{figure}
 Ebenfalls merkwürdig ist, dass die Korrelation so viel schlechter ist, als in der Absorberhalle. Diesen Sachverhalt können wir uns nicht erklären, wir hatte in der Absorberhalle eine Sichtverbindung zwischen den beiden PI's. Wir vermuten, dass unser Körper das Signal 'blockiert' hat und so nichts an der anderen Seite angekommen ist. 
 \subsection*{4}
-In dieser Messung sollten wir Alice zyklisch bewegen (lassen). Wir haben jedoch Zuhause Alice zyklisch mit der Hand bewegt und in der Absorberhalle Alice an einer Schnur befestigt und gependelt 
+In dieser Messung sollten wir Alice zyklisch bewegen (lassen). Wir haben jedoch Zuhause Alice zyklisch mit der Hand bewegt und in der Absorberhalle Alice an einer Schnur befestigt und gependelt.
+\begin{table}[H]
+\centering
+\begin{tabular}{ cc }
+Zuhause & Absorberhalle  \\
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -62.28577 & 7.08883 \\
+\hline
+Bob & -62.06654 & 7.04135 \\
+\hline
+Eve & -55.98965 & 7.07650 \\
+\end{tabular} &
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -51.78577 & 6.28086 \\
+\hline
+Bob & -51.56843 & 6.22006 \\
+\hline
+Eve & -46.37456 & 6.69024 \\
+\end{tabular}
+\end{tabular}
+\end{table}
+\begin{figure}[H]
+\centering
+\subfloat[Zuhause]{\includegraphics[width=0.4\textwidth]{../Abgabe_3/Messungen/4_mitBwg_A_B/output_Ex3/correlation_AB.png}}   \qquad
+\subfloat[Absorber]{\includegraphics[width=0.4\textwidth]{Messungen/A_4_mit_Bwg/output_Ex4/correlation_AB_.png}}
+\caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
+\label{fig:4}
+\end{figure}
+An diesen Ergebnissen ist nichts auffällig, die niedrigere std-Abweichung kann bsp auf die andere Bewegung zurückgeführt werden und auch die Korrelation ist wie erwartet.
+\subsection*{5}
+Ja hier haben wir verkackt und die Messung in der Absorberhalle nicht vernünftig gemacht.
+
+\subsection*{b)}
+Die Messung, bei der wir Eve und Bob am Fuß hatten, weißt die schlechtesten Chancen für Eve auf. So ist die Korrelation hier nicht ein einziges mal 1, während Alice und Bob hoch Korreliert sind.
+\begin{figure}[H]
+\centering
+\subfloat[]{\includegraphics[width=0.4\textwidth]{Messungen/A_Aufgabe1_B_am_Fus/output_Ex4/correlation_AB_.png}} \qquad
+\subfloat[]{\includegraphics[width=0.4\textwidth]{Messungen/A_Aufgabe1_B_am_Fus/output_Ex4/correlation_AE.png}}  
+\caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
+\label{fig:4}
+\end{figure}
 \clearpage
 \section{Bit Error Rate}
 Implementiert, aber nicht so wie definiert, wenn alle Bits falsch sind haben wir laut der Definition auf der Folie ein Biterrorrate von 0, jedoch ist dies falsch, da wir einmal invertieren müssen, damit wir das richtige Ergebnis bekommen. Daher addieren wir, falls wir über 0.5 sind noch 1/len auf die Biterrorrate hinzu, was dem Schritt des Invertierens entspricht
