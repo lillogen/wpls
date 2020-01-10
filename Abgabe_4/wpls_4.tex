@@ -255,9 +255,9 @@ Die Messung, bei der wir Eve und Bob am Fuß hatten, weißt die schlechtesten Ch
 \caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
 \label{fig:6}
 \end{figure}
-\newpage
 \subsection*{Fazit}
-Wir haben sehr unterschiedliche Ergebnisse in der Absorberhalle erziehlt. Bei den ersten Messungen, war die Entropie auf den Channel höher, aber sobald der Abstand 10m betrug, war es besser in 'normaler' Umgebung zu Messen, die Werte zwischen A und B waren dann verhältnismäßig unkorreliert. Aber abgesehen davon, gab es keine Großen unterschiede. Eve hatte in keinem Fall eine Chance den Key zu extrahieren, da A E sehr unkorreliert war. In der 5 Messung, haben wir ebenfalls nur eine bedingt erhöhte Korrelation zwischen Eve und Alice feststellen können.
+Wir haben sehr unterschiedliche Ergebnisse in der Absorberhalle erziehlt. Bei den ersten Messungen, war die Entropie auf den Channel höher, aber sobald der Abstand 10m betrug, war es besser in 'normaler' Umgebung zu Messen, die Werte zwischen A und B waren dann verhältnismäßig unkorreliert. Aber abgesehen davon, gab es keine Großen unterschiede. Eve hatte in keinem Fall eine Chance den Key zu extrahieren, da A E sehr unkorreliert war. In der 5 Messung, haben wir ebenfalls nur eine bedingt erhöhte Korrelation zwischen Eve und Alice feststellen können.\\
+Trotz der Absorberhalle, war bei einigen Messungen, bei denen es keine Bewegung im Raum gab, die std-Abweichung verhältnismäßig hoch bzw. ungleich 0, wie wir es erwartet hätten. Dies führen wir auf thermisches rauschen bzw. die ungenauigkeit der Hardware zurück.
 \clearpage
 \section{Bit Error Rate}
 Implementiert, aber nicht so wie definiert, wenn alle Bits falsch sind haben wir laut der Definition auf der Folie ein Biterrorrate von 0, jedoch ist dies falsch, da wir einmal invertieren müssen, damit wir das richtige Ergebnis bekommen. Daher addieren wir, falls wir über 0.5 sind noch 1/len auf die Biterrorrate hinzu, was dem Schritt des Invertierens entspricht
@@ -266,6 +266,7 @@ Beide Implementiert, beim ersten kleiner Fehler an einer Bereichsgrenze bei euch
 Beim zweiten ist mehr falsch aber keine Ahnung was.
 \section{Attack Trees}
 \section{Angriffe}
+\subsection*{Eavsdropping Attack}
 Die Messung sieht wie in Abbildung \ref{test7} zu sehen ist aus. Nach der Hälfte der Zeit waren wir bei Messung 3b angekommen, wir erhöhten also die Distanz auf 10m, was sehr schön in der Abbildung zu sehen ist. Zu diesem Zeitpunkt brechen die RSSI Werte ein und werden Teilweise sehr schwach. Um nun zu sehen, zu welchem Zeitpunkt ein Angreifer die besten Chancen hat, schauen wir uns zum einen die Biterrorrate an und zum anderen die Mutal Information.
 \begin{figure}[H]
 \centering
@@ -289,7 +290,60 @@ Beim zweiten Quantisierer hat der Angreifer keine Chance, wie man sieht gab es h
 \caption{Biterrorrate Quant 2 \textbf{Blocksize 10}}
 \label{fig:8}
 \end{figure}
+
+\subsection*{Repetition Attack}
+\subsection*{Prediction Attack}
+\subsection*{Eigener Angriff}
 \section{Angriffe in der Aborberhalle}
 Die Quantisierer kann man schlecht vergleichen, da der Suhas/Mathur Quantisierer schon eine Art Information reconcilliation drin hat, der Jana Multibit aber nicht. Von daher können wir hier keinen vernünftigen Vergleich durchführen.
+\subsection*{Repetition Attack}
+\begin{figure}[H]
+\centering
+
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/measurement_shortened.png}} \qquad
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_repitition_atk/output_Ex4/measurement_shortened.png}}  
+\caption{Messwerte der Repition Attacks}
+\label{fig:9}
+\end{figure}
+Wie in Abbildung \ref{fig:9} zu sehen ist, ist diese Messung sehr gleichförmig. Wir haben Alice an einem Pendel befestigt und schwingen lassen. Als Angreifer hat man hier keine Chance einen erfolgreichen Angriff zu starten, auch hier ist sowohl die Mutal-Information zwischen Alice und Eve viel zu klein und die BER viel zu hoch ungeachtet des Quantisierers. Die 2 Messung (in der Eve ein kleines Stückchen näher war lieferte das gleiche Ergebnis). Vielleicht ist es möglich einen besseren Angriff zu starten, indem man die Ergebnisse aus mehreren Messungen kombiniert. 
+\begin{figure}[H]
+\centering
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AB_Quant_2.png}} \qquad
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AE_Quant_2.png}}  
+\caption{Biterrorrate Quant 2 \textbf{Blocksize 10}}
+\label{fig:10}
+\end{figure}
+\begin{figure}[H]
+\centering
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AB_Quant_1.png}} \qquad
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AE_Quant_1.png}}  
+\caption{Biterrorrate Quant 2 \textbf{Blocksize 50}}
+\label{fig:11}
+\end{figure}
+Beim wechsel der Position ergibt sich ein ähnlches Bild.
+\subsection*{Prediction Attack}
+Zuersteinmal zum vorgehen, wir haben einen der schwarzen Absorber immer wieder zwischen Alice und Eve/Bob gepackt, und so einen einbruch der stärke des Empfangssignals provoziert. Dies wird auch in Abbildung \ref{fig:12} deutlich.\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Messungen/A_predictions/output_Ex4/measurement_shortened.png}
+\caption{RSSI Verlauf der Messwerte aus der Prediction Attack}
+\label{fig:12}
+\end{figure}
+Hier ergibt sich in Bezug auf Quantisierer 2 das gleiche Bild wie in dem vorherigen Angriff. Die Werte sind viel zu unkorreliert, als das sich ein guter Angriff ergeben würde. Dies wird erneut deutlich, wenn die Bilder zu BER betrachtet werden. Zwar ist die MI besser als im Repetition Angriff, jedoch reicht dies nicht aus. Die BER ist im Schnitt zu hoch zwischen Alice und Eve im Vergleich zu Eve und Bob, dass selbst durch zusätzliche Informationen, die durch Reconcilliation preigegeben werden der Key nicht berechnet werden kann.
+\begin{figure}[H]
+\centering
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/A_predictions/output_Ex4/ber_AB_Quant_1.png}} \qquad
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/A_predictions/output_Ex4/ber_AE_Quant_1.png}}  
+\caption{Biterrorrate Quant 1 \textbf{Blocksize 50}}
+\label{fig:13}
+\end{figure}
+\begin{figure}[H]
+\centering
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_predictions/output_Ex4/ber_AB_Quant_2.png}} \qquad
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_predictions/output_Ex4/ber_AE_Quant_2.png}}  
+\caption{Biterrorrate Quant 2 \textbf{Blocksize 10}}
+\label{fig:14}
+\end{figure}
+Jedoch sieht es bei Quantisierer 1 (Abbildung \ref{fig:13}) viel besser aus. So sehen wir eine BER von 0, in dem Moment, in dem das Signal stark einbricht. Hier mit diesem Quantisierer ist also ein Praktischer Angriff theoretisch möglich. 
 \section{Bonus: Reading Assignment}
 \end{document}
