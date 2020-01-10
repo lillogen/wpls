@@ -202,6 +202,7 @@ Eve & -46.37456 & 6.69024 \\
 \end{tabular}
 \end{tabular}
 \end{table}
+
 \begin{figure}[H]
 \centering
 \subfloat[Zuhause]{\includegraphics[width=0.4\textwidth]{../Abgabe_3/Messungen/4_mitBwg_A_B/output_Ex3/correlation_AB.png}}   \qquad
@@ -211,8 +212,40 @@ Eve & -46.37456 & 6.69024 \\
 \end{figure}
 An diesen Ergebnissen ist nichts auffällig, die niedrigere std-Abweichung kann bsp auf die andere Bewegung zurückgeführt werden und auch die Korrelation ist wie erwartet.
 \subsection*{5}
-Ja hier haben wir verkackt und die Messung in der Absorberhalle nicht vernünftig gemacht.
+Hier ist das gleiche Ergebnis zu sehen, wie wir es Zuhause auch hatten, die Korrelation von Alice und Eve ist im Vergleich zu den vorherigen Messungen leicht erhöht, jedoch immernoch weit von der zwischen Alice und Bob entfernt
 
+\begin{table}[H]
+\centering
+\begin{tabular}{ cc }
+Zuhause & Absorberhalle  \\
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -63.77634 & 7.33027 \\
+\hline
+Bob & -63.45434 & 7.31302 \\
+\hline
+Eve & -58.22699 & 7.88637 \\
+\end{tabular} &
+\begin{tabular}{l|l|l}
+& Mittelwert & empirische std \\
+\hline
+Alice & -54.31316 & 10.02524 \\
+\hline
+Bob & -54.04349 & 9.96904 \\
+\hline
+Eve & -50.82739 & 11.66601 \\
+\end{tabular}
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\subfloat[Zuhause]{\includegraphics[width=0.4\textwidth]{../Abgabe_3/Messungen/5_mitBwg_A_B/output_Ex3/correlation_AE.png}}   \qquad
+\subfloat[Absorber]{\includegraphics[width=0.4\textwidth]{Messungen/A_5_mit_Bwg/output_Ex4/correlation_AE.png}}
+\caption{3b Korrelation mit Bewegung \textbf{Blocksize 10}}
+\label{fig:5}
+\end{figure}
 \subsection*{b)}
 Die Messung, bei der wir Eve und Bob am Fuß hatten, weißt die schlechtesten Chancen für Eve auf. So ist die Korrelation hier nicht ein einziges mal 1, während Alice und Bob hoch Korreliert sind.
 \begin{figure}[H]
@@ -220,10 +253,11 @@ Die Messung, bei der wir Eve und Bob am Fuß hatten, weißt die schlechtesten Ch
 \subfloat[]{\includegraphics[width=0.4\textwidth]{Messungen/A_Aufgabe1_B_am_Fus/output_Ex4/correlation_AB_.png}} \qquad
 \subfloat[]{\includegraphics[width=0.4\textwidth]{Messungen/A_Aufgabe1_B_am_Fus/output_Ex4/correlation_AE.png}}  
 \caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
-\label{fig:4}
+\label{fig:6}
 \end{figure}
+\newpage
 \subsection*{Fazit}
-Wir haben sehr unterschiedliche Ergebnisse in der Absorberhalle erziehlt. Bei den ersten Messungen, war die Entropie auf den Channel höher, aber sobald der Abstand 10m betrug, war es besser in 'normaler' Umgebung zu Messen, die Werte zwischen A und B waren dann verhältnismäßig unkorreliert. Aber abgesehen davon, gab es keine Großen unterschiede. Eve hatte in keinem Fall eine Chance den Key zu extrahieren, da A E sehr unkorreliert war.
+Wir haben sehr unterschiedliche Ergebnisse in der Absorberhalle erziehlt. Bei den ersten Messungen, war die Entropie auf den Channel höher, aber sobald der Abstand 10m betrug, war es besser in 'normaler' Umgebung zu Messen, die Werte zwischen A und B waren dann verhältnismäßig unkorreliert. Aber abgesehen davon, gab es keine Großen unterschiede. Eve hatte in keinem Fall eine Chance den Key zu extrahieren, da A E sehr unkorreliert war. In der 5 Messung, haben wir ebenfalls nur eine bedingt erhöhte Korrelation zwischen Eve und Alice feststellen können.
 \clearpage
 \section{Bit Error Rate}
 Implementiert, aber nicht so wie definiert, wenn alle Bits falsch sind haben wir laut der Definition auf der Folie ein Biterrorrate von 0, jedoch ist dies falsch, da wir einmal invertieren müssen, damit wir das richtige Ergebnis bekommen. Daher addieren wir, falls wir über 0.5 sind noch 1/len auf die Biterrorrate hinzu, was dem Schritt des Invertierens entspricht
@@ -232,7 +266,30 @@ Beide Implementiert, beim ersten kleiner Fehler an einer Bereichsgrenze bei euch
 Beim zweiten ist mehr falsch aber keine Ahnung was.
 \section{Attack Trees}
 \section{Angriffe}
-Die Quantisierer kann man schlecht vergleichen, da der Suhas/Mathur Quantisierer schon eine Art Information reconcilliation drin hat, der Jana Multibit aber nicht. Von daher können wir hier dafür keine Vernünftigen Angriffe durchführen.
+Die Messung sieht wie in Abbildung \ref{test7} zu sehen ist aus. Nach der Hälfte der Zeit waren wir bei Messung 3b angekommen, wir erhöhten also die Distanz auf 10m, was sehr schön in der Abbildung zu sehen ist. Zu diesem Zeitpunkt brechen die RSSI Werte ein und werden Teilweise sehr schwach. Um nun zu sehen, zu welchem Zeitpunkt ein Angreifer die besten Chancen hat, schauen wir uns zum einen die Biterrorrate an und zum anderen die Mutal Information.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Messungen/Messungen_aus_3/output_Ex4/measurement_shortened.png}
+\caption{RSSI Verlauf der Messwerte aus Assignemnt 3}
+\label{test7}
+\end{figure}
+Bei der Biterrorrate fällt auf, dass der Angreifer bei Bewegung i.d.r Chancenlos ist. So ist an Anfang Anfang die Biterrorate zwischen Alice und Bob höher als zwischen Alice und Eve. Als Bewegung einsetzt sink die rate wieder. Jedoch kann je nach Reconcilliation Verfahren genug information preigegeben werden, dass Eve an den Key kommt.
+\begin{figure}[H]
+\centering
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/Messungen_aus_3/output_Ex4/ber_AB_Quant_1.png}} \qquad
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/Messungen_aus_3/output_Ex4/ber_AE_Quant_1.png}}  
+\caption{Biterrorrate Quant 1 \textbf{Blocksize 50}}
+\label{fig:7}
+\end{figure}
+Beim zweiten Quantisierer hat der Angreifer keine Chance, wie man sieht gab es hier schon eine Art von Reconcilliation Alice und Eve haben den gleichen Key, während Bob und Alice sehr unkorreliert sind. Jedoch wurden hier auch äußerst wenig Bits extrahiert.
+\begin{figure}[H]
+\centering
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/Messungen_aus_3/output_Ex4/ber_AB_Quant_2.png}} \qquad
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/Messungen_aus_3/output_Ex4/ber_AE_Quant_2.png}}  
+\caption{Biterrorrate Quant 2 \textbf{Blocksize 10}}
+\label{fig:8}
+\end{figure}
 \section{Angriffe in der Aborberhalle}
+Die Quantisierer kann man schlecht vergleichen, da der Suhas/Mathur Quantisierer schon eine Art Information reconcilliation drin hat, der Jana Multibit aber nicht. Von daher können wir hier keinen vernünftigen Vergleich durchführen.
 \section{Bonus: Reading Assignment}
 \end{document}
