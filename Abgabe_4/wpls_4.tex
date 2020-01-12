@@ -50,7 +50,7 @@ $ $
 \begin{document}
 \hwheadtwo
 Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.\\
-Achja und wir waren so frei für euch das Framework in Python 3 zu portieren, unter dem Github Link findet ihr das. Des Weiteren nutzen wir gitlab Actions, damit ihr seht, dass unser Code funktioniert ;)\\
+Achja und wir waren so frei für euch das Framework in Python 3 zu portieren, unter dem Github Link findet ihr das. Des Weiteren nutzen wir Github Actions, damit ihr seht, dass unser Code funktioniert ;)\\
 Unser Code geht übrigens nicht mehr mit Python 2, da die map()-Funktion in Python 2 nicht aufhöhrt wenn ein Iterator erschöpft ist.
 \section{Absorberhalle}
 \subsection*{1 und 2 }
@@ -292,8 +292,68 @@ Beim zweiten Quantisierer hat der Angreifer keine Chance, wie man sieht gab es h
 \end{figure}
 
 \subsection*{Repetition Attack}
+In diesem Angriff haben wir, wie in der Absorberhalle eine Pendel mit Alice dran schwingen lassen, und die Position von Eve 2 mal geändert. Hier ist es ebenfalls nicht möglich an den Schlüssel zu kommmen, da die Werte viel zu unterschiedlich sind. Dies kann zum einen daran liegen, das das Pendel nicht gleichförmig genug war, oder das dieser Angriff sehr schwierig ist, da man die Ergebnisse aus mehreren Messungen miteinander kombinieren muss.
+\begin{figure}[H]
+\centering
+\subfloat[25 cm]{\includegraphics[width=0.4\textwidth]{Bilder/Abstand25.jpg}} \qquad
+\subfloat[5 cm]{\includegraphics[width=0.4\textwidth]{Bilder/Abstand5.jpg}}
+\caption{Korrelation Alice Eve}
+\label{fig:rep1}
+\end{figure}
+Der Angriff an sich hat keine Chance, da auch hier die Korrelation zwischen Alice und Eve sehr schlecht ist. Wie erwähnt liegt es wahrscheinlich daran, dass wir kein sich über längere Zeit gleichmäßig bewegendes Objekt gewählt haben, sondern ein Pendel
+\begin{figure}[H]
+\centering
+\subfloat[25 cm Abstand E <-> B]{\includegraphics[width=0.4\textwidth]{Messungen/Repetition_1_25cm/output_Ex4/correlation_AE.png}} \qquad
+\subfloat[5 cm Abstand E <-> B]{\includegraphics[width=0.4\textwidth]{Messungen/Repetition_1_25cm/output_Ex4/correlation_AE.png}}
+\caption{Korrelation zwischen Alice und Eve \textbf{Blocksize 25}}
+\label{fig:rep2}
+\end{figure}
 \subsection*{Prediction Attack}
+In diesem Angriff wurde die Hand um den Sender Alice gelegt, dadurch sind die RSSI Werte enorm eingebrochen, wie in Abbildung \ref{fig:p1} zu sehen.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Messungen/Predictions_Atk_Zuhause/output_Ex4/measurement_shortened.png}
+\caption{RSSI Verlauf der Messwerte aus dem Prediction Angriff}
+\label{fig:p1}
+\end{figure}
+In der Korrelation ist ebenfalls zu erkennen, dass dies ein wirksamer Angriff ist beziehungsweise dass die Korrelation zwischen Alice und Eve im Vergleich zu vorherigen Messwerten sehr stark ist.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{Messungen/Predictions_Atk_Zuhause/output_Ex4/correlation_AE.png}
+\caption{RSSI Verlauf der Messwerte aus dem Prediction Angriff}
+\label{fig:p2}
+\end{figure}
+Jedoch zeigt sich dies nicht bei den Quantisierern, die BER ist leider immernoch weit von der 0 entfernt, dies zeigt sich bei den 2 Quantisierern.
+\begin{figure}[H]
+\centering
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/Predictions_Atk_Zuhause/output_Ex4/ber_AB_Quant_1.png} } \qquad
+\subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/Predictions_Atk_Zuhause/output_Ex4/ber_AE_Quant_1.png} }
+\caption{BER Quantisierer 1 Prediction Atk}
+\label{fig:p3}
+\end{figure}
+\begin{figure}[H]
+\centering
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/Predictions_Atk_Zuhause/output_Ex4/ber_AB_Quant_2.png} } \qquad
+\subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/Predictions_Atk_Zuhause/output_Ex4/ber_AE_Quant_2.png} }
+\caption{BER Quantisierer 2 Prediction Atk}
+\label{fig:p4}
+\end{figure}
 \subsection*{Eigener Angriff}
+Als eigenen Angriff haben wir uns ausgedacht, das wir Eve so lange umlegen bis wir eine gute Korrelation finden und die Werte ähnlich sind. Aus dieser Position heraus ist es am günstigsten einen Angriff zu starten. Wir haben bei einem Abstand zwischen Alice und Eve von 135 cm angefangen dann 115, 95,65,35,5,1. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Messungen/EIGENER_Angriff/output_Ex4/measurement_shortened.png}
+\caption{RSSI Verlauf der Messwerte aus dem eigenen Angriff}
+\label{fig:e1}
+\end{figure}
+Hier ist auffällig, dass die Messwerte bei ca 5cm Abstand fast genau übereinander liegen, bei 1cm aber scho wieder sehr unterschiedlich aussehen. Wir denken wenn Alice und Eve direkt nebeneinander sind, so beinflussen sie sich gegenseitig, daher der Abfall.
+Die Korrelation über die Zeit bestätigt die These, dass für einen passiven Angriff 5cm besser sind als 1cm. Dies wird in Abbildung \ref{fig:e2} deutlich.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Messungen/EIGENER_Angriff/output_Ex4/correlation_AE.png}
+\caption{Korrelation Alice Eve aus dem eigenen Angriff}
+\label{fig:e2}
+\end{figure}
 \section{Angriffe in der Aborberhalle}
 Die Quantisierer kann man schlecht vergleichen, da der Suhas/Mathur Quantisierer schon eine Art Information reconcilliation drin hat, der Jana Multibit aber nicht. Von daher können wir hier keinen vernünftigen Vergleich durchführen.
 \subsection*{Repetition Attack}
@@ -346,4 +406,9 @@ Hier ergibt sich in Bezug auf Quantisierer 2 das gleiche Bild wie in dem vorheri
 \end{figure}
 Jedoch sieht es bei Quantisierer 1 (Abbildung \ref{fig:13}) viel besser aus. So sehen wir eine BER von 0, in dem Moment, in dem das Signal stark einbricht. Hier mit diesem Quantisierer ist also ein Praktischer Angriff theoretisch möglich. Jedoch weichen den gesamten Rest der Messung die Werte teils stark ab und die BER ist im Mittel ungefähr 2,5. 
 \section{Bonus: Reading Assignment}
+Radioaktiver Zerfall, thermisches Rauschen, Handlungen von Menschen (Maus Tastatur Bewegung), atmospherisches Rauschen und Photonen (Doppelspalt)\\
+\\
+'According to the heuristic (1) we need roughly 128/0.125 = 1024
+samples to extract a 128-bit key'\\
+\\
 \end{document}
