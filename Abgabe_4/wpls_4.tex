@@ -339,8 +339,21 @@ Jedoch zeigt sich dies nicht bei den Quantisierern, die BER ist leider immernoch
 \label{fig:p4}
 \end{figure}
 \subsection*{Eigener Angriff}
-Als eigenen Angriff haben wir uns ausgedacht, das wir Eve so lange umlegen, bis wir eine gute Korrelation finden und die Werte ähnlich sind. Aus dieser position heraus ist es am günstigsten einen Angriff zu starten.
-
+Als eigenen Angriff haben wir uns ausgedacht, das wir Eve so lange umlegen bis wir eine gute Korrelation finden und die Werte ähnlich sind. Aus dieser Position heraus ist es am günstigsten einen Angriff zu starten. Wir haben bei einem Abstand zwischen Alice und Eve von 135 cm angefangen dann 115, 95,65,35,5,1. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Messungen/EIGENER_Angriff/output_Ex4/measurement_shortened.png}
+\caption{RSSI Verlauf der Messwerte aus dem eigenen Angriff}
+\label{fig:e1}
+\end{figure}
+Hier ist auffällig, dass die Messwerte bei ca 5cm Abstand fast genau übereinander liegen, bei 1cm aber scho wieder sehr unterschiedlich aussehen. Wir denken wenn Alice und Eve direkt nebeneinander sind, so beinflussen sie sich gegenseitig, daher der Abfall.
+Die Korrelation über die Zeit bestätigt die These, dass für einen passiven Angriff 5cm besser sind als 1cm. Dies wird in Abbildung \ref{fig:e2} deutlich.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Messungen/EIGENER_Angriff/output_Ex4/correlation_AE.png}
+\caption{Korrelation Alice Eve aus dem eigenen Angriff}
+\label{fig:e2}
+\end{figure}
 \section{Angriffe in der Aborberhalle}
 Die Quantisierer kann man schlecht vergleichen, da der Suhas/Mathur Quantisierer schon eine Art Information reconcilliation drin hat, der Jana Multibit aber nicht. Von daher können wir hier keinen vernünftigen Vergleich durchführen.
 \subsection*{Repetition Attack}
