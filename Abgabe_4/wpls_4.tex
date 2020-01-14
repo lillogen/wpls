@@ -346,7 +346,7 @@ Als eigenen Angriff haben wir uns ausgedacht, das wir Eve so lange umlegen bis w
 \caption{RSSI Verlauf der Messwerte aus dem eigenen Angriff}
 \label{fig:e1}
 \end{figure}
-Hier ist auffällig, dass die Messwerte bei ca 5cm Abstand fast genau übereinander liegen, bei 1cm aber scho wieder sehr unterschiedlich aussehen. Wir denken wenn Alice und Eve direkt nebeneinander sind, so beinflussen sie sich gegenseitig, daher der Abfall.
+Hier ist auffällig, dass die Messwerte bei ca 5cm Abstand fast genau übereinander liegen, bei 1cm aber schon wieder sehr unterschiedlich aussehen. Wir denken wenn Alice und Eve direkt nebeneinander sind, so beinflussen sie sich gegenseitig, daher der Abfall.
 Die Korrelation über die Zeit bestätigt die These, dass für einen passiven Angriff 5cm besser sind als 1cm. Dies wird in Abbildung \ref{fig:e2} deutlich.
 \begin{figure}[H]
 \centering
@@ -382,7 +382,7 @@ Wie in Abbildung \ref{fig:9} zu sehen ist, ist diese Messung sehr gleichförmig.
 \end{figure}
 Beim wechsel der Position ergibt sich ein ähnlches Bild.
 \subsection*{Prediction Attack}
-Zuersteinmal zum vorgehen, wir haben einen der schwarzen Absorber immer wieder zwischen Alice und Eve/Bob gepackt, und so einen einbruch der stärke des Empfangssignals provoziert. Dies wird auch in Abbildung \ref{fig:12} deutlich.\\
+Zuersteinmal zum vorgehen, wir haben einen der schwarzen Absorber immer wieder zwischen Alice und Eve/Bob gepackt, und so einen einbruch der stärke des Empfangssignals provoziert. Dies wird auch in Abbildung \ref{fig:12} deutlich. Alice und Bob hatten ca. zwei Meter Abstand, Eve lag 20cm neben Bob.\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{Messungen/A_predictions/output_Ex4/measurement_shortened.png}
@@ -405,10 +405,12 @@ Hier ergibt sich in Bezug auf Quantisierer 2 das gleiche Bild wie in dem vorheri
 \label{fig:14}
 \end{figure}
 Jedoch sieht es bei Quantisierer 1 (Abbildung \ref{fig:13}) viel besser aus. So sehen wir eine BER von 0, in dem Moment, in dem das Signal stark einbricht. Hier mit diesem Quantisierer ist also ein Praktischer Angriff theoretisch möglich. Jedoch weichen den gesamten Rest der Messung die Werte teils stark ab und die BER ist im Mittel ungefähr 2,5. 
+\newpage
 \section{Bonus: Reading Assignment}
 Radioaktiver Zerfall, thermisches Rauschen, Handlungen von Menschen (Maus Tastatur Bewegung), atmospherisches Rauschen und Photonen (Doppelspalt)\\
 \\
 'According to the heuristic (1) we need roughly 128/0.125 = 1024
 samples to extract a 128-bit key'\\
 \\
+Der Unterschied beträgt ca. $\Theta\left(\sqrt[]{log(\frac{1}{\epsilon})n}\right)$ bits
 \end{document}
