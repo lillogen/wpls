@@ -237,7 +237,7 @@ def quant2(A, B, E, args):
 
     #print(L_Schlange)
 
-    #Alice und Bob leiten bits anhang von L_Schlange ab
+    #Alice und Bob leiten bits anhand von L_Schlange ab
     for i in L_Schlange:
         i = int(i)
         if A[i] > q_a_plus:
@@ -245,7 +245,7 @@ def quant2(A, B, E, args):
         elif A[i] < q_a_minus:
             bA.append(0)
 
-
+        #Wenn Eve m kennt, könnte man das hier optimieren.
         if E[i] > m_e:
             bE.append(1)
         elif E[i] <= m_e:
