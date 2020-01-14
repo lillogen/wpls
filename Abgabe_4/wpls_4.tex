@@ -49,9 +49,11 @@ $ $
 
 \begin{document}
 \hwheadtwo
-Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://git.noc.ruhr-uni-bochum.de/Kakashiiiiy/wpls_abgabe_2}.\\
+Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://github.com/lillogen/wpls}.\\
 Achja und wir waren so frei für euch das Framework in Python 3 zu portieren, unter dem Github Link findet ihr das. Des Weiteren nutzen wir Github Actions, damit ihr seht, dass unser Code funktioniert ;)\\
-Unser Code geht übrigens nicht mehr mit Python 2, da die map()-Funktion in Python 2 nicht aufhöhrt wenn ein Iterator erschöpft ist.
+Unser Code bzw. das Framework geht übrigens nicht mehr mit Python 2, da die map()-Funktion in Python 2 nicht aufhöhrt wenn ein Iterator erschöpft ist.
+\tableofcontents
+\newpage
 \section{Absorberhalle}
 \subsection*{1 und 2 }
 Im Vergleich zur ersten Messung, die wir Zuhause durchgeführt haben, ist doch merklich, dass es viel weniger Interferenzen gibt.\\ 
@@ -61,7 +63,7 @@ Auffälig ist, dass Beispielsweise bei der 1 Messung ohne Bewegung eine viel hö
 \begin{tabular}{ cc }
 Zuhause & Absorberhalle  \\
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -70.24570 & 5.23857 \\
 \hline
@@ -70,7 +72,7 @@ Bob & -70.02834 & 5.12334 \\
 Eve & -58.23386 & 4.41267 \\
 \end{tabular} &
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -65.70090 & 11.01262 \\
 \hline
@@ -79,8 +81,9 @@ Bob & -65.41460 & 10.86356 \\
 Eve & -64.49248 & 10.11749 \\
 \end{tabular}
 \end{tabular}
+\caption{Durchführung 1 ohne Bewegung}
 \end{table}
-Die Korrelation der beiden Ergebnisse ist identisch, nur, dass in der Absorberhalle die Ergebnisse noch näher an der eins liegen als Zuhause.
+Die Korrelation der beiden Ergebnisse ist identisch, nur das in der Absorberhalle die Ergebnisse noch näher an der eins liegen als Zuhause.
 \begin{figure}[H]
 \centering
 \subfloat[Zuhause]{\includegraphics[width=0.4\textwidth]{../Abgabe_3/Messungen/2_mitBwg_A_B/output_Ex3/correlation_AB.png}}   \qquad
@@ -89,13 +92,13 @@ Die Korrelation der beiden Ergebnisse ist identisch, nur, dass in der Absorberha
 \label{fig:2}
 \end{figure}
 \subsection*{3 A}
-Die 3 Auswertung, 20cm Abstand mit Bewegung, ist schwer zu vergleichen, da die Bewegungen willkürlich waren. Es fällt jedoch auf, dass wir auch erneut eine deutlich höhere std-Abweichung haben, da jede unserer Bewegungen das Signal deutlich verändert.
+Die 3 Auswertung, 20cm Abstand mit Bewegung, ist schwer zu vergleichen, da die Bewegungen willkürlich waren. Es fällt jedoch auf, dass wir auch erneut eine deutlich höhere STD-Abweichung haben, da jede unserer Bewegungen das Signal deutlich verändert.
 \begin{table}[H]
 \centering
 \begin{tabular}{ cc }
 Zuhause & Absorberhalle  \\
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -48.80779 & 1.79983 \\
 \hline
@@ -104,7 +107,7 @@ Bob & -48.79270 & 1.79899 \\
 Eve & -69.58161 & 3.10826 \\
 \end{tabular} &
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -48.57021 & 4.79384 \\
 \hline
@@ -115,13 +118,13 @@ Eve & -38.24554 & 6.91417 \\
 \end{tabular}
 \end{table}
 Bei der Korrelation tut sich nicht viel, weswegen ich das Bild mal nicht einfüge.\\
-Ohne Bewegung mit 20cm Abstand, bekommen wir in der Absorberhalle mehr Entropie auf den Channel als Zuhause, dies wird erneut deutlich, wenn die std-Abweichung verglichen wird.
+Ohne Bewegung mit 20cm Abstand, bekommen wir in der Absorberhalle mehr Entropie auf den Channel als Zuhause, dies wird erneut deutlich, wenn die STD-Abweichung verglichen wird.
 \begin{table}[H]
 \centering
 \begin{tabular}{ cc }
 Zuhause & Absorberhalle  \\
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -49.00072 & 0.02689 \\
 \hline
@@ -130,7 +133,7 @@ Bob & -49.00000 & 0.00000 \\
 Eve & -72.23263 & 0.85618 \\
 \end{tabular} &
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -51.39272 & 0.49181 \\
 \hline
@@ -140,15 +143,15 @@ Eve & -33.00033 & 0.01819 \\
 \end{tabular}
 \end{tabular}
 \end{table}
-Bei der Korrelation ergibt sich ein ähnliches Bild, da wir des öfteren bei Abschnitten eine std-Abweichung von Null haben und wir durch Null teilen würden, lässt sich für diesen Bereich kein Korrelationswert berechnen.\\
+Bei der Korrelation ergibt sich ein ähnliches Bild, da wir des öfteren bei Abschnitten eine STD-Abweichung von Null haben und wir durch Null teilen würden, lässt sich für diesen Bereich kein Korrelationswert berechnen.\\
 \subsection*{3 B}
-Bei 10 Meter Entfernung mit Bewegung haben wir eine gegensätzliche Entwicklung als vorher. So ist die std-Abweichung hier Zuhause höher als in der Absorberhalle und auch die Korrelation ist Zuhause 'besser'.
+Bei 10 Meter Entfernung mit Bewegung haben wir eine gegensätzliche Entwicklung als vorher. So ist die STD-Abweichung hier Zuhause höher als in der Absorberhalle und auch die Korrelation ist Zuhause 'besser'. Wir sind uns sicher, dass zwischen Alice und Bob eine sichtverbindung bestand, das wir diese auf jeweils zwei gestapelte Kartons gestellt haben. 
 \begin{table}[H]
 \centering
 \begin{tabular}{ cc }
 Zuhause & Absorberhalle  \\
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -48.80779 & 1.79983 \\
 \hline
@@ -157,7 +160,7 @@ Bob & -48.79270 & 1.79899 \\
 Eve & -69.58161 & 3.10826 \\
 \end{tabular} &
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -71.91518 & 1.53653 \\
 \hline
@@ -183,7 +186,7 @@ In dieser Messung sollten wir Alice zyklisch bewegen (lassen). Wir haben jedoch 
 \begin{tabular}{ cc }
 Zuhause & Absorberhalle  \\
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -62.28577 & 7.08883 \\
 \hline
@@ -192,7 +195,7 @@ Bob & -62.06654 & 7.04135 \\
 Eve & -55.98965 & 7.07650 \\
 \end{tabular} &
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -51.78577 & 6.28086 \\
 \hline
@@ -210,7 +213,7 @@ Eve & -46.37456 & 6.69024 \\
 \caption{3b Korrelation mit Bewegung  \textbf{Blocksize 10}}
 \label{fig:4}
 \end{figure}
-An diesen Ergebnissen ist nichts auffällig, die niedrigere std-Abweichung kann bsp auf die andere Bewegung zurückgeführt werden und auch die Korrelation ist wie erwartet.
+An diesen Ergebnissen ist nichts auffällig, die niedrigere STD-Abweichung kann bsp auf die andere Bewegung zurückgeführt werden und auch die Korrelation ist wie erwartet.
 \subsection*{5}
 Hier ist das gleiche Ergebnis zu sehen, wie wir es Zuhause auch hatten, die Korrelation von Alice und Eve ist im Vergleich zu den vorherigen Messungen leicht erhöht, jedoch immernoch weit von der zwischen Alice und Bob entfernt
 
@@ -219,7 +222,7 @@ Hier ist das gleiche Ergebnis zu sehen, wie wir es Zuhause auch hatten, die Korr
 \begin{tabular}{ cc }
 Zuhause & Absorberhalle  \\
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -63.77634 & 7.33027 \\
 \hline
@@ -228,7 +231,7 @@ Bob & -63.45434 & 7.31302 \\
 Eve & -58.22699 & 7.88637 \\
 \end{tabular} &
 \begin{tabular}{l|l|l}
-& Mittelwert & empirische std \\
+& Mittelwert & empirische STD \\
 \hline
 Alice & -54.31316 & 10.02524 \\
 \hline
@@ -257,7 +260,7 @@ Die Messung, bei der wir Eve und Bob am Fuß hatten, weißt die schlechtesten Ch
 \end{figure}
 \subsection*{Fazit}
 Wir haben sehr unterschiedliche Ergebnisse in der Absorberhalle erziehlt. Bei den ersten Messungen, war die Entropie auf den Channel höher, aber sobald der Abstand 10m betrug, war es besser in 'normaler' Umgebung zu Messen, die Werte zwischen A und B waren dann verhältnismäßig unkorreliert. Aber abgesehen davon, gab es keine Großen unterschiede. Eve hatte in keinem Fall eine Chance den Key zu extrahieren, da A E sehr unkorreliert war. In der 5 Messung, haben wir ebenfalls nur eine bedingt erhöhte Korrelation zwischen Eve und Alice feststellen können.\\
-Trotz der Absorberhalle, war bei einigen Messungen, bei denen es keine Bewegung im Raum gab, die std-Abweichung verhältnismäßig hoch bzw. ungleich 0, wie wir es erwartet hätten. Dies führen wir auf thermisches rauschen bzw. die ungenauigkeit der Hardware zurück.
+Trotz der Absorberhalle, war bei einigen Messungen, bei denen es keine Bewegung im Raum gab, die STD-Abweichung verhältnismäßig hoch bzw. ungleich 0, wie wir es erwartet hätten. Dies führen wir auf thermisches rauschen bzw. die ungenauigkeit der Hardware zurück.
 \clearpage
 \section{Bit Error Rate}
 Implementiert, aber nicht so wie definiert, wenn alle Bits falsch sind haben wir laut der Definition auf der Folie ein Biterrorrate von 0, jedoch ist dies falsch, da wir einmal invertieren müssen, damit wir das richtige Ergebnis bekommen. Daher addieren wir, falls wir über 0.5 sind noch 1/len auf die Biterrorrate hinzu, was dem Schritt des Invertierens entspricht
@@ -273,7 +276,7 @@ Beim zweiten ist mehr falsch aber keine Ahnung was.
 \end{figure}
 \section{Angriffe}
 \subsection*{Eavsdropping Attack}
-Die Messung sieht wie in Abbildung \ref{test7} zu sehen ist aus. Nach der Hälfte der Zeit waren wir bei Messung 3b angekommen, wir erhöhten also die Distanz auf 10m, was sehr schön in der Abbildung zu sehen ist. Zu diesem Zeitpunkt brechen die RSSI Werte ein und werden Teilweise sehr schwach. Um nun zu sehen, zu welchem Zeitpunkt ein Angreifer die besten Chancen hat, schauen wir uns zum einen die Biterrorrate an und zum anderen die Mutal Information.
+Die Messung sieht wie in Abbildung \ref{test7} zu sehen ist aus. Nach der Hälfte der Zeit waren wir bei Messung 3b angekommen, wir erhöhten also die Distanz auf 10m, was sehr schön in der Abbildung zu sehen ist. Zu diesem Zeitpunkt brechen die RSSI Werte ein und werden Teilweise sehr schwach. Um nun zu sehen, zu welchem Zeitpunkt ein Angreifer die besten Chancen hat, schauen wir uns zum einen die Biterrorrate und zum anderen die Mutal Information an.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{Messungen/Messungen_aus_3/output_Ex4/measurement_shortened.png}
@@ -306,7 +309,7 @@ In diesem Angriff haben wir, wie in der Absorberhalle eine Pendel mit Alice dran
 \caption{Korrelation Alice Eve}
 \label{fig:rep1}
 \end{figure}
-Der Angriff an sich hat keine Chance, da auch hier die Korrelation zwischen Alice und Eve sehr schlecht ist. Wie erwähnt liegt es wahrscheinlich daran, dass wir kein sich über längere Zeit gleichmäßig bewegendes Objekt gewählt haben, sondern ein Pendel
+Der Angriff an sich hat keine Chance, da auch hier die Korrelation zwischen Alice und Eve sehr schlecht ist. Wie erwähnt liegt es wahrscheinlich daran, dass wir kein sich über längere Zeit gleichmäßig bewegendes Objekt gewählt haben, sondern ein Pendel. Auch eine erneute Variierung der Position wäre nutzlos gewesen, da wir überhaupt keine Ahnung haben, wie man die gesammelten Informationen geschickt kombinieren kann.
 \begin{figure}[H]
 \centering
 \subfloat[25 cm Abstand E <-> B]{\includegraphics[width=0.4\textwidth]{Messungen/Repetition_1_25cm/output_Ex4/correlation_AE.png}} \qquad
@@ -367,8 +370,8 @@ Wir haben nun versucht diese Position nachzustellen, konnten aber jedoch nich so
 \subfloat[]{\includegraphics[width=0.4\textwidth]{Messungen/eigener_Angriff_1/output_Ex4/correlation_AE.png} }
 \caption{Korrelation zwischen Alice und Eve, bei 5cm Abstand zwischen Bob und Eve}
 \label{fig:p4}
-Die Korrelation zeigt hier erhöhte Werte, aber in Bezug auf die BER, hat Eve erneut keine Chance an den Schlüssel zu kommen. Die BER ist im Vergleich zu Alice und Bob zu hoch, egal welcher Quantisierer verwendet wird.
 \end{figure}
+Die Korrelation zeigt hier erhöhte Werte, aber in Bezug auf die BER, hat Eve erneut keine Chance an den Schlüssel zu kommen. Die BER ist im Vergleich zu Alice und Bob zu hoch, egal welcher Quantisierer verwendet wird. Die Bilder können in der PDF eingesehen werden.
 \section{Angriffe in der Aborberhalle}
 Die Quantisierer kann man schlecht vergleichen, da der Suhas/Mathur Quantisierer schon eine Art Information reconcilliation drin hat, der Jana Multibit aber nicht. Von daher können wir hier keinen vernünftigen Vergleich durchführen.
 \subsection*{Repetition Attack}
@@ -385,14 +388,14 @@ Wie in Abbildung \ref{fig:9} zu sehen ist, ist diese Messung sehr gleichförmig.
 \centering
 \subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AB_Quant_2.png}} \qquad
 \subfloat[Quant 2]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AE_Quant_2.png}}  
-\caption{Biterrorrate Quant 2 \textbf{Blocksize 10}}
+\caption{Biterrorrate Quant 2, Position 1\textbf{Blocksize 10}}
 \label{fig:10}
 \end{figure}
 \begin{figure}[H]
 \centering
 \subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AB_Quant_1.png}} \qquad
 \subfloat[Quant 1]{\includegraphics[width=0.4\textwidth]{Messungen/A_repetition_2/output_Ex4/ber_AE_Quant_1.png}}  
-\caption{Biterrorrate Quant 2 \textbf{Blocksize 50}}
+\caption{Biterrorrate Quant 1, Position 1\textbf{Blocksize 50}}
 \label{fig:11}
 \end{figure}
 Beim wechsel der Position ergibt sich ein ähnlches Bild.
