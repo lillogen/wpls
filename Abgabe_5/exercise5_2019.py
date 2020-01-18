@@ -101,7 +101,6 @@ def standardize_per_channel(data):
     #print(new_data)
     #print("standardize_per_channel not implemented yet")
     #exit()
-    
     return new_data
 
 
@@ -144,10 +143,12 @@ def compute_intra_distance(data, num_challenges):
     :return: numpy vector containing all intra distances
     """
     print("Intra Distance")
-    intra_distances=np.empty(len(data))
-    for i in range(0,len(data)):
-        intra_distances[i] = compute_euclidean_distance(data[math.floor(i/100)*100],data[i])
+    intra_distances=[]
+    for i in range(0,len(data),100):
+        for x in range(i+1,i+100):
+            intra_distances.append(compute_euclidean_distance(data[i],data[x]) )
 
+    
     #print("compute_intra_distance not implemented yet")
     #exit()
     
