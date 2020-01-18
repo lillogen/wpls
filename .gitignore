@@ -4,3 +4,5 @@ Abgabe_*/*.zip
 Abgabe_3/RPI_Data
 **/__pycache__
 *.pyc
+Abgabe_5/data_for_students.zip
+Abgabe_5/csi_dataset.npy
