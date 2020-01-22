@@ -1,0 +1,76 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{txfonts} %Times New Roman Font
+\usepackage{titlesec} %Format der Headings ändern
+\usepackage{times}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage[linesnumbered, lined, boxed, commentsnumbered]{algorithm2e}
+\usepackage[bottom]{footmisc}
+
+
+\renewcommand{\thesection}{\arabic{section}.} %Nummerierung der Sections anpassen
+\renewcommand{\labelenumi}{\alph{enumi})}  %Nummerierung der Listen anpassen
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{} %Format der Section Überschrift ändern
+\setlength{\parindent}{0pt} %Keine Einrückung bei neuen Paragraphen
+\geometry{left=2.0cm,textwidth=17cm,top=2.5cm,textheight=23cm}
+
+% Anpassen %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\student}{Benedict Schlüter\\ 108018212913 } % Namen eintragen
+\newcommand{\partner}{Christoph Lange\\ 108015222248} % Matrikelnummer eintragen
+\newcommand{\group}{1} % Gruppennummer eintragen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\hwheadtwo}{$ $
+  \vspace{-2cm}
+  
+\noindent \student \qquad \qquad  Wireless Physical Layer Security Praktikum \hfill WS 2019/2020 \\
+\noindent \partner \\
+%\noindent \thirdone \\  % einkommentieren, falls ihr eine 3er Gruppe seid
+\noindent Gruppe:~\group\\
+$ $
+
+  
+\begin{center}    
+{\Large \bf Abgabe PHYSEC 4}
+\end{center}
+}
+
+\begin{document}
+\hwheadtwo
+Wir lassen über die Hausaufgabe eine Versionskontrolle laufen. Wenn irgendetwas in der ZIP fehlen sollte, kannst du uns entwerder 0 Punkte geben oder du schaust einmal kurz hier nach \url{https://github.com/lillogen/wpls}.\\
+Achja und wir waren so frei für euch das Framework in Python 3 zu portieren, unter dem Github Link findet ihr das. Des Weiteren nutzen wir Github Actions, damit ihr seht, dass unser Code funktioniert ;)\\
+Unser Code bzw. das Framework geht übrigens nicht mehr mit Python 2, da die map()-Funktion in Python 2 nicht aufhört wenn ein Iterator erschöpft ist.
+\tableofcontents
+\newpage
+
+\section{Implementierung, Analyse, Theorie}
+\subsection*{Analyse 1}
+- Das obrige Messsetup macht es möglich genauere Messwerte zu generieren, da die Umwelt einen größeren Einfluss nimmt. Außerdem ist es möglich, durch komplexe Phasenwerte, deutlich mehr Bits zu extrahieren. Das sorgt für mehr Sicherheit gegen Angreifer, da die Angriffe komplexer werden.\\\\
+- Die Wahrscheinlichkeit, dass false-positive Werte auftreten, ist bei RSSI-Werten geringer. Das liegt daran, dass diese eben nicht so empfindlich reagieren. Dadurch kann kann ein gemeinsamer Schlüssel einfacher extrahiert werden. 
+\subsection*{Theorie}
+- Intradistanzen sind die Abstände zweier PUF-responses, die mit der gleichen Challenge erzeugt wurden.\\\\
+- Interdistanzen sind die Abstände zweier PUF-responses, die mit unterschiedlichen Challenges erzeugt werden.
+\subsection*{Implementierung}
+Die Implementierung ist in der Datei...
+\subsection*{Analyse 2}
+
+\newpage
+
+\section{Reading Assignment}
+- Die effektive Bandbreite beim Indoor Positioning muss 360 MHz betragen, um 1 cm genaue Positionen bestimmen zu können. Das Problem mit handelsüblichen WlAN AP's besteht darin, dass deren Brandbreite nur 20-40MHz betragen, was für eine genau Positionsbestimmung indoor nicht ausreicht.\\\\
+- Um Wireless Event Detection zu ermöglichen müssen genau zwei Phasen durchlaufen werden. Zum ersten ein Offline Training, welches bei jedem Indoor Event, aus den entsprechenden CSI Daten eine Matrix erstellt. Und zum zweiten das Online testing, welches das Eintreten, von Indoor Events durch Äbschätzung von Ähnlichkeit zwischen Test und Trainings CSI zu erkennen.\\\\
+- Die Human Radio Biometrics werden durch die physikalischen Eigenschaften Größe, Masse, Wasseranteil oder sogar Haut beeinflusst. Außerdem ist der Mensch nicht reflektiv und zusätzlich permissiv. Dies verhindert, dass Human Radio Biometrics gute Messwerte ergeben. \\\\
+- Es gibt zwei Arten von Indoor Tracking. Zum einen Indoor Tracking triangulation based. Dabei wird die Entfernung mit dem zugehörigen Winkel zwischen Gerät und Ankern abgeschätzt, um die geometrische Triangulation auf die Lage anzuwenden. So lässt sich die Lage des Geräts festlegen. Des Weiteren gibt es Indoor Tracking fingerprinting based. Dafür müssen fingerprints der Lage generiert und regelmäßig erneuert werden. Mit diesen fingerprints, gespeichert in einer Datenbank, ist es dann auch möglich, den Standort eines Geräts ausfindig zu machen.
+\end{document}
