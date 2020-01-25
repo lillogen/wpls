@@ -45,16 +45,8 @@ jobs:
     - name: Test 4
       run: |
         python Abgabe_4/framework/physec_praktikum.py -A Abgabe_4/Messungen/Messungen_aus_3/A.csv -B Abgabe_4/Messungen/Messungen_aus_3/B.csv -E Abgabe_4/Messungen/Messungen_aus_3/E.csv -X 4 -Q 1 --size 50 
-    - name: Test 1 Aufgabe 5
-      run: |
-        cd Abgabe_5/ ; python exercise5_2019.py
     - name: Upload PDF Exercise 4
       uses:  actions/upload-artifact@v1
       with:
         name: Messungen
         path: output_Ex4/
-    - name: Upload PDF Exercise 5
-      uses:  actions/upload-artifact@v1
-      with:
-        name: Bilder_Aufgabe_5
-        path: Abgabe_5/*.png
